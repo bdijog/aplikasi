@@ -4,12 +4,14 @@ namespace App\Models;
 
 use App\Enums\QueueTicketPriority;
 use App\Enums\QueueTicketStatus;
+use Database\Factories\QueueTicketFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class QueueTicket extends Model
 {
+    /** @use HasFactory<QueueTicketFactory> */
     use HasFactory;
 
     /**

@@ -28,8 +28,8 @@ class DoctorScheduleTest extends TestCase
     {
         $doctor = Doctor::create([
             'name' => 'dr. Andi Pratama, Sp.A',
-            'license_number' => 'STR-1234567890',
-            'email' => 'andi@klinik.test',
+            'license_number' => 'STR-TEST-1234567890',
+            'email' => 'andi.unique@klinik.test',
             'password' => 'secret123',
             'phone' => '081234567890',
             'is_active' => true,
@@ -37,8 +37,8 @@ class DoctorScheduleTest extends TestCase
         ]);
 
         $this->assertDatabaseHas('doctors', [
-            'email' => 'andi@klinik.test',
-            'license_number' => 'STR-1234567890',
+            'email' => 'andi.unique@klinik.test',
+            'license_number' => 'STR-TEST-1234567890',
             'specialty' => 'Spesialis Anak',
         ]);
 
@@ -61,8 +61,8 @@ class DoctorScheduleTest extends TestCase
     {
         $doctor = Doctor::create([
             'name' => 'dr. Budi Santoso, Sp.PD',
-            'license_number' => 'STR-9876543210',
-            'email' => 'budi@klinik.test',
+            'license_number' => 'STR-TEST-9876543210',
+            'email' => 'budi.unique@klinik.test',
             'password' => 'secret123',
             'specialty' => 'Penyakit Dalam',
         ]);
@@ -77,20 +77,20 @@ class DoctorScheduleTest extends TestCase
         ]);
 
         $patient = Patient::create([
-            'medical_record_number' => 'RM-20260903-0001',
+            'medical_record_number' => 'RM-TEST-UNIQUE-0001',
             'name' => 'Ahmad Fauzi',
-            'email' => 'ahmad@patient.test',
+            'email' => 'ahmad.unique@patient.test',
             'password' => 'patient123',
             'date_of_birth' => '1990-05-15',
             'gender' => Gender::Male,
-            'national_id' => '3201011505900001',
+            'national_id' => '9901011505900001',
             'phone' => '082198765432',
             'blood_type' => 'O',
             'allergies' => ['Paracetamol', 'Penicillin'],
         ]);
 
         $this->assertDatabaseHas('patients', [
-            'medical_record_number' => 'RM-20260903-0001',
+            'medical_record_number' => 'RM-TEST-UNIQUE-0001',
             'gender' => 'male',
         ]);
         $this->assertContains('Paracetamol', $patient->fresh()->allergies);
@@ -99,7 +99,7 @@ class DoctorScheduleTest extends TestCase
             'patient_id' => $patient->id,
             'doctor_id' => $doctor->id,
             'schedule_id' => $schedule->id,
-            'booking_code' => 'APT-20260903-0001',
+            'booking_code' => 'APT-TEST-UNIQUE-0001',
             'appointment_date' => '2026-09-08',
             'visit_type' => VisitType::NewVisit,
             'chief_complaint' => 'Demam tinggi selama 3 hari',
@@ -142,13 +142,13 @@ class DoctorScheduleTest extends TestCase
     {
         $counter = ServiceCounter::create([
             'name' => 'Poli Anak 1',
-            'code' => 'POLI-A-01',
+            'code' => 'TEST-POLI-A-01',
             'location' => 'Lantai 2 Gedung B',
             'is_active' => true,
         ]);
 
         $this->assertDatabaseHas('service_counters', [
-            'code' => 'POLI-A-01',
+            'code' => 'TEST-POLI-A-01',
             'is_active' => true,
         ]);
         $this->assertTrue($counter->is_active);

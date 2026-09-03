@@ -2,11 +2,13 @@
 
 namespace App\Models;
 
+use Database\Factories\ServiceCounterFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class ServiceCounter extends Model
 {
+    /** @use HasFactory<ServiceCounterFactory> */
     use HasFactory;
 
     /**

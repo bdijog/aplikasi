@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Enums\ScheduleStatus;
 use App\Enums\ScheduleType;
+use Database\Factories\ScheduleFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -11,6 +12,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Schedule extends Model
 {
+    /** @use HasFactory<ScheduleFactory> */
     use HasFactory;
 
     /**

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Database\Factories\DoctorFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -9,6 +10,7 @@ use Illuminate\Notifications\Notifiable;
 
 class Doctor extends Authenticatable
 {
+    /** @use HasFactory<DoctorFactory> */
     use HasFactory, Notifiable;
 
     /**
