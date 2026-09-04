@@ -2,7 +2,10 @@
 
 namespace App\Enums;
 
-enum QueueTicketStatus: string
+use Filament\Support\Contracts\HasColor;
+use Filament\Support\Contracts\HasLabel;
+
+enum QueueTicketStatus: string implements HasLabel, HasColor
 {
     case Waiting = 'waiting';
     case Serving = 'serving';
@@ -10,7 +13,7 @@ enum QueueTicketStatus: string
     case Skipped = 'skipped';
     case Cancelled = 'cancelled';
 
-    public function label(): string
+    public function getLabel(): ?string
     {
         return match ($this) {
             self::Waiting => 'Menunggu',
@@ -18,6 +21,22 @@ enum QueueTicketStatus: string
             self::Completed => 'Selesai',
             self::Skipped => 'Terlewat (Skipped)',
             self::Cancelled => 'Dibatalkan',
+        };
+    }
+
+    public function label(): string
+    {
+        return $this->getLabel() ?? '';
+    }
+
+    public function getColor(): string | array | null
+    {
+        return match ($this) {
+            self::Waiting => 'warning',
+            self::Serving => 'info',
+            self::Completed => 'success',
+            self::Skipped => 'danger',
+            self::Cancelled => 'gray',
         };
     }
 }
