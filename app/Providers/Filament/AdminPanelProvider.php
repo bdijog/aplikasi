@@ -54,6 +54,8 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->authMiddleware([
                 Authenticate::class,
-            ]);
+            ])
+            ->resourceCreatePageRedirect('index')
+            ->resourceEditPageRedirect('index');
     }
 }

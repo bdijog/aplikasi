@@ -13,6 +13,7 @@ use Filament\Forms\Components\TimePicker;
 use Filament\Schemas\Components\Utilities\Get;
 use Filament\Schemas\Schema;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Str;
 
 class AppointmentForm
@@ -56,7 +57,7 @@ class AppointmentForm
                     )
                     ->getOptionLabelFromRecordUsing(function ($record): string {
                         $dayOrDate = ($record->type?->value === 'one_time' || $record->type === 'one_time')
-                            ? ($record->specific_date ? $record->specific_date->format('d/m/Y') : '-')
+                            ? ($record->specific_date ? Carbon::parse($record->specific_date)->format('d/m/Y') : '-')
                             : ([
                                 0 => 'Minggu',
                                 1 => 'Senin',
@@ -67,8 +68,8 @@ class AppointmentForm
                                 6 => 'Sabtu',
                             ][$record->day_of_week] ?? '-');
 
-                        $start = $record->start_time ? $record->start_time->format('H:i') : '--:--';
-                        $end = $record->end_time ? $record->end_time->format('H:i') : '--:--';
+                        $start = $record->start_time ? Carbon::parse($record->start_time)->format('H:i') : '--:--';
+                        $end = $record->end_time ? Carbon::parse($record->end_time)->format('H:i') : '--:--';
 
                         return "{$dayOrDate} ({$start} - {$end}) - Kuota: {$record->max_patients}";
                     })
