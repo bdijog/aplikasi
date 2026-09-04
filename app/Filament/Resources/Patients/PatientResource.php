@@ -13,7 +13,6 @@ use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
-use UnitEnum;
 
 class PatientResource extends Resource
 {
@@ -21,13 +20,22 @@ class PatientResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedUsers;
 
-    protected static string|UnitEnum|null $navigationGroup = 'Master Data & Sistem';
-
-    protected static ?string $modelLabel = 'Pasien';
-
-    protected static ?string $pluralModelLabel = 'Data Pasien';
-
     protected static ?int $navigationSort = 1;
+
+    public static function getNavigationGroup(): ?string
+    {
+        return __('Master Data & System');
+    }
+
+    public static function getModelLabel(): string
+    {
+        return __('Patient');
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+        return __('Patients');
+    }
 
     public static function form(Schema $schema): Schema
     {

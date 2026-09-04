@@ -29,71 +29,71 @@ class AppointmentsTable
         return $table
             ->columns([
                 TextColumn::make('booking_code')
-                    ->label('Kode Booking')
+                    ->label(__('Booking Code'))
                     ->searchable()
                     ->sortable()
                     ->copyable()
                     ->weight('bold'),
 
                 TextColumn::make('appointment_date')
-                    ->label('Tanggal')
+                    ->label(__('Date'))
                     ->date('d M Y')
                     ->sortable(),
 
                 TextColumn::make('estimated_time')
-                    ->label('Jam')
+                    ->label(__('Time'))
                     ->time('H:i')
                     ->placeholder('-'),
 
                 TextColumn::make('patient.name')
-                    ->label('Pasien')
+                    ->label(__('Patient'))
                     ->searchable()
                     ->sortable(),
 
                 TextColumn::make('doctor.name')
-                    ->label('Dokter')
+                    ->label(__('Doctor'))
                     ->searchable()
                     ->sortable(),
 
                 TextColumn::make('status')
-                    ->label('Status')
+                    ->label(__('Status'))
                     ->badge(),
 
                 TextColumn::make('visit_type')
-                    ->label('Kunjungan')
+                    ->label(__('Visit'))
                     ->badge(),
 
                 TextColumn::make('source')
-                    ->label('Sumber')
+                    ->label(__('Source'))
                     ->badge(),
             ])
             ->filters([
                 SelectFilter::make('doctor_id')
-                    ->label('Dokter')
+                    ->label(__('Doctor'))
                     ->relationship('doctor', 'name')
                     ->searchable()
                     ->preload(),
 
                 SelectFilter::make('status')
-                    ->label('Status')
+                    ->label(__('Status'))
                     ->options(AppointmentStatus::class),
 
                 SelectFilter::make('visit_type')
-                    ->label('Jenis Kunjungan')
+                    ->label(__('Visit Type'))
                     ->options(VisitType::class),
 
                 SelectFilter::make('source')
-                    ->label('Sumber Booking')
+                    ->label(__('Booking Source'))
                     ->options(AppointmentSource::class),
             ])
             ->recordActions([
                 Action::make('checkIn')
-                    ->label('Check-in')
+                    ->label(__('Check-in'))
                     ->icon(Heroicon::OutlinedCheckBadge)
                     ->color('success')
                     ->requiresConfirmation()
-                    ->modalHeading('Proses Check-in Pasien')
-                    ->modalDescription('Apakah pasien sudah tiba di klinik? Sistem akan menandai appointment sebagai Checked-in dan menerbitkan tiket antrian.')
+                    ->modalHeading(__('Process Patient Check-in'))
+                    ->modalDescription(__('Has the patient arrived at the clinic? The system will mark the appointment as Checked-in and issue a queue ticket.'))
                     ->visible(fn (Appointment $record): bool => in_array($record->status, [AppointmentStatus::Confirmed, AppointmentStatus::Pending], true))
                     ->action(function (Appointment $record): void {
                         $record->status = AppointmentStatus::CheckedIn;
@@ -126,14 +126,14 @@ class AppointmentsTable
                         }
 
                         Notification::make()
-                            ->title('Check-in Berhasil')
+                            ->title(__('Check-in Successful'))
                             ->body("Pasien {$record->patient->name} telah check-in dan tiket antrian berhasil dibuat.")
                             ->success()
                             ->send();
                     }),
 
                 Action::make('confirm')
-                    ->label('Konfirmasi')
+                    ->label(__('Confirm'))
                     ->icon(Heroicon::OutlinedCheckCircle)
                     ->color('info')
                     ->visible(fn (Appointment $record): bool => $record->status === AppointmentStatus::Pending)
@@ -142,18 +142,18 @@ class AppointmentsTable
                         $record->save();
 
                         Notification::make()
-                            ->title('Appointment Dikonfirmasi')
+                            ->title(__('Appointment Confirmed'))
                             ->success()
                             ->send();
                     }),
 
                 Action::make('cancel')
-                    ->label('Batalkan')
+                    ->label(__('Cancel'))
                     ->icon(Heroicon::OutlinedXCircle)
                     ->color('danger')
                     ->form([
                         Textarea::make('cancellation_reason')
-                            ->label('Alasan Pembatalan')
+                            ->label(__('Cancellation Reason'))
                             ->required(),
                     ])
                     ->visible(fn (Appointment $record): bool => ! in_array($record->status, [AppointmentStatus::Cancelled, AppointmentStatus::Completed], true))
@@ -168,7 +168,7 @@ class AppointmentsTable
                         }
 
                         Notification::make()
-                            ->title('Appointment Dibatalkan')
+                            ->title(__('Appointment Cancelled'))
                             ->danger()
                             ->send();
                     }),

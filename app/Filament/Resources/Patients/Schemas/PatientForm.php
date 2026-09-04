@@ -18,67 +18,67 @@ class PatientForm
         return $schema
             ->components([
                 TextInput::make('medical_record_number')
-                    ->label('No. Rekam Medis (RM)')
+                    ->label(__('Medical Record No. (RM)'))
                     ->required()
                     ->unique(ignoreRecord: true)
                     ->maxLength(50)
                     ->placeholder('contoh: RM-20260901-0001'),
 
                 TextInput::make('name')
-                    ->label('Nama Lengkap Pasien')
+                    ->label(__('Patient Full Name'))
                     ->required()
                     ->maxLength(255),
 
                 TextInput::make('national_id')
-                    ->label('NIK (No. KTP)')
+                    ->label(__('NIK (ID Card No.)'))
                     ->unique(ignoreRecord: true)
                     ->maxLength(30)
                     ->placeholder('16 digit NIK'),
 
                 TextInput::make('phone')
-                    ->label('Nomor Telepon / WhatsApp')
+                    ->label(__('Phone / WhatsApp Number'))
                     ->tel()
                     ->required()
                     ->maxLength(50),
 
                 TextInput::make('email')
-                    ->label('Email Pasien')
+                    ->label(__('Patient Email'))
                     ->email()
                     ->unique(ignoreRecord: true)
                     ->maxLength(255),
 
                 DatePicker::make('date_of_birth')
-                    ->label('Tanggal Lahir')
+                    ->label(__('Date of Birth'))
                     ->required()
                     ->maxDate(now()),
 
                 Select::make('gender')
-                    ->label('Jenis Kelamin')
+                    ->label(__('Gender'))
                     ->options(Gender::class)
                     ->required(),
 
                 Select::make('blood_type')
-                    ->label('Golongan Darah')
+                    ->label(__('Blood Type'))
                     ->options([
                         'A' => 'A',
                         'B' => 'B',
                         'AB' => 'AB',
                         'O' => 'O',
                     ])
-                    ->placeholder('Pilih Golongan Darah'),
+                    ->placeholder(__('Select Blood Type')),
 
                 TagsInput::make('allergies')
-                    ->label('Riwayat Alergi')
+                    ->label(__('Allergy History'))
                     ->placeholder('Ketik alergi lalu tekan enter (contoh: Amoksisilin, Seafood)'),
 
                 FileUpload::make('photo')
-                    ->label('Foto Pasien')
+                    ->label(__('Patient Photo'))
                     ->image()
                     ->disk('public')
                     ->directory('patients'),
 
                 Textarea::make('address')
-                    ->label('Alamat Domisili')
+                    ->label(__('Home Address'))
                     ->rows(3),
             ]);
     }

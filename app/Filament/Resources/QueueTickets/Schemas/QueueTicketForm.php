@@ -17,68 +17,68 @@ class QueueTicketForm
         return $schema
             ->components([
                 Select::make('appointment_id')
-                    ->label('Appointment Pasien')
+                    ->label(__('Patient Appointment'))
                     ->relationship('appointment', 'booking_code')
                     ->searchable()
                     ->preload()
                     ->required(),
 
                 Select::make('doctor_id')
-                    ->label('Dokter')
+                    ->label(__('Doctor'))
                     ->relationship('doctor', 'name')
                     ->searchable()
                     ->preload()
                     ->required(),
 
                 Select::make('schedule_id')
-                    ->label('Jadwal Dokter')
+                    ->label(__('Doctor Schedule'))
                     ->relationship('schedule', 'id')
                     ->required(),
 
                 DatePicker::make('queue_date')
-                    ->label('Tanggal Antrian')
+                    ->label(__('Queue Date'))
                     ->default(now())
                     ->required(),
 
                 TextInput::make('display_number')
-                    ->label('Nomor Tampilan (Display)')
+                    ->label(__('Display Number'))
                     ->required()
                     ->placeholder('contoh: A-001'),
 
                 TextInput::make('prefix')
-                    ->label('Prefix')
+                    ->label(__('Prefix'))
                     ->default('A')
                     ->maxLength(5)
                     ->required(),
 
                 TextInput::make('queue_number')
-                    ->label('Nomor Urut')
+                    ->label(__('Queue Number'))
                     ->numeric()
                     ->required(),
 
                 Select::make('priority')
-                    ->label('Prioritas Antrian')
+                    ->label(__('Queue Priority'))
                     ->options(QueueTicketPriority::class)
                     ->default(QueueTicketPriority::Normal)
                     ->required(),
 
                 Select::make('status')
-                    ->label('Status Tiket')
+                    ->label(__('Ticket Status'))
                     ->options(QueueTicketStatus::class)
                     ->default(QueueTicketStatus::Waiting)
                     ->required(),
 
                 TextInput::make('counter')
-                    ->label('Loket / Poli Layanan')
+                    ->label(__('Counter / Clinic'))
                     ->placeholder('contoh: Poli Anak 1'),
 
                 TextInput::make('call_count')
-                    ->label('Jumlah Panggilan')
+                    ->label(__('Call Count'))
                     ->numeric()
                     ->default(0),
 
                 Textarea::make('notes')
-                    ->label('Catatan Antrian')
+                    ->label(__('Queue Notes'))
                     ->rows(2),
             ]);
     }

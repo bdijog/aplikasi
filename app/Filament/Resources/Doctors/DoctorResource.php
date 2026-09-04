@@ -21,17 +21,21 @@ class DoctorResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedUserPlus;
 
-    // protected static string|UnitEnum|null $navigationGroup = 'Jadwal & Dokter';
-
-    protected static ?string $modelLabel = 'Dokter';
-
-    protected static ?string $pluralModelLabel = 'Data Dokter';
-
     protected static ?int $navigationSort = 2;
 
     public static function getNavigationGroup(): ?string
     {
         return __('Schedule & Doctors');
+    }
+
+    public static function getModelLabel(): string
+    {
+        return __('Doctor');
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+        return __('Doctors');
     }
 
     public static function form(Schema $schema): Schema

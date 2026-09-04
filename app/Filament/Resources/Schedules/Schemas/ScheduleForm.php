@@ -19,21 +19,21 @@ class ScheduleForm
         return $schema
             ->components([
                 Select::make('doctor_id')
-                    ->label('Dokter')
+                    ->label(__('Doctor'))
                     ->relationship('doctor', 'name')
                     ->searchable()
                     ->preload()
                     ->required(),
 
                 Select::make('type')
-                    ->label('Tipe Jadwal')
+                    ->label(__('Schedule Type'))
                     ->options(ScheduleType::class)
                     ->default(ScheduleType::Recurring)
                     ->required()
                     ->live(),
 
                 Select::make('day_of_week')
-                    ->label('Hari Praktik')
+                    ->label(__('Practice Day'))
                     ->options([
                         0 => 'Minggu',
                         1 => 'Senin',
@@ -47,37 +47,37 @@ class ScheduleForm
                     ->visible(fn (Get $get) => in_array($get('type'), [ScheduleType::Recurring->value, 'recurring', null], true)),
 
                 DatePicker::make('specific_date')
-                    ->label('Tanggal Khusus')
+                    ->label(__('Specific Date'))
                     ->required(fn (Get $get) => in_array($get('type'), [ScheduleType::OneTime->value, 'one_time'], true))
                     ->visible(fn (Get $get) => in_array($get('type'), [ScheduleType::OneTime->value, 'one_time'], true)),
 
                 TimePicker::make('start_time')
-                    ->label('Jam Mulai Praktik')
+                    ->label(__('Practice Start Time'))
                     ->seconds(false)
                     ->required(),
 
                 TimePicker::make('end_time')
-                    ->label('Jam Selesai Praktik')
+                    ->label(__('Practice End Time'))
                     ->seconds(false)
                     ->required(),
 
                 TextInput::make('max_patients')
-                    ->label('Kuota Pasien')
+                    ->label(__('Patient Quota'))
                     ->numeric()
                     ->minValue(1)
                     ->maxValue(50)
                     ->default(20)
                     ->required()
-                    ->helperText('Batas kuota pasien antara 1 - 50'),
+                    ->helperText(__('Patient quota must be between 1 - 50')),
 
                 Select::make('status')
-                    ->label('Status Jadwal')
+                    ->label(__('Schedule Status'))
                     ->options(ScheduleStatus::class)
                     ->default(ScheduleStatus::Active)
                     ->required(),
 
                 Textarea::make('notes')
-                    ->label('Catatan / Keterangan')
+                    ->label(__('Notes / Remarks'))
                     ->rows(2),
             ]);
     }

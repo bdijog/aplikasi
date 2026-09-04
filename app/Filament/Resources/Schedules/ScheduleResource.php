@@ -13,7 +13,6 @@ use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
-use UnitEnum;
 
 class ScheduleResource extends Resource
 {
@@ -21,13 +20,22 @@ class ScheduleResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedCalendarDays;
 
-    protected static string|UnitEnum|null $navigationGroup = 'Jadwal & Dokter';
-
-    protected static ?string $modelLabel = 'Jadwal Praktik';
-
-    protected static ?string $pluralModelLabel = 'Jadwal Praktik Dokter';
-
     protected static ?int $navigationSort = 1;
+
+    public static function getNavigationGroup(): ?string
+    {
+        return __('Schedule & Doctors');
+    }
+
+    public static function getModelLabel(): string
+    {
+        return __('Schedule');
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+        return __('Schedules');
+    }
 
     public static function form(Schema $schema): Schema
     {

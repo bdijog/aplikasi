@@ -24,76 +24,76 @@ class QueueTicketsTable
         return $table
             ->columns([
                 TextColumn::make('display_number')
-                    ->label('No. Antrian')
+                    ->label(__('Queue No.'))
                     ->searchable()
                     ->sortable()
                     ->weight('bold')
                     ->copyable(),
 
                 TextColumn::make('queue_date')
-                    ->label('Tanggal')
+                    ->label(__('Date'))
                     ->date('d M Y')
                     ->sortable(),
 
                 TextColumn::make('appointment.patient.name')
-                    ->label('Pasien')
+                    ->label(__('Patient'))
                     ->searchable(),
 
                 TextColumn::make('doctor.name')
-                    ->label('Dokter')
+                    ->label(__('Doctor'))
                     ->searchable()
                     ->sortable(),
 
                 TextColumn::make('priority')
-                    ->label('Prioritas')
+                    ->label(__('Priority'))
                     ->badge(),
 
                 TextColumn::make('status')
-                    ->label('Status')
+                    ->label(__('Status'))
                     ->badge(),
 
                 TextColumn::make('counter')
-                    ->label('Loket/Poli')
+                    ->label(__('Counter/Clinic'))
                     ->placeholder('-'),
 
                 TextColumn::make('call_count')
-                    ->label('Panggilan')
+                    ->label(__('Calls'))
                     ->numeric()
                     ->sortable(),
 
                 TextColumn::make('called_at')
-                    ->label('Waktu Panggil')
+                    ->label(__('Call Time'))
                     ->time('H:i:s')
                     ->toggleable(isToggledHiddenByDefault: true),
 
                 TextColumn::make('served_at')
-                    ->label('Mulai Layani')
+                    ->label(__('Serve Time'))
                     ->time('H:i:s')
                     ->toggleable(isToggledHiddenByDefault: true),
 
                 TextColumn::make('completed_at')
-                    ->label('Selesai')
+                    ->label(__('Completed'))
                     ->time('H:i:s')
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
                 SelectFilter::make('doctor_id')
-                    ->label('Dokter')
+                    ->label(__('Doctor'))
                     ->relationship('doctor', 'name')
                     ->searchable()
                     ->preload(),
 
                 SelectFilter::make('status')
-                    ->label('Status Antrian')
+                    ->label(__('Queue Status'))
                     ->options(QueueTicketStatus::class),
 
                 SelectFilter::make('priority')
-                    ->label('Prioritas')
+                    ->label(__('Priority'))
                     ->options(QueueTicketPriority::class),
             ])
             ->recordActions([
                 Action::make('call')
-                    ->label('Panggil')
+                    ->label(__('Call'))
                     ->icon(Heroicon::OutlinedSpeakerWave)
                     ->color('info')
                     ->visible(fn (QueueTicket $record): bool => in_array($record->status, [QueueTicketStatus::Waiting, QueueTicketStatus::Skipped], true))
@@ -118,7 +118,7 @@ class QueueTicketsTable
                     }),
 
                 Action::make('complete')
-                    ->label('Selesai')
+                    ->label(__('Complete'))
                     ->icon(Heroicon::OutlinedCheckCircle)
                     ->color('success')
                     ->visible(fn (QueueTicket $record): bool => $record->status === QueueTicketStatus::Serving)
@@ -138,7 +138,7 @@ class QueueTicketsTable
                     }),
 
                 Action::make('skip')
-                    ->label('Lewati')
+                    ->label(__('Skip'))
                     ->icon(Heroicon::OutlinedForward)
                     ->color('warning')
                     ->visible(fn (QueueTicket $record): bool => $record->status === QueueTicketStatus::Serving)

@@ -19,17 +19,17 @@ class SchedulesTable
         return $table
             ->columns([
                 TextColumn::make('doctor.name')
-                    ->label('Dokter')
+                    ->label(__('Doctor'))
                     ->searchable()
                     ->sortable()
                     ->weight('bold'),
 
                 TextColumn::make('type')
-                    ->label('Tipe')
+                    ->label(__('Type'))
                     ->badge(),
 
                 TextColumn::make('day_of_week')
-                    ->label('Hari Praktik')
+                    ->label(__('Practice Day'))
                     ->formatStateUsing(fn ($state) => [
                         0 => 'Minggu',
                         1 => 'Senin',
@@ -42,40 +42,40 @@ class SchedulesTable
                     ->sortable(),
 
                 TextColumn::make('specific_date')
-                    ->label('Tgl Khusus')
+                    ->label(__('Special Date'))
                     ->date('d M Y')
                     ->placeholder('-'),
 
                 TextColumn::make('start_time')
-                    ->label('Jam Mulai')
+                    ->label(__('Start Time'))
                     ->time('H:i'),
 
                 TextColumn::make('end_time')
-                    ->label('Jam Selesai')
+                    ->label(__('End Time'))
                     ->time('H:i'),
 
                 TextColumn::make('max_patients')
-                    ->label('Kuota')
+                    ->label(__('Quota'))
                     ->numeric()
                     ->sortable(),
 
                 TextColumn::make('status')
-                    ->label('Status')
+                    ->label(__('Status'))
                     ->badge(),
             ])
             ->filters([
                 SelectFilter::make('doctor_id')
-                    ->label('Dokter')
+                    ->label(__('Doctor'))
                     ->relationship('doctor', 'name')
                     ->searchable()
                     ->preload(),
 
                 SelectFilter::make('status')
-                    ->label('Status')
+                    ->label(__('Status'))
                     ->options(ScheduleStatus::class),
 
                 SelectFilter::make('type')
-                    ->label('Tipe Jadwal')
+                    ->label(__('Schedule Type'))
                     ->options(ScheduleType::class),
             ])
             ->recordActions([

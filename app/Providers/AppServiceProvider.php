@@ -21,7 +21,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         LanguageSwitch::configureUsing(function (LanguageSwitch $switch) {
-            $switch->locales(['id', 'en', 'ar']);
+            $switch->locales(['id', 'en']);
             
         });
     }

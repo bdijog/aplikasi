@@ -18,47 +18,47 @@ class PatientsTable
         return $table
             ->columns([
                 TextColumn::make('medical_record_number')
-                    ->label('No. RM')
+                    ->label(__('RM No.'))
                     ->searchable()
                     ->sortable()
                     ->copyable()
                     ->weight('bold'),
 
                 TextColumn::make('name')
-                    ->label('Nama Pasien')
+                    ->label(__('Patient Name'))
                     ->searchable()
                     ->sortable(),
 
                 TextColumn::make('national_id')
-                    ->label('NIK')
+                    ->label(__('NIK'))
                     ->searchable()
                     ->toggleable(),
 
                 TextColumn::make('phone')
-                    ->label('Telepon')
+                    ->label(__('Phone'))
                     ->searchable(),
 
                 TextColumn::make('gender')
-                    ->label('Gender')
+                    ->label(__('Gender'))
                     ->badge(),
 
                 TextColumn::make('date_of_birth')
-                    ->label('Tgl Lahir')
+                    ->label(__('Date of Birth (short)'))
                     ->date('d M Y')
                     ->sortable(),
 
                 TextColumn::make('blood_type')
-                    ->label('Gol. Darah')
+                    ->label(__('Blood Type (short)'))
                     ->badge()
                     ->placeholder('-'),
             ])
             ->filters([
                 SelectFilter::make('gender')
-                    ->label('Jenis Kelamin')
+                    ->label(__('Gender'))
                     ->options(Gender::class),
 
                 SelectFilter::make('blood_type')
-                    ->label('Golongan Darah')
+                    ->label(__('Blood Type'))
                     ->options([
                         'A' => 'A',
                         'B' => 'B',

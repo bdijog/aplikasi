@@ -19,46 +19,46 @@ class DoctorsTable
         return $table
             ->columns([
                 ImageColumn::make('photo')
-                    ->label('Foto')
+                    ->label(__('Photo'))
                     ->disk('public')
                     ->circular()
                     ->defaultImageUrl(fn () => 'https://ui-avatars.com/api/?name=Dr&background=0D8ABC&color=fff'),
 
                 TextColumn::make('name')
-                    ->label('Nama Dokter')
+                    ->label(__('Doctor Name'))
                     ->searchable()
                     ->sortable()
                     ->weight('bold'),
 
                 TextColumn::make('specialty')
-                    ->label('Spesialisasi')
+                    ->label(__('Specialty'))
                     ->searchable()
                     ->sortable()
                     ->badge()
                     ->placeholder('Umum'),
 
                 TextColumn::make('license_number')
-                    ->label('Nomor STR')
+                    ->label(__('STR No.'))
                     ->searchable()
                     ->toggleable(),
 
                 TextColumn::make('phone')
-                    ->label('Telepon')
+                    ->label(__('Phone'))
                     ->searchable(),
 
                 TextColumn::make('email')
-                    ->label('Email')
+                    ->label(__('Email'))
                     ->searchable()
                     ->toggleable(isToggledHiddenByDefault: true),
 
                 IconColumn::make('is_active')
-                    ->label('Aktif')
+                    ->label(__('Active'))
                     ->boolean()
                     ->sortable(),
             ])
             ->filters([
                 TernaryFilter::make('is_active')
-                    ->label('Status Aktif'),
+                    ->label(__('Active Status')),
             ])
             ->recordActions([
                 EditAction::make(),

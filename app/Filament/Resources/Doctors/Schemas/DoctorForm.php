@@ -15,31 +15,31 @@ class DoctorForm
         return $schema
             ->components([
                 TextInput::make('name')
-                    ->label('Nama Lengkap')
+                    ->label(__('Full Name'))
                     ->required()
                     ->maxLength(255),
 
                 TextInput::make('license_number')
-                    ->label('Nomor STR')
+                    ->label(__('STR Number'))
                     ->required()
                     ->unique(ignoreRecord: true)
                     ->maxLength(100)
                     ->placeholder('contoh: STR-12345678'),
 
                 TextInput::make('specialty')
-                    ->label('Spesialisasi')
+                    ->label(__('Specialty'))
                     ->maxLength(255)
                     ->placeholder('contoh: Spesialis Anak, Umum, Penyakit Dalam'),
 
                 TextInput::make('email')
-                    ->label('Email Login')
+                    ->label(__('Login Email'))
                     ->email()
                     ->required()
                     ->unique(ignoreRecord: true)
                     ->maxLength(255),
 
                 TextInput::make('password')
-                    ->label('Password')
+                    ->label(__('Password'))
                     ->password()
                     ->revealable()
                     ->required(fn (string $operation): bool => $operation === 'create')
@@ -47,23 +47,23 @@ class DoctorForm
                     ->maxLength(255),
 
                 TextInput::make('phone')
-                    ->label('Nomor Telepon')
+                    ->label(__('Phone Number'))
                     ->tel()
                     ->maxLength(50),
 
                 FileUpload::make('photo')
-                    ->label('Foto Dokter')
+                    ->label(__('Doctor Photo'))
                     ->image()
                     ->imageEditor()
                     ->disk('public')
                     ->directory('doctors'),
 
                 Toggle::make('is_active')
-                    ->label('Status Aktif')
+                    ->label(__('Active Status'))
                     ->default(true),
 
                 Textarea::make('bio')
-                    ->label('Bio / Profil Singkat')
+                    ->label(__('Bio / Brief Profile'))
                     ->rows(3),
             ]);
     }

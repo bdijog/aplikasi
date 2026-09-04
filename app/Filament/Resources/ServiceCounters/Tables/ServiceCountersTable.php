@@ -17,23 +17,23 @@ class ServiceCountersTable
         return $table
             ->columns([
                 TextColumn::make('code')
-                    ->label('Kode Ruangan')
+                    ->label(__('Room / Counter Code'))
                     ->searchable()
                     ->sortable()
                     ->weight('bold'),
 
                 TextColumn::make('name')
-                    ->label('Nama Ruangan / Loket')
+                    ->label(__('Room / Counter Name'))
                     ->searchable()
                     ->sortable(),
 
                 TextColumn::make('location')
-                    ->label('Lokasi / Lantai')
+                    ->label(__('Location / Floor'))
                     ->searchable()
                     ->placeholder('-'),
 
                 IconColumn::make('is_active')
-                    ->label('Aktif')
+                    ->label(__('Active'))
                     ->boolean()
                     ->sortable(),
             ])

@@ -23,7 +23,7 @@ class AppointmentForm
         return $schema
             ->components([
                 TextInput::make('booking_code')
-                    ->label('Kode Booking')
+                    ->label(__('Booking Code'))
                     ->default(fn () => 'APT-' . date('Ymd') . '-' . strtoupper(Str::random(4)))
                     ->required()
                     ->unique(ignoreRecord: true)
@@ -31,14 +31,14 @@ class AppointmentForm
                     ->dehydrated(),
 
                 Select::make('patient_id')
-                    ->label('Pasien')
+                    ->label(__('Patient'))
                     ->relationship('patient', 'name')
                     ->searchable()
                     ->preload()
                     ->required(),
 
                 Select::make('doctor_id')
-                    ->label('Dokter')
+                    ->label(__('Doctor'))
                     ->relationship('doctor', 'name')
                     ->searchable()
                     ->preload()
@@ -46,7 +46,7 @@ class AppointmentForm
                     ->live(),
 
                 Select::make('schedule_id')
-                    ->label('Jadwal Dokter')
+                    ->label(__('Doctor Schedule'))
                     ->relationship(
                         'schedule',
                         'id',
@@ -78,43 +78,43 @@ class AppointmentForm
                     ->required(),
 
                 DatePicker::make('appointment_date')
-                    ->label('Tanggal Janji Temu')
+                    ->label(__('Appointment Date'))
                     ->default(now())
                     ->required(),
 
                 TimePicker::make('estimated_time')
-                    ->label('Estimasi Jam Layanan')
+                    ->label(__('Estimated Service Time'))
                     ->seconds(false),
 
                 Select::make('visit_type')
-                    ->label('Jenis Kunjungan')
+                    ->label(__('Visit Type'))
                     ->options(VisitType::class)
                     ->default(VisitType::NewVisit)
                     ->required(),
 
                 Select::make('source')
-                    ->label('Sumber Booking')
+                    ->label(__('Booking Source'))
                     ->options(AppointmentSource::class)
                     ->default(AppointmentSource::Online)
                     ->required(),
 
                 Select::make('status')
-                    ->label('Status Appointment')
+                    ->label(__('Appointment Status'))
                     ->options(AppointmentStatus::class)
                     ->default(AppointmentStatus::Pending)
                     ->live()
                     ->required(),
 
                 Textarea::make('chief_complaint')
-                    ->label('Keluhan Utama')
+                    ->label(__('Chief Complaint'))
                     ->rows(3),
 
                 Textarea::make('patient_notes')
-                    ->label('Catatan Pasien')
+                    ->label(__('Patient Notes'))
                     ->rows(2),
 
                 Textarea::make('cancellation_reason')
-                    ->label('Alasan Pembatalan')
+                    ->label(__('Cancellation Reason'))
                     ->rows(2)
                     ->visible(fn (Get $get): bool => in_array($get('status'), [AppointmentStatus::Cancelled->value, 'cancelled'], true)),
             ]);

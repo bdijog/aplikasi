@@ -13,7 +13,6 @@ use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
-use UnitEnum;
 
 class AppointmentResource extends Resource
 {
@@ -21,13 +20,22 @@ class AppointmentResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedClipboardDocumentList;
 
-    protected static string|UnitEnum|null $navigationGroup = 'Layanan Pasien & Antrian';
-
-    protected static ?string $modelLabel = 'Janji Temu';
-
-    protected static ?string $pluralModelLabel = 'Janji Temu (Appointment)';
-
     protected static ?int $navigationSort = 1;
+
+    public static function getNavigationGroup(): ?string
+    {
+        return __('Patient Services & Queue');
+    }
+
+    public static function getModelLabel(): string
+    {
+        return __('Appointment');
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+        return __('Appointments');
+    }
 
     public static function form(Schema $schema): Schema
     {

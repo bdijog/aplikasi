@@ -13,7 +13,6 @@ use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
-use UnitEnum;
 
 class ServiceCounterResource extends Resource
 {
@@ -21,13 +20,22 @@ class ServiceCounterResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedBuildingOffice;
 
-    protected static string|UnitEnum|null $navigationGroup = 'Master Data & Sistem';
-
-    protected static ?string $modelLabel = 'Ruangan / Loket';
-
-    protected static ?string $pluralModelLabel = 'Master Ruangan & Loket';
-
     protected static ?int $navigationSort = 2;
+
+    public static function getNavigationGroup(): ?string
+    {
+        return __('Master Data & System');
+    }
+
+    public static function getModelLabel(): string
+    {
+        return __('Service Counter');
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+        return __('Service Counters');
+    }
 
     public static function form(Schema $schema): Schema
     {
