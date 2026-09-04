@@ -31,7 +31,7 @@ class DoctorResource extends Resource
 
     public static function getNavigationGroup(): ?string
     {
-        return 'Jadwal & Dokter';
+        return __('Schedule & Doctors');
     }
 
     public static function form(Schema $schema): Schema
