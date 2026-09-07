@@ -24,6 +24,12 @@ class UsersTable
                     ->label(__('Email'))
                     ->searchable()
                     ->sortable(),
+
+                TextColumn::make('roles.name')
+                    ->label(__('Roles'))
+                    ->badge()
+                    ->color('info')
+                    ->separator(','),
             ])
             ->filters([
                 //
