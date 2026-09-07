@@ -22,6 +22,7 @@ class DatabaseSeeder extends Seeder
             ScheduleSeeder::class,
             AppointmentSeeder::class,
             QueueTicketSeeder::class,
+            AnnouncementSeeder::class,
         ]);
     }
 }
