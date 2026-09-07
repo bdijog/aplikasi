@@ -5,11 +5,19 @@ namespace App\Models;
 use Database\Factories\ServiceCounterFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Translatable\HasTranslations;
 
 class ServiceCounter extends Model
 {
     /** @use HasFactory<ServiceCounterFactory> */
-    use HasFactory;
+    use HasFactory, HasTranslations;
+
+    /**
+     * The attributes that are translatable.
+     *
+     * @var list<string>
+     */
+    public array $translatable = ['name', 'location'];
 
     /**
      * The attributes that are mass assignable.

@@ -7,11 +7,19 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Spatie\Translatable\HasTranslations;
 
 class Doctor extends Authenticatable
 {
     /** @use HasFactory<DoctorFactory> */
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable, HasTranslations;
+
+    /**
+     * The attributes that are translatable.
+     *
+     * @var list<string>
+     */
+    public array $translatable = ['specialty', 'bio'];
 
     /**
      * The attributes that are mass assignable.

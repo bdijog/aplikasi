@@ -24,14 +24,35 @@ class ServiceCounterFactory extends Factory
      */
     public function definition(): array
     {
-        $counterTypes = ['Poli Anak', 'Poli Penyakit Dalam', 'Poli Gigi', 'Poli Kandungan', 'Poli Mata', 'Poli THT', 'Loket Registrasi', 'Loket Pembayaran'];
-        $typeName = fake()->randomElement($counterTypes);
+        $counterTypes = [
+            'Poli Anak' => 'Pediatric Clinic',
+            'Poli Penyakit Dalam' => 'Internal Medicine Clinic',
+            'Poli Gigi' => 'Dental Clinic',
+            'Poli Kandungan' => 'Obstetrics Clinic',
+            'Poli Mata' => 'Eye Clinic',
+            'Poli THT' => 'ENT Clinic',
+            'Loket Registrasi' => 'Registration Counter',
+            'Loket Pembayaran' => 'Cashier Counter',
+        ];
+
+        $typeNameId = array_rand($counterTypes);
+        $typeNameEn = $counterTypes[$typeNameId];
         $number = fake()->numberBetween(1, 4);
 
+        $floor = fake()->numberBetween(1, 3);
+        $building = fake()->randomElement(['A', 'B', 'Utama']);
+        $buildingEn = $building === 'Utama' ? 'Main' : $building;
+
         return [
-            'name' => "{$typeName} {$number}",
+            'name' => [
+                'id' => "{$typeNameId} {$number}",
+                'en' => "{$typeNameEn} {$number}",
+            ],
             'code' => strtoupper(fake()->unique()->bothify('CTR-??-##')),
-            'location' => 'Lantai ' . fake()->numberBetween(1, 3) . ' Gedung ' . fake()->randomElement(['A', 'B', 'Utama']),
+            'location' => [
+                'id' => "Lantai {$floor} Gedung {$building}",
+                'en' => "Floor {$floor} Building {$buildingEn}",
+            ],
             'is_active' => true,
         ];
     }

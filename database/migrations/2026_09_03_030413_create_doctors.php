@@ -21,13 +21,12 @@ return new class extends Migration
             $table->rememberToken();
             $table->string('phone')->nullable();
             $table->string('photo')->nullable();
-            $table->text('bio')->nullable();
+            $table->json('bio')->nullable();
             $table->boolean('is_active')->default(true);
-            $table->string('specialty')->nullable();
+            $table->json('specialty')->nullable();
             $table->timestamps();
 
             $table->index('is_active');
-            $table->index('specialty');
         });
     }
 

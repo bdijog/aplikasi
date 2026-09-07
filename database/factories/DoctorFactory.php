@@ -25,21 +25,21 @@ class DoctorFactory extends Factory
     protected static ?string $password;
 
     /**
-     * List of Indonesian medical specialties with titles.
+     * List of Indonesian medical specialties with titles and English translations.
      *
-     * @var array<string, string>
+     * @var array<string, array{suffix: string, en: string}>
      */
     protected static array $specialties = [
-        'Spesialis Anak' => 'Sp.A',
-        'Spesialis Penyakit Dalam' => 'Sp.PD',
-        'Spesialis Jantung & Pembuluh Darah' => 'Sp.JP',
-        'Spesialis Obstetri & Ginekologi' => 'Sp.OG',
-        'Spesialis Bedah' => 'Sp.B',
-        'Spesialis Mata' => 'Sp.M',
-        'Spesialis Kulit & Kelamin' => 'Sp.KK',
-        'Spesialis THT-KL' => 'Sp.THT-KL',
-        'Spesialis Saraf' => 'Sp.S',
-        'Dokter Umum' => '',
+        'Spesialis Anak' => ['suffix' => 'Sp.A', 'en' => 'Pediatrician'],
+        'Spesialis Penyakit Dalam' => ['suffix' => 'Sp.PD', 'en' => 'Internal Medicine Specialist'],
+        'Spesialis Jantung & Pembuluh Darah' => ['suffix' => 'Sp.JP', 'en' => 'Cardiologist & Vascular Specialist'],
+        'Spesialis Obstetri & Ginekologi' => ['suffix' => 'Sp.OG', 'en' => 'Obstetrician & Gynecologist'],
+        'Spesialis Bedah' => ['suffix' => 'Sp.B', 'en' => 'General Surgeon'],
+        'Spesialis Mata' => ['suffix' => 'Sp.M', 'en' => 'Ophthalmologist'],
+        'Spesialis Kulit & Kelamin' => ['suffix' => 'Sp.KK', 'en' => 'Dermatologist & Venereologist'],
+        'Spesialis THT-KL' => ['suffix' => 'Sp.THT-KL', 'en' => 'ENT Specialist'],
+        'Spesialis Saraf' => ['suffix' => 'Sp.S', 'en' => 'Neurologist'],
+        'Dokter Umum' => ['suffix' => '', 'en' => 'General Practitioner'],
     ];
 
     /**
@@ -50,8 +50,8 @@ class DoctorFactory extends Factory
     public function definition(): array
     {
         $specialtyName = array_rand(self::$specialties);
-        $title = self::$specialties[$specialtyName];
-        $degreeSuffix = $title ? ", {$title}" : '';
+        $meta = self::$specialties[$specialtyName];
+        $degreeSuffix = $meta['suffix'] ? ", {$meta['suffix']}" : '';
 
         return [
             'name' => 'dr. ' . fake()->firstName() . ' ' . fake()->lastName() . $degreeSuffix,
@@ -62,9 +62,15 @@ class DoctorFactory extends Factory
             'remember_token' => Str::random(10),
             'phone' => '08' . fake()->numerify('##########'),
             'photo' => null,
-            'bio' => fake()->paragraph(),
+            'bio' => [
+                'id' => fake('id_ID')->paragraph(),
+                'en' => fake('en_US')->paragraph(),
+            ],
             'is_active' => true,
-            'specialty' => $specialtyName,
+            'specialty' => [
+                'id' => $specialtyName,
+                'en' => $meta['en'],
+            ],
         ];
     }
 
@@ -91,12 +97,15 @@ class DoctorFactory extends Factory
     /**
      * Set a specific specialty for the doctor.
      */
-    public function withSpecialty(string $specialty, ?string $degreeSuffix = null): static
+    public function withSpecialty(string $specialty, ?string $degreeSuffix = null, ?string $enSpecialty = null): static
     {
-        return $this->state(function (array $attributes) use ($specialty, $degreeSuffix) {
+        return $this->state(function (array $attributes) use ($specialty, $degreeSuffix, $enSpecialty) {
             $suffix = $degreeSuffix ? ", {$degreeSuffix}" : '';
             return [
-                'specialty' => $specialty,
+                'specialty' => [
+                    'id' => $specialty,
+                    'en' => $enSpecialty ?? (self::$specialties[$specialty]['en'] ?? $specialty),
+                ],
                 'name' => 'dr. ' . fake()->firstName() . ' ' . fake()->lastName() . $suffix,
             ];
         });

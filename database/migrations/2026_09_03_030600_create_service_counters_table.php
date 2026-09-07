@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('service_counters', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->json('name');
             $table->string('code')->unique();
-            $table->string('location')->nullable();
+            $table->json('location')->nullable();
             $table->boolean('is_active')->default(true);
             $table->timestamps();
         });
