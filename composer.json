@@ -7,6 +7,7 @@
     "license": "MIT",
     "require": {
         "php": "^8.3",
+        "awcodes/light-switch": "^3.1",
         "bezhansalleh/filament-language-switch": "^5.0",
         "filament/filament": "^5.7",
         "lara-zeus/spatie-translatable": "^2.0",
