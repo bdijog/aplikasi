@@ -59,7 +59,10 @@ Semua halaman dibangun berdasarkan desain di [desain_frontend](file:///home/kurn
 > **Branding**: Nama klinik = **"Klinik Ayo Sehat"**, subtitle = "HealthQueue Portal Terpadu". Logo akan menggunakan gambar dari `desain_frontend/klinik_sehat_medika_logo/screen.png` (dicopy ke `public/images/logo.png`).
 
 > [!IMPORTANT]
-> **Flow Registrasi + Booking Terintegrasi**: Pasien baru yang belum punya akun langsung menuju flow: **Register → Pilih Dokter & Jadwal → Isi Data Keluhan → Konfirmasi Booking**. Pasien lama (sudah punya akun) tinggal **Login → Pilih Dokter & Jadwal → Booking**.
+> **Autentikasi & Portal Mandiri Pasien**: Pasien dapat melakukan **Login Mandiri** kapan saja (`/patient/login`) tanpa harus memilih jadwal dokter atau membuat janji temu baru. Setelah berhasil login, pasien langsung mengakses **Dashboard / Portal Pasien** (`/patient/dashboard`) untuk melihat:
+> 1. **Daftar Janji Temu / Booking Sebelumnya**: Menampilkan riwayat dan status reservasi (Confirmed, Checked-in, Completed, Cancelled) beserta detail dokter, tanggal, sesi, dan kode barcode.
+> 2. **Tiket & Status Antrean Aktif**: Memantau nomor antrean aktif hari ini, status panggilan, estimasi tunggu, dan ruangan poliklinik.
+> 3. **Aksi Terpadu**: Melakukan Self Check-in mandiri untuk janji temu hari H, membatalkan janji temu, atau membuat reservasi baru dari dashboard.
 
 > [!IMPORTANT]
 > **Audio Notifikasi Antrian**: Display antrian akan menggunakan **Web Speech API** (`speechSynthesis`) untuk memanggil nomor antrian secara audio + **audio bell/chime** (file `.mp3`) sebagai attention grabber sebelum pengumuman suara.
@@ -73,38 +76,36 @@ Semua halaman dibangun berdasarkan desain di [desain_frontend](file:///home/kurn
 ### Fase 1 — Infrastruktur & Konfigurasi
 
 #### [MODIFY] [auth.php](file:///home/kurnia/HTDOCS/aplikasi/config/auth.php)
-- Tambah guard `patient` (driver: `session`, provider: `patients`)
-- Tambah provider `patients` (driver: `eloquent`, model: `Patient`)
+- Guard `patient` (driver: `session`, provider: `patients`)
+- Provider `patients` (driver: `eloquent`, model: `Patient`)
 
 #### [MODIFY] [web.php](file:///home/kurnia/HTDOCS/aplikasi/routes/web.php)
 Semua route frontend:
 ```php
 // Public pages
 Route::get('/', HomePage::class)->name('home');
-Route::get('/doctors', DoctorSchedulePage::class)->name('doctors');
-Route::get('/announcements', AnnouncementListPage::class)->name('announcements');
-Route::get('/announcements/{slug}', AnnouncementDetailPage::class)->name('announcements.show');
-Route::get('/queue-display', QueueDisplayPage::class)->name('queue-display');
+Route::get('/doctors', DoctorSchedule::class)->name('doctors.index');
+Route::get('/announcements', AnnouncementList::class)->name('announcements.index');
+Route::get('/announcements/{slug}', AnnouncementDetail::class)->name('announcements.show');
+Route::get('/queue/display', QueueDisplay::class)->name('queue.display');
 
-// Booking flow (multi-step, guest dapat akses step 1)
-Route::get('/booking', BookingPage::class)->name('booking');
-Route::get('/booking/{schedule}', BookingPage::class)->name('booking.schedule');
+// Booking flow (guest / auto-filled jika login)
+Route::get('/booking', AppointmentBooking::class)->name('booking.index');
 
-// Patient auth (guest only)
+// Patient Auth (Login Mandiri - Guest Only)
 Route::middleware('guest:patient')->group(function () {
-    Route::get('/patient/login', PatientLoginPage::class)->name('patient.login');
-    Route::get('/patient/register', PatientRegisterPage::class)->name('patient.register');
+    Route::get('/patient/login', PatientLogin::class)->name('patient.login');
+});
+
+// Patient Authenticated (Dashboard, Janji Temu & Antrean)
+Route::middleware('auth:patient')->group(function () {
+    Route::get('/patient/dashboard', PatientDashboard::class)->name('patient.dashboard');
+    Route::get('/patient/queue', PatientQueue::class)->name('queue.index');
+    Route::post('/patient/logout', function (Request $request) { ... })->name('patient.logout');
 });
 
 // Self Check-in (public, kiosk mode)
-Route::get('/check-in', SelfCheckInPage::class)->name('check-in');
-
-// Patient authenticated
-Route::middleware('auth:patient')->prefix('patient')->group(function () {
-    Route::get('/dashboard', PatientDashboardPage::class)->name('patient.dashboard');
-    Route::get('/queue', QueueStatusPage::class)->name('patient.queue');
-    Route::post('/logout', [PatientAuthController::class, 'logout'])->name('patient.logout');
-});
+Route::get('/check-in', SelfCheckIn::class)->name('checkin.index');
 ```
 
 #### [NEW] [SetLocale.php](file:///home/kurnia/HTDOCS/aplikasi/app/Http/Middleware/SetLocale.php)
@@ -133,7 +134,13 @@ Dibangun berdasarkan header/footer yang konsisten di semua desain HTML.
 #### [NEW] [frontend.blade.php](file:///home/kurnia/HTDOCS/aplikasi/resources/views/layouts/frontend.blade.php)
 Master layout sesuai desain:
 - **Top bar (navy)**: Badge akreditasi + Layanan IGD 24 Jam + Hotline darurat
-- **Navbar**: Logo "Klinik Ayo Sehat" + subtitle "HealthQueue Portal Terpadu", navigasi (Jadwal Dokter & Poliklinik, Booking Appointment, Status Antrian, Self Check-in, Pengumuman), search bar, language switcher (ID/EN), notifikasi bell, profile avatar / Login button
+- **Navbar**: Logo "Klinik Ayo Sehat" + subtitle "HealthQueue Portal Terpadu", navigasi utama, tombol pintas TV Monitor, pemilih bahasa (ID/EN), serta kontrol autentikasi pasien:
+  - **Jika Belum Login (Guest)**: Tombol sekunder **"Masuk Pasien"** (`/patient/login`) dan tombol primer **"Daftar & Booking"** (`/booking`).
+  - **Jika Sudah Login (Authenticated Patient)**: Avatar profil pasien dengan dropdown:
+    - Ringkasan nama dan No. Rekam Medis (MRN)
+    - Tautan ke **"Dashboard Pasien"** (`/patient/dashboard`)
+    - Tautan ke **"Antrean Aktif Saya"** (`/patient/queue`)
+    - Tombol **"Keluar"** (`/patient/logout`)
 - **Footer**: 4 kolom — Info klinik & alamat, Layanan Poliklinik, HealthQueue Digital, Jam Operasional. Copyright bar.
 - Slot untuk `@livewire` content + `@stack('scripts')`
 - SEO meta tags
@@ -212,13 +219,54 @@ Referensi: desain `booking_janji_temu_dokter`
 - Generate `booking_code` format `APT-YYYYMMDD-XXXX`
 - Validasi kuota (tidak boleh melebihi `max_patients`)
 
-#### [NEW] [PatientLoginPage.php](file:///home/kurnia/HTDOCS/aplikasi/app/Livewire/Frontend/PatientLoginPage.php)
-#### [NEW] [patient-login-page.blade.php](file:///home/kurnia/HTDOCS/aplikasi/resources/views/livewire/frontend/patient-login-page.blade.php)
-- Form: Email + Password, auth via guard `patient`
-- Rate limiting 5 attempts/menit
-- Link ke registrasi + redirect setelah login (ke booking jika ada intended URL)
+---
+
+### Fase 4.5 — Autentikasi Mandiri & Portal Pasien (`/patient/login` & `/patient/dashboard`)
+
+Pasien dapat login langsung ke akun mereka kapan saja tanpa harus melalui alur pemesanan jadwal atau membuat janji temu baru.
+
+#### [NEW] [PatientLogin.php](file:///home/kurnia/HTDOCS/aplikasi/app/Livewire/Frontend/PatientLogin.php)
+#### [NEW] [patient-login.blade.php](file:///home/kurnia/HTDOCS/aplikasi/resources/views/livewire/frontend/patient-login.blade.php)
+- **Desain**: Form login modern berestetika *Clinical Clean*, kartu putih di atas background lembut, logo klinik, badge keamanan data terenkripsi.
+- **Input Kredensial**:
+  - Identifier: NIK (16 digit), Nomor Rekam Medis (RM), atau Email
+  - Kata Sandi akun pasien
+  - Checkbox "Ingat Saya" (Remember Me)
+- **Autentikasi**: Guard `Auth::guard('patient')->attempt(...)`
+- **Keamanan**: Rate limiting pencegah brute-force (5 percobaan per menit)
+- **Tautan Navigasi**:
+  - "Belum punya akun? Registrasi & Buat Janji Temu" → mengarahkan ke `/booking`
+  - "Lupa kata sandi? Hubungi Bantuan WhatsApp Admisi"
+- **Redirect**: Setelah berhasil login, langsung diarahkan ke `/patient/dashboard` (atau intended URL jika sebelumnya mengakses halaman yang membutuhkan login).
+
+#### [NEW] [PatientDashboard.php](file:///home/kurnia/HTDOCS/aplikasi/app/Livewire/Frontend/PatientDashboard.php)
+#### [NEW] [patient-dashboard.blade.php](file:///home/kurnia/HTDOCS/aplikasi/resources/views/livewire/frontend/patient-dashboard.blade.php)
+Halaman portal pribadi pasien setelah login:
+- **1. Header & Profil Ringkas**:
+  - Salam pembuka personal ("Selamat Datang, Budi Santoso"), badge nomor rekam medis (`MRN: RM-2026-0001`), NIK, nomor telepon, dan status pasien terdaftar.
+  - Tombol aksi cepat: "Buat Janji Temu Baru" (`/booking`), "Check-in Mandiri Kiosk" (`/check-in`), dan "Keluar" (Logout).
+- **2. Seksi "Antrean Aktif Hari Ini" (Active Queue)**:
+  - Jika pasien memiliki antrean aktif pada hari ini (`QueueTicket` dengan status `waiting` atau `called`):
+    - Tampilkan nomor antrean besar (misal: `A-003`), nama dokter, ruangan poliklinik, dan estimasi waktu giliran.
+    - Status alur antrean (Checked-in → Menunggu → Dipanggil).
+    - Tombol "Pantau Live Monitor Antrean" → `/patient/queue`.
+- **3. Seksi "Janji Temu Saya" (My Appointments)**:
+  - Tab navigasi: **Janji Temu Mendatang** vs **Riwayat Kunjungan**.
+  - Setiap kartu reservasi menampilkan:
+    - Kode booking (`BK-YYYYMMDD-XXXX`) dengan representasi barcode visual.
+    - Foto & nama dokter, spesialisasi poliklinik, dan ruangan.
+    - Tanggal berobat & sesi jam praktik.
+    - Keluhan utama dan jenis penjamin (BPJS / Mandiri / Asuransi).
+    - Status badge interaktif: `Confirmed` (Terkonfirmasi), `CheckedIn` (Sudah Check-in), `Completed` (Selesai), `Cancelled` (Dibatalkan).
+    - **Aksi Mandiri**:
+      - Tombol **"Self Check-in"**: Jika tanggal kunjungan adalah hari ini dan belum check-in, pasien bisa langsung mengonfirmasi kehadiran tanpa harus mengetik ulang kode.
+      - Tombol **"Lihat Tiket Antrean"**: Jika sudah check-in, langsung membuka detail nomor tiket.
+      - Tombol **"Batalkan Janji Temu"**: Modal konfirmasi pembatalan jika berhalangan hadir.
+- **4. Widget Edukasi & Bantuan**:
+  - Banner panduan tata tertib klinik, hotline WhatsApp admisi, dan tautan pengumuman terbaru.
 
 ---
+
 
 ### Fase 5 — Status Antrian Pasien (`/patient/queue`)
 
@@ -333,14 +381,15 @@ Tambahkan 80+ key-value terjemahan baru untuk semua label frontend, termasuk:
 | 7 | NEW | `resources/views/layouts/queue-display.blade.php` | — |
 | 8 | NEW | `resources/views/components/frontend/language-switcher.blade.php` | — |
 | 9 | NEW | `app/Livewire/Frontend/HomePage.php` + view | Hero + receptionist image |
-| 10 | NEW | `app/Livewire/Frontend/DoctorSchedulePage.php` + view | `jadwal_dokter_poliklinik_1` |
-| 11 | NEW | `app/Livewire/Frontend/BookingPage.php` + view | `booking_janji_temu_dokter` |
-| 12 | NEW | `app/Livewire/Frontend/PatientLoginPage.php` + view | — |
-| 13 | NEW | `app/Livewire/Frontend/QueueStatusPage.php` + view | `status_antrian_pasien` |
-| 14 | NEW | `app/Livewire/Frontend/SelfCheckInPage.php` + view | `self_check_in_mandiri` |
-| 15 | NEW | `app/Livewire/Frontend/AnnouncementListPage.php` + view | — |
-| 16 | NEW | `app/Livewire/Frontend/AnnouncementDetailPage.php` + view | — |
-| 17 | NEW | `app/Livewire/Frontend/PatientDashboardPage.php` + view | — |
+| 10 | NEW | `app/Livewire/Frontend/DoctorSchedule.php` + view | `jadwal_dokter_poliklinik_1` |
+| 11 | NEW | `app/Livewire/Frontend/AppointmentBooking.php` + view | `booking_janji_temu_dokter` |
+| 12 | NEW | `app/Livewire/Frontend/PatientLogin.php` + view | Form Login Mandiri Pasien |
+| 13 | NEW | `app/Livewire/Frontend/PatientDashboard.php` + view | Portal & Riwayat Janji Temu Pasien |
+| 14 | NEW | `app/Livewire/Frontend/PatientQueue.php` + view | `status_antrian_pasien` |
+| 15 | NEW | `app/Livewire/Frontend/SelfCheckIn.php` + view | `self_check_in_mandiri` |
+| 16 | NEW | `app/Livewire/Frontend/QueueDisplay.php` + view | Layar Antrean TV Ruang Tunggu |
+| 17 | NEW | `app/Livewire/Frontend/AnnouncementList.php` + view | Daftar Berita & Pengumuman |
+| 18 | NEW | `app/Livewire/Frontend/AnnouncementDetail.php` + view | Detail Pengumuman |
 | 18 | NEW | `public/images/logo.png` | Logo HealthQueue |
 | 19 | NEW | `public/images/receptionist.png` | Gambar hero |
 | 20 | NEW | `public/audio/notification-bell.mp3` | Audio antrian |
@@ -354,21 +403,25 @@ Tambahkan 80+ key-value terjemahan baru untuk semua label frontend, termasuk:
 
 ```mermaid
 graph TD
-    A["Fase 1: Infrastruktur"] --> B["Fase 2: Layout & Komponen"]
+    A["Fase 1: Infrastruktur & Auth Guard"] --> B["Fase 2: Layout & Navbar"]
     B --> C["Fase 3: Jadwal Dokter"]
     B --> G["Fase 7: Pengumuman"]
     B --> H["Fase 8: Beranda"]
-    C --> D["Fase 4: Booking + Registrasi"]
-    D --> E["Fase 5: Status Antrian"]
-    D --> F["Fase 6: Self Check-in"]
-    E --> I["Fase 9: Terjemahan"]
+    B --> J["Fase 4.5: Login Mandiri & Dashboard Pasien"]
+    C --> D["Fase 4: Booking Appointment & Registrasi"]
+    J --> E["Fase 5: Status Antrean Pasien"]
+    J --> F["Fase 6: Self Check-in Kiosk"]
+    D --> E
+    D --> F
+    E --> I["Fase 9: Terjemahan & QA"]
     F --> I
     G --> I
     H --> I
+    J --> I
 ```
 
-> [!TIP]
-> Fase 3, 7, dan 8 bisa dikerjakan paralel setelah Fase 2 selesai. Fase 5 dan 6 bergantung pada Fase 4 (karena membutuhkan data appointment).
+> [!NOTE]
+> **Pemisahan Alur**: Fitur **Login Pasien Mandiri (`/patient/login`)** dan **Dashboard Riwayat Janji Temu & Antrean (`/patient/dashboard`)** beroperasi secara independen tanpa mewajibkan pasien memilih dokter/jadwal terlebih dahulu. Pasien yang sudah memiliki akun dapat langsung masuk, memantau antrean aktif hari ini, melihat rekam reservasi terdahulu, melakukan pembatalan, atau melakukan 1-click check-in.
 
 ---
 
