@@ -106,7 +106,7 @@ class SelfCheckIn extends Component
                 'prefix' => $prefix,
                 'display_number' => $displayNumber,
                 'status' => QueueTicketStatus::Waiting,
-                'priority' => QueueTicketPriority::Regular,
+                'priority' => QueueTicketPriority::Normal,
                 'counter' => 'Ruang Poli '.($prefix === 'A' ? '204' : ($prefix === 'B' ? '102' : '201')),
                 'call_count' => 0,
             ]);
@@ -115,7 +115,7 @@ class SelfCheckIn extends Component
             $appointment->update([
                 'status' => AppointmentStatus::CheckedIn,
                 'checked_in_at' => now(),
-                'check_in_method' => CheckInMethod::Kiosk,
+                'check_in_method' => $this->activeTab === 'scan' ? CheckInMethod::QrScan : CheckInMethod::SelfService,
             ]);
         }
 

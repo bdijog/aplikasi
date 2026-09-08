@@ -48,7 +48,7 @@
 
             <!-- Content Body -->
             <div class="prose prose-sm max-w-none text-on-surface leading-relaxed space-y-4 text-xs md:text-sm">
-                {!! nl2br(e($announcement->getTranslation('content', app()->getLocale()))) !!}
+                {!! $announcement->getTranslation('content', app()->getLocale()) !!}
             </div>
 
             <!-- Share & Footer Actions -->

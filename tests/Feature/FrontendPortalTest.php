@@ -2,17 +2,25 @@
 
 namespace Tests\Feature;
 
+use App\Enums\AppointmentStatus;
+use App\Enums\QueueTicketPriority;
 use App\Enums\ScheduleStatus;
 use App\Enums\ScheduleType;
 use App\Livewire\Frontend\AppointmentBooking;
+use App\Livewire\Frontend\SelfCheckIn;
 use App\Models\Announcement;
+use App\Models\Appointment;
 use App\Models\Doctor;
+use App\Models\Patient;
 use App\Models\Schedule;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Livewire\Livewire;
 use Tests\TestCase;
 
 class FrontendPortalTest extends TestCase
 {
+    use DatabaseTransactions;
+
     protected Doctor $doctor;
 
     protected Schedule $schedule;
@@ -167,6 +175,44 @@ class FrontendPortalTest extends TestCase
         $this->assertDatabaseHas('patients', [
             'national_id' => $uniqueNik,
             'name' => 'Budi Pasien Baru',
+        ]);
+    }
+
+    public function test_self_check_in_verifies_appointment_and_issues_ticket(): void
+    {
+        $patient = Patient::firstOrCreate(
+            ['national_id' => '3201999988887777'],
+            [
+                'name' => 'Pasien Check In Test',
+                'medical_record_number' => 'RM-CHECKIN-01',
+                'date_of_birth' => '1990-01-01',
+                'gender' => 'male',
+                'phone' => '08123456789',
+                'password' => bcrypt('secret123'),
+            ]
+        );
+
+        $appointment = Appointment::create([
+            'booking_code' => 'BK-TEST-'.rand(1000, 9999),
+            'patient_id' => $patient->id,
+            'doctor_id' => $this->doctor->id,
+            'schedule_id' => $this->schedule->id,
+            'appointment_date' => now()->format('Y-m-d'),
+            'estimated_service_time' => '08:30:00',
+            'status' => AppointmentStatus::Confirmed,
+            'chief_complaint' => 'Pemeriksaan rutin check-in',
+        ]);
+
+        Livewire::test(SelfCheckIn::class)
+            ->set('bookingCode', $appointment->booking_code)
+            ->call('verifyCheckIn')
+            ->assertHasNoErrors()
+            ->assertSet('verifiedAppointment.id', $appointment->id)
+            ->assertSet('issuedTicket.priority', QueueTicketPriority::Normal);
+
+        $this->assertDatabaseHas('queue_tickets', [
+            'appointment_id' => $appointment->id,
+            'priority' => 'normal',
         ]);
     }
 }

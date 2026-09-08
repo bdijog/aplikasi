@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Carbon;
 
 class Schedule extends Model
 {
@@ -88,5 +89,21 @@ class Schedule extends Model
         ];
 
         return $days[$this->day_of_week] ?? '';
+    }
+
+    /**
+     * Get human-readable schedule description.
+     */
+    public function getFullScheduleLabelAttribute(): string
+    {
+        $dayOrDate = ($this->type === ScheduleType::OneTime || $this->type?->value === 'one_time')
+            ? ($this->specific_date ? Carbon::parse($this->specific_date)->format('d/m/Y') : '-')
+            : ($this->day_name ?: '-');
+
+        $start = $this->start_time ? Carbon::parse($this->start_time)->format('H:i') : '--:--';
+        $end = $this->end_time ? Carbon::parse($this->end_time)->format('H:i') : '--:--';
+        $notes = $this->notes ? " ({$this->notes})" : '';
+
+        return "{$dayOrDate}, {$start} - {$end}{$notes} [Kuota: {$this->max_patients}]";
     }
 }
