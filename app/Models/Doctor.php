@@ -12,7 +12,7 @@ use Spatie\Translatable\HasTranslations;
 class Doctor extends Authenticatable
 {
     /** @use HasFactory<DoctorFactory> */
-    use HasFactory, Notifiable, HasTranslations;
+    use HasFactory, HasTranslations, Notifiable;
 
     /**
      * The attributes that are translatable.

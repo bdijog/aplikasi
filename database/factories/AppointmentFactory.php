@@ -55,7 +55,7 @@ class AppointmentFactory extends Factory
             'patient_id' => Patient::factory(),
             'doctor_id' => Doctor::factory(),
             'schedule_id' => Schedule::factory(),
-            'booking_code' => 'APT-' . date('Ymd', strtotime($appointmentDate)) . '-' . fake()->unique()->numerify('####'),
+            'booking_code' => 'APT-'.date('Ymd', strtotime($appointmentDate)).'-'.fake()->unique()->numerify('####'),
             'appointment_date' => $appointmentDate,
             'estimated_time' => fake()->randomElement(['08:30:00', '09:00:00', '09:30:00', '10:00:00', '13:30:00', '14:00:00', '14:30:00']),
             'visit_type' => fake()->randomElement([VisitType::NewVisit, VisitType::FollowUp]),
@@ -147,9 +147,10 @@ class AppointmentFactory extends Factory
     public function today(): static
     {
         $today = date('Y-m-d');
+
         return $this->state(fn (array $attributes) => [
             'appointment_date' => $today,
-            'booking_code' => 'APT-' . date('Ymd') . '-' . fake()->unique()->numerify('####'),
+            'booking_code' => 'APT-'.date('Ymd').'-'.fake()->unique()->numerify('####'),
         ]);
     }
 }

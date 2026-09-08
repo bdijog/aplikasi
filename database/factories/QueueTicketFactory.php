@@ -39,14 +39,14 @@ class QueueTicketFactory extends Factory
             'queue_date' => date('Y-m-d'),
             'queue_number' => $queueNumber,
             'prefix' => $prefix,
-            'display_number' => $prefix . '-' . str_pad((string) $queueNumber, 3, '0', STR_PAD_LEFT),
+            'display_number' => $prefix.'-'.str_pad((string) $queueNumber, 3, '0', STR_PAD_LEFT),
             'status' => QueueTicketStatus::Waiting,
             'priority' => QueueTicketPriority::Normal,
             'called_at' => null,
             'served_at' => null,
             'completed_at' => null,
             'call_count' => 0,
-            'counter' => 'Poli ' . fake()->numberBetween(1, 5),
+            'counter' => 'Poli '.fake()->numberBetween(1, 5),
             'notes' => null,
         ];
     }

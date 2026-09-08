@@ -54,13 +54,13 @@ class DoctorFactory extends Factory
         $degreeSuffix = $meta['suffix'] ? ", {$meta['suffix']}" : '';
 
         return [
-            'name' => 'dr. ' . fake()->firstName() . ' ' . fake()->lastName() . $degreeSuffix,
-            'license_number' => 'STR-' . fake()->unique()->numerify('##########'),
+            'name' => 'dr. '.fake()->firstName().' '.fake()->lastName().$degreeSuffix,
+            'license_number' => 'STR-'.fake()->unique()->numerify('##########'),
             'email' => fake()->unique()->safeEmail(),
             'password' => static::$password ??= Hash::make('password'),
             'email_verified_at' => now(),
             'remember_token' => Str::random(10),
-            'phone' => '08' . fake()->numerify('##########'),
+            'phone' => '08'.fake()->numerify('##########'),
             'photo' => null,
             'bio' => [
                 'id' => fake('id_ID')->paragraph(),
@@ -101,12 +101,13 @@ class DoctorFactory extends Factory
     {
         return $this->state(function (array $attributes) use ($specialty, $degreeSuffix, $enSpecialty) {
             $suffix = $degreeSuffix ? ", {$degreeSuffix}" : '';
+
             return [
                 'specialty' => [
                     'id' => $specialty,
                     'en' => $enSpecialty ?? (self::$specialties[$specialty]['en'] ?? $specialty),
                 ],
-                'name' => 'dr. ' . fake()->firstName() . ' ' . fake()->lastName() . $suffix,
+                'name' => 'dr. '.fake()->firstName().' '.fake()->lastName().$suffix,
             ];
         });
     }

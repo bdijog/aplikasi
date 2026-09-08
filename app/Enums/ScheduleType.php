@@ -5,7 +5,7 @@ namespace App\Enums;
 use Filament\Support\Contracts\HasColor;
 use Filament\Support\Contracts\HasLabel;
 
-enum ScheduleType: string implements HasLabel, HasColor
+enum ScheduleType: string implements HasColor, HasLabel
 {
     case Recurring = 'recurring';
     case OneTime = 'one_time';
@@ -23,7 +23,7 @@ enum ScheduleType: string implements HasLabel, HasColor
         return $this->getLabel() ?? '';
     }
 
-    public function getColor(): string | array | null
+    public function getColor(): string|array|null
     {
         return match ($this) {
             self::Recurring => 'info',

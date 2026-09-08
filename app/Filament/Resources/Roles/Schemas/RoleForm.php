@@ -40,10 +40,12 @@ class RoleForm
                             )
                             ->getOptionLabelFromRecordUsing(function ($record) {
                                 $enum = PermissionType::tryFrom($record->name);
+
                                 return $enum ? $enum->label() : $record->name;
                             })
                             ->getOptionDescriptionFromRecordUsing(function ($record) {
                                 $enum = PermissionType::tryFrom($record->name);
+
                                 return $enum ? "[{$enum->group()}] {$record->name}" : $record->name;
                             })
                             ->searchable()

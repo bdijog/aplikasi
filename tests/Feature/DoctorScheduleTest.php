@@ -15,7 +15,6 @@ use App\Models\Appointment;
 use App\Models\Doctor;
 use App\Models\Patient;
 use App\Models\QueueTicket;
-use App\Models\Schedule;
 use App\Models\ServiceCounter;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Tests\TestCase;
@@ -39,8 +38,8 @@ class DoctorScheduleTest extends TestCase
         $this->assertDatabaseHas('doctors', [
             'email' => 'andi.unique@klinik.test',
             'license_number' => 'STR-TEST-1234567890',
-            'specialty' => 'Spesialis Anak',
         ]);
+        $this->assertEquals('Spesialis Anak', $doctor->getTranslation('specialty', 'id'));
 
         $schedule = $doctor->schedules()->create([
             'day_of_week' => 1, // Senin

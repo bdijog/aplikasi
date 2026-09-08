@@ -5,7 +5,7 @@ namespace App\Enums;
 use Filament\Support\Contracts\HasColor;
 use Filament\Support\Contracts\HasLabel;
 
-enum QueueTicketPriority: string implements HasLabel, HasColor
+enum QueueTicketPriority: string implements HasColor, HasLabel
 {
     case Normal = 'normal';
     case Priority = 'priority';
@@ -25,7 +25,7 @@ enum QueueTicketPriority: string implements HasLabel, HasColor
         return $this->getLabel() ?? '';
     }
 
-    public function getColor(): string | array | null
+    public function getColor(): string|array|null
     {
         return match ($this) {
             self::Normal => 'gray',

@@ -5,7 +5,7 @@ namespace App\Enums;
 use Filament\Support\Contracts\HasColor;
 use Filament\Support\Contracts\HasLabel;
 
-enum QueueTicketStatus: string implements HasLabel, HasColor
+enum QueueTicketStatus: string implements HasColor, HasLabel
 {
     case Waiting = 'waiting';
     case Serving = 'serving';
@@ -29,7 +29,7 @@ enum QueueTicketStatus: string implements HasLabel, HasColor
         return $this->getLabel() ?? '';
     }
 
-    public function getColor(): string | array | null
+    public function getColor(): string|array|null
     {
         return match ($this) {
             self::Waiting => 'warning',

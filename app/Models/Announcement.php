@@ -72,9 +72,9 @@ class Announcement extends Model
     protected function casts(): array
     {
         return [
-            'is_active'    => 'boolean',
+            'is_active' => 'boolean',
             'published_at' => 'datetime',
-            'expired_at'   => 'datetime',
+            'expired_at' => 'datetime',
         ];
     }
 

@@ -24,7 +24,7 @@ class AppointmentForm
             ->components([
                 TextInput::make('booking_code')
                     ->label(__('Booking Code'))
-                    ->default(fn () => 'APT-' . date('Ymd') . '-' . strtoupper(Str::random(4)))
+                    ->default(fn () => 'APT-'.date('Ymd').'-'.strtoupper(Str::random(4)))
                     ->required()
                     ->unique(ignoreRecord: true)
                     ->disabled(fn (string $operation): bool => $operation === 'edit')

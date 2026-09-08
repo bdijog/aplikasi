@@ -52,7 +52,7 @@ class AppointmentSeeder extends Seeder
             $schedule1 = $doctorSchedules->random();
             $pastDate = date('Y-m-d', strtotime('-3 days'));
             Appointment::updateOrCreate(
-                ['booking_code' => 'APT-' . date('Ymd', strtotime($pastDate)) . '-' . str_pad($doctor->id, 2, '0', STR_PAD_LEFT) . '01'],
+                ['booking_code' => 'APT-'.date('Ymd', strtotime($pastDate)).'-'.str_pad($doctor->id, 2, '0', STR_PAD_LEFT).'01'],
                 [
                     'patient_id' => $patient1->id,
                     'doctor_id' => $doctor->id,
@@ -72,7 +72,7 @@ class AppointmentSeeder extends Seeder
             $patient2 = $patients->random();
             $schedule2 = $doctorSchedules->random();
             Appointment::updateOrCreate(
-                ['booking_code' => 'APT-' . date('Ymd') . '-' . str_pad($doctor->id, 2, '0', STR_PAD_LEFT) . '02'],
+                ['booking_code' => 'APT-'.date('Ymd').'-'.str_pad($doctor->id, 2, '0', STR_PAD_LEFT).'02'],
                 [
                     'patient_id' => $patient2->id,
                     'doctor_id' => $doctor->id,
@@ -93,7 +93,7 @@ class AppointmentSeeder extends Seeder
             $schedule3 = $doctorSchedules->random();
             $futureDate = date('Y-m-d', strtotime('+2 days'));
             Appointment::updateOrCreate(
-                ['booking_code' => 'APT-' . date('Ymd', strtotime($futureDate)) . '-' . str_pad($doctor->id, 2, '0', STR_PAD_LEFT) . '03'],
+                ['booking_code' => 'APT-'.date('Ymd', strtotime($futureDate)).'-'.str_pad($doctor->id, 2, '0', STR_PAD_LEFT).'03'],
                 [
                     'patient_id' => $patient3->id,
                     'doctor_id' => $doctor->id,

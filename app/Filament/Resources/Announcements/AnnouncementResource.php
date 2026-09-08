@@ -58,9 +58,9 @@ class AnnouncementResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index'  => ListAnnouncements::route('/'),
+            'index' => ListAnnouncements::route('/'),
             'create' => CreateAnnouncement::route('/create'),
-            'edit'   => EditAnnouncement::route('/{record}/edit'),
+            'edit' => EditAnnouncement::route('/{record}/edit'),
         ];
     }
 }

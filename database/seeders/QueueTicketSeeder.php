@@ -38,7 +38,7 @@ class QueueTicketSeeder extends Seeder
             $queueNumber = $queueByDoctor[$doctorId];
 
             $prefix = chr(65 + ($doctorId % 26)); // 'A', 'B', etc.
-            $displayNumber = $prefix . '-' . str_pad((string) $queueNumber, 3, '0', STR_PAD_LEFT);
+            $displayNumber = $prefix.'-'.str_pad((string) $queueNumber, 3, '0', STR_PAD_LEFT);
 
             // Determine status based on appointment status
             $ticketStatus = match ($appointment->status) {
@@ -58,7 +58,7 @@ class QueueTicketSeeder extends Seeder
                     'display_number' => $displayNumber,
                     'status' => $ticketStatus,
                     'priority' => QueueTicketPriority::Normal,
-                    'counter' => 'Poli ' . $prefix . ' 1',
+                    'counter' => 'Poli '.$prefix.' 1',
                     'call_count' => $ticketStatus === QueueTicketStatus::Waiting ? 0 : 1,
                     'called_at' => $ticketStatus === QueueTicketStatus::Waiting ? null : now()->subMinutes(10),
                     'served_at' => $ticketStatus === QueueTicketStatus::Waiting ? null : now()->subMinutes(8),

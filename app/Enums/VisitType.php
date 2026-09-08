@@ -5,7 +5,7 @@ namespace App\Enums;
 use Filament\Support\Contracts\HasColor;
 use Filament\Support\Contracts\HasLabel;
 
-enum VisitType: string implements HasLabel, HasColor
+enum VisitType: string implements HasColor, HasLabel
 {
     case NewVisit = 'new_visit';
     case FollowUp = 'follow_up';
@@ -23,7 +23,7 @@ enum VisitType: string implements HasLabel, HasColor
         return $this->getLabel() ?? '';
     }
 
-    public function getColor(): string | array | null
+    public function getColor(): string|array|null
     {
         return match ($this) {
             self::NewVisit => 'info',

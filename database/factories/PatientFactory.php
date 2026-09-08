@@ -60,16 +60,16 @@ class PatientFactory extends Factory
             : null;
 
         return [
-            'medical_record_number' => 'RM-' . date('Y') . fake()->unique()->numerify('######'),
-            'name' => $firstName . ' ' . $lastName,
+            'medical_record_number' => 'RM-'.date('Y').fake()->unique()->numerify('######'),
+            'name' => $firstName.' '.$lastName,
             'email' => fake()->unique()->safeEmail(),
             'password' => static::$password ??= Hash::make('password'),
             'email_verified_at' => now(),
             'remember_token' => Str::random(10),
             'date_of_birth' => fake()->dateTimeBetween('-65 years', '-1 years')->format('Y-m-d'),
             'gender' => $gender,
-            'national_id' => '32' . fake()->unique()->numerify('##############'),
-            'phone' => '08' . fake()->numerify('##########'),
+            'national_id' => '32'.fake()->unique()->numerify('##############'),
+            'phone' => '08'.fake()->numerify('##########'),
             'address' => fake()->address(),
             'blood_type' => fake()->randomElement(['A', 'B', 'AB', 'O']),
             'allergies' => $allergiesList,
@@ -84,7 +84,7 @@ class PatientFactory extends Factory
     {
         return $this->state(fn (array $attributes) => [
             'gender' => Gender::Male,
-            'name' => fake()->firstNameMale() . ' ' . fake()->lastName(),
+            'name' => fake()->firstNameMale().' '.fake()->lastName(),
         ]);
     }
 
@@ -95,7 +95,7 @@ class PatientFactory extends Factory
     {
         return $this->state(fn (array $attributes) => [
             'gender' => Gender::Female,
-            'name' => fake()->firstNameFemale() . ' ' . fake()->lastName(),
+            'name' => fake()->firstNameFemale().' '.fake()->lastName(),
         ]);
     }
 

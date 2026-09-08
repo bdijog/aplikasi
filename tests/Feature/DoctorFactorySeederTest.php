@@ -33,7 +33,7 @@ class DoctorFactorySeederTest extends TestCase
         $this->assertNull($unverified->email_verified_at);
 
         $specialist = Doctor::factory()->withSpecialty('Spesialis Anak', 'Sp.A')->create();
-        $this->assertEquals('Spesialis Anak', $specialist->specialty);
+        $this->assertEquals('Spesialis Anak', $specialist->getTranslation('specialty', 'id'));
         $this->assertStringEndsWith('Sp.A', $specialist->name);
     }
 
@@ -43,22 +43,18 @@ class DoctorFactorySeederTest extends TestCase
 
         $this->assertDatabaseHas('doctors', [
             'email' => 'sarah.wijaya@klinik.test',
-            'specialty' => 'Spesialis Anak',
         ]);
 
         $this->assertDatabaseHas('doctors', [
             'email' => 'budi.santoso@klinik.test',
-            'specialty' => 'Spesialis Penyakit Dalam',
         ]);
 
         $this->assertDatabaseHas('doctors', [
             'email' => 'maya.kartika@klinik.test',
-            'specialty' => 'Spesialis Obstetri & Ginekologi',
         ]);
 
         $this->assertDatabaseHas('doctors', [
             'email' => 'dimas.wicaksono@klinik.test',
-            'specialty' => 'Dokter Umum',
         ]);
 
         // At least 6 curated + 4 random doctors

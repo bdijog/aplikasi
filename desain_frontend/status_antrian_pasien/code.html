@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+
+<html lang="id"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Plus+Jakarta+Sans:wght@500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base { html, body { margin: 0; padding: 0; } body { overscroll-behavior: none; } main > :first-child { margin-top: 0 !important; } main > :last-child { margin-bottom: 0 !important; } } ::-webkit-scrollbar { display: none; }</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "secondary-container": "#86f2e4", "status-limited": "#D97706", "on-surface": "#0b1c30", "primary-fixed": "#9cf2e8", "surface-container-low": "#eff4ff", "primary": "#005c55", "surface-container-high": "#dce9ff", "tertiary-fixed-dim": "#ffb77d", "tertiary-fixed": "#ffdcc3", "secondary-fixed": "#89f5e7", "surface": "#f8f9ff", "error": "#ba1a1a", "surface-container-lowest": "#ffffff", "on-tertiary": "#ffffff", "background": "#f8f9ff", "on-tertiary-fixed": "#2f1500", "secondary-fixed-dim": "#6bd8cb", "on-secondary": "#ffffff", "secondary": "#006a61", "on-surface-variant": "#3e4947", "on-error-container": "#93000a", "outline": "#6e7977", "on-tertiary-fixed-variant": "#6e3900", "tertiary-container": "#a15600", "on-secondary-fixed": "#00201d", "surface-card": "#FFFFFF", "surface-variant": "#d3e4fe", "on-secondary-fixed-variant": "#005049", "primary-fixed-dim": "#80d5cb", "on-primary-container": "#a3faef", "surface-container": "#e5eeff", "tertiary": "#7d4200", "on-secondary-container": "#006f66", "inverse-primary": "#80d5cb", "surface-bright": "#f8f9ff", "status-full": "#DC2626", "on-background": "#0b1c30", "primary-container": "#0f766e", "surface-dim": "#cbdbf5", "surface-canvas": "#F8FAFC", "on-tertiary-container": "#ffe6d5", "surface-tint": "#006a63", "error-container": "#ffdad6", "on-primary-fixed": "#00201d", "on-error": "#ffffff", "brand-navy": "#082747", "inverse-surface": "#213145", "brand-gold": "#FBBA15", "on-primary": "#ffffff", "on-primary-fixed-variant": "#00504a", "outline-variant": "#bdc9c6", "surface-container-highest": "#d3e4fe", "inverse-on-surface": "#eaf1ff", "status-available": "#059669" }, "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, "spacing": { "gutter-mobile": "1rem", "space-xs": "0.5rem", "container-max": "75rem", "space-xl": "2rem", "space-sm": "0.75rem", "space-2xs": "0.25rem", "space-md": "1rem", "space-2xl": "3rem", "gutter-desktop": "1.5rem", "space-lg": "1.5rem", "space-3xl": "4rem" }, "fontFamily": { "label-md": ["Inter"], "title-lg": ["Plus Jakarta Sans"], "body-lg": ["Inter"], "display-lg-mobile": ["Plus Jakarta Sans"], "display-lg": ["Plus Jakarta Sans"], "body-sm": ["Inter"], "label-sm": ["Inter"], "headline-md": ["Plus Jakarta Sans"], "body-md": ["Inter"], "headline-lg": ["Plus Jakarta Sans"], "label-lg": ["Inter"], "title-md": ["Plus Jakarta Sans"] }, "fontSize": { "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "600" }], "title-lg": ["18px", { "lineHeight": "26px", "fontWeight": "600" }], "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }], "display-lg-mobile": ["30px", { "lineHeight": "38px", "letterSpacing": "-0.015em", "fontWeight": "700" }], "display-lg": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700" }], "body-sm": ["12px", { "lineHeight": "18px", "fontWeight": "400" }], "label-sm": ["11px", { "lineHeight": "14px", "letterSpacing": "0.03em", "fontWeight": "500" }], "headline-md": ["22px", { "lineHeight": "30px", "letterSpacing": "-0.005em", "fontWeight": "600" }], "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }], "headline-lg": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "700" }], "label-lg": ["14px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600" }], "title-md": ["16px", { "lineHeight": "24px", "fontWeight": "600" }] } } } };</script></head><body class="bg-surface font-body-md text-on-surface min-h-screen flex flex-col antialiased selection:bg-primary-container selection:text-on-primary-container"><header class="fixed top-0 left-0 w-full z-50 bg-surface-container-lowest/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="w-full bg-brand-navy text-surface px-gutter-desktop py-space-2xs"><div class="max-w-container-max mx-auto flex items-center justify-between font-label-sm text-label-sm"><div class="flex items-center gap-space-md"><span class="flex items-center gap-space-2xs"><span class="material-symbols-outlined text-brand-gold text-[15px]">verified</span>Akreditasi Paripurna KARS &amp; ISO 9001:2015</span><span class="hidden md:inline text-outline-variant">•</span><span class="hidden md:flex items-center gap-space-2xs"><span class="material-symbols-outlined text-secondary-fixed text-[15px]">schedule</span>Layanan IGD 24 Jam &amp; Poliklinik Rawat Jalan</span></div><div class="flex items-center gap-space-md"><span class="flex items-center gap-space-2xs bg-error/20 text-on-error px-space-xs py-0.5 rounded-full font-label-sm text-label-sm"><span class="w-1.5 h-1.5 rounded-full bg-error animate-pulse"></span>Hotline Darurat: +62 274 555-999</span></div></div></div><div class="h-20 max-w-container-max mx-auto px-gutter-desktop flex items-center justify-between gap-space-md"><div class="flex items-center gap-space-lg shrink-0"><div class="flex items-center gap-space-sm"><img alt="Klinik Sehat Medika Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCIp2CS02GzqTmUtufIqI2EX6Qz2z0KM27zKfA-4s0QkpH4zN3HwIFDP_kZnWsT3P6ppHht7VUSFDzyuEVCwm1tRr0IfhgNgLaUAaE-03kWPs2hcSUZfVBApV46VYe0P6WdreLJmC_2DbN2qUPJ1aWlCbE3N8Qb870NH-FKY1IdOhrWIDFhYjuTgybZZzP2q7unPz13z8JYZQ_umODU_sceq2-Hkotw8Jqkk_Cixv2OVZjuzOH2kK48"/><div class="flex flex-col"><span class="font-title-lg text-title-lg text-primary tracking-tight leading-tight">Klinik Sehat Medika</span><span class="font-label-sm text-label-sm text-on-surface-variant -mt-0.5">HealthQueue Portal Terpadu</span></div></div><nav class="hidden xl:flex items-center gap-space-xs" data-active-classes="bg-primary-container text-on-primary-container font-semibold rounded-lg shadow-sm"><a class="px-space-sm py-space-xs rounded-lg font-label-lg text-label-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="jadwal-dokter-poliklinik" href="#">Jadwal Dokter &amp; Poliklinik</a><a class="px-space-sm py-space-xs rounded-lg font-label-lg text-label-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="booking-appointment" href="#">Booking Appointment</a><a aria-current="page" class="px-space-sm py-space-xs transition-colors bg-primary-container text-on-primary-container font-semibold rounded-lg shadow-sm" data-path="status-antrian-pasien" href="#">Status Antrian Pasien</a><a class="px-space-sm py-space-xs rounded-lg font-label-lg text-label-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="self-check-in" href="#">Self Check-in</a></nav></div><div class="flex items-center gap-space-md shrink-0"><div class="relative hidden lg:block w-64 xl:w-72"><span class="material-symbols-outlined absolute left-space-sm top-1/2 -translate-y-1/2 text-outline text-[18px]">search</span><input class="w-full pl-9 pr-space-md py-space-xs rounded-lg bg-surface-container-low font-body-sm text-body-sm text-on-surface placeholder:text-outline focus:outline-none focus:bg-surface-container-lowest focus:ring-2 focus:ring-primary transition-all" placeholder="Cari dokter, poli, layanan..." type="search"/></div><div class="flex items-center gap-space-sm pl-space-xs"><button aria-label="Notifikasi" class="p-space-xs rounded-full text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors relative" type="button"><span class="material-symbols-outlined text-[22px]">notifications</span><span class="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-status-limited"></span></button><div class="flex items-center gap-space-xs pl-space-xs py-1 pr-1.5 rounded-full bg-surface-container-low"><img alt="Profile" class="w-8 h-8 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAoK7PGtX4TV_NmFYJIz7XnBpEqlvmqR9qfNCABuuASktQwJ5JYfxRtW8xR-WHWWKNR6aDFs8NA4rrRRAIB8Bh6oprELy8woOOEqW6944n-OHjB3eAwK04cfEO9FgvB0f8pdsFsTL_44-Ot3EFzVflMcgZT8ojSjY7MyStrnm7H1Yc5QdF8ChqJBLiE6dwTw8fsIF4pDxmWS6zPG_ZXr-InnYCATSQdbiQRekpM6EVniASWwrpx4_x6"/><div class="hidden sm:flex flex-col text-left pr-space-xs"><span class="font-label-sm text-label-sm text-on-surface font-semibold truncate max-w-[100px]">Pasien Terdaftar</span><span class="font-label-sm text-label-sm text-status-available text-[10px] leading-tight">BPJS Aktif</span></div></div></div></div></div></header><main class="w-full pt-28 bg-surface"><div class="flex flex-col w-full">
+<div class="w-full bg-surface-canvas py-space-xl">
+<div class="max-w-container-max mx-auto px-gutter-mobile md:px-gutter-desktop flex flex-col gap-space-xl">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-space-md">
+<div class="flex flex-col">
+<div class="flex items-center gap-space-2xs text-secondary font-label-md text-label-md mb-1">
+<span class="w-2 h-2 rounded-full bg-status-available animate-ping"></span>
+<span class="uppercase tracking-widest font-bold">HealthQueue Live Sync Active</span>
+<span class="text-on-surface-variant font-normal">• Polling 10d</span>
+</div>
+<h1 class="font-headline-lg text-headline-lg text-brand-navy tracking-tight">Status Antrean &amp; Tracking Pasien</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">Pantau posisi giliran dan estimasi konsultasi rawat jalan secara akurat dari genggaman Anda.</p>
+</div>
+<div class="flex items-center gap-space-xs bg-surface-container-lowest p-space-2xs rounded-xl shadow-sm self-start md:self-auto">
+<div class="relative flex items-center">
+<span class="material-symbols-outlined absolute left-3 text-outline text-[20px]">confirmation_number</span>
+<input class="pl-10 pr-space-md py-2.5 bg-surface-container-low font-label-md text-label-md text-on-surface rounded-lg focus:outline-none focus:bg-surface-container-lowest focus:ring-2 focus:ring-primary w-56 sm:w-64 transition-all" id="ticketInput" placeholder="Masukkan Kode Booking..." type="text" value="APT-20260903-0012"/>
+</div>
+<button class="h-10 px-space-md bg-primary hover:bg-secondary text-on-primary font-label-md text-label-md rounded-lg flex items-center gap-1.5 transition-all shadow-sm" id="btnSearch">
+<span class="material-symbols-outlined text-[18px]">search</span>
+<span>Cari</span>
+</button>
+<button class="h-10 px-3 bg-secondary-container text-on-secondary-container hover:bg-primary-fixed font-label-md text-label-md rounded-lg flex items-center gap-1 transition-all" id="btnScanQr" title="Scan QR Code Tiket">
+<span class="material-symbols-outlined text-[20px]">qr_code_scanner</span>
+<span class="hidden sm:inline">Scan QR</span>
+</button>
+</div>
+</div>
+<div class="w-full bg-status-limited/10 rounded-xl p-space-md flex items-start gap-space-sm">
+<span class="material-symbols-outlined text-status-limited text-[24px] shrink-0 mt-0.5" style="font-variation-settings: 'FILL' 1;">info</span>
+<div class="flex-1 flex flex-col sm:flex-row sm:items-center justify-between gap-space-xs">
+<p class="font-body-md text-body-md text-brand-navy font-medium">
+<span class="font-bold text-status-limited">Pemberitahuan:</span> Mohon berada di sekitar area ruang tunggu Poliklinik 10 menit sebelum estimasi giliran Anda dipanggil.
+          </p>
+<span class="font-label-sm text-label-sm text-on-surface-variant whitespace-nowrap flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-secondary">update</span>
+            Diperbarui 4 detik lalu
+          </span>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg">
+<div class="lg:col-span-8 flex flex-col gap-space-lg">
+<div class="w-full bg-surface-card rounded-xl p-space-lg md:p-space-xl shadow-md flex flex-col gap-space-lg relative overflow-hidden">
+<div class="absolute -right-16 -top-16 w-56 h-56 rounded-full bg-primary/5 pointer-events-none blur-2xl"></div>
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-space-md pb-space-sm">
+<div class="flex items-center gap-space-xs">
+<span class="px-3 py-1 bg-surface-container-high text-brand-navy font-label-md text-label-md rounded-full font-bold">
+                  KODE: APT-20260903-0012
+                </span>
+<span class="px-3 py-1 bg-status-limited/15 text-status-limited font-label-md text-label-md rounded-full font-semibold flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-status-limited animate-pulse"></span>
+                  Sedang Menunggu (Urutan ke-3)
+                </span>
+</div>
+<div class="flex items-center gap-2 text-on-surface-variant font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-primary text-[18px]">how_to_reg</span>
+<span>Check-in: <strong class="text-on-surface">08:24 WIB</strong></span>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-12 gap-space-md items-center bg-surface-container-low/70 p-space-md md:p-space-lg rounded-xl">
+<div class="md:col-span-5 flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Nomor Antrean Anda</span>
+<div class="flex items-baseline gap-space-xs">
+<span class="font-display-lg text-display-lg text-primary font-bold tracking-tight">A-012</span>
+<span class="font-label-md text-label-md text-on-surface-variant">/ 35 Kuota</span>
+</div>
+<div class="flex items-center gap-1.5 mt-2 text-status-available font-label-sm text-label-sm font-semibold">
+<span class="material-symbols-outlined text-[16px]">hourglass_bottom</span>
+<span>Estimasi Tunggu: ± 18 Menit lagi</span>
+</div>
+</div>
+<div class="hidden md:block md:col-span-2 text-center">
+<div class="w-12 h-12 mx-auto rounded-full bg-surface-container-high flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[24px]">arrow_forward</span>
+</div>
+</div>
+<div class="md:col-span-5 flex flex-col bg-surface-card p-space-md rounded-lg shadow-sm">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Sedang Dipanggil Saat Ini</span>
+<span class="px-2 py-0.5 rounded bg-error/10 text-error font-label-sm text-label-sm font-bold flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-error animate-ping"></span>
+                    Live Konsultasi
+                  </span>
+</div>
+<div class="flex items-baseline gap-2 mt-1">
+<span class="font-headline-lg text-headline-lg text-brand-navy font-bold">A-009</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">(Ruang 204)</span>
+</div>
+<p class="font-label-sm text-label-sm text-on-surface-variant mt-1">Sisa 3 pasien sebelum giliran nomor A-012 dipanggil</p>
+</div>
+</div>
+<div class="flex flex-col sm:flex-row items-start sm:items-center gap-space-md p-space-md bg-surface-container-lowest rounded-xl shadow-sm">
+<img class="w-16 h-16 rounded-xl object-cover shrink-0 shadow-sm" data-alt="Close up professional portrait of dr H Ahmad Fauzi Sp PD, an Indonesian male doctor in clinical white coat with stethoscope, soft warm clinical background, calm and authoritative hospital aesthetic" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBD1IxhsKIJ72SAe-yueRlgRf3Z0Ncv-aVPzvXuba5MLLmkhezAmNPmMncl1NWByqP2ZWr3eeSoWCYHsm-JFWDi-CqCUzWvGvwMfrMPHVpHgeb8IwS4po8WEcqap0MpVZGOVtE0fQoOqANqTVMNcLiFuO3uZewye_-Aqu6xoX27p3S5cwF_YWj4e6AQOXIR2lcEwJjmFdrZp--4eg_ozfDKZjR06zE-GO2Fqs_BqpWgGUxgNqc_DYSS"/>
+<div class="flex-1 flex flex-col">
+<div class="flex flex-wrap items-center gap-2">
+<h2 class="font-title-lg text-title-lg text-brand-navy font-bold">dr. H. Ahmad Fauzi, Sp.PD</h2>
+<span class="px-2.5 py-0.5 bg-secondary-fixed text-on-secondary-fixed font-label-sm text-label-sm rounded-md font-semibold">Dokter Utama</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">Poli Penyakit Dalam • Konsultasi Rawat Jalan Spesialistik</p>
+<div class="flex flex-wrap items-center gap-space-md mt-1 font-label-sm text-label-sm text-on-surface">
+<span class="flex items-center gap-1 text-primary font-semibold">
+<span class="material-symbols-outlined text-[17px]">meeting_room</span> Counter / Ruang 204 Lantai 2
+                  </span>
+<span class="flex items-center gap-1 text-on-surface-variant">
+<span class="material-symbols-outlined text-[17px]">schedule</span> Sesi: 08:00 - 12:00 WIB
+                  </span>
+</div>
+</div>
+</div>
+<div class="flex flex-col gap-space-xs pt-space-xs">
+<div class="flex justify-between items-center">
+<span class="font-label-md text-label-md text-brand-navy uppercase tracking-wider font-bold">Alur Pelayanan Antrean</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Rata-rata 10 menit / pasien</span>
+</div>
+<div class="grid grid-cols-5 gap-2 pt-2">
+<div class="flex flex-col gap-1.5 items-center text-center">
+<div class="w-8 h-8 rounded-full bg-status-available text-on-primary flex items-center justify-center font-label-sm text-label-sm font-bold shadow-sm">
+<span class="material-symbols-outlined text-[18px]">check</span>
+</div>
+<span class="font-label-sm text-label-sm text-brand-navy font-bold">Checked-in</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">08:24 WIB</span>
+</div>
+<div class="flex flex-col gap-1.5 items-center text-center">
+<div class="w-8 h-8 rounded-full bg-status-limited text-on-primary flex items-center justify-center font-label-sm text-label-sm font-bold shadow-sm ring-4 ring-status-limited/20">
+<span class="material-symbols-outlined text-[18px]">hourglass_top</span>
+</div>
+<span class="font-label-sm text-label-sm text-status-limited font-bold">Menunggu</span>
+<span class="font-body-sm text-body-sm text-status-limited font-semibold">3 Pasien Lagi</span>
+</div>
+<div class="flex flex-col gap-1.5 items-center text-center opacity-40">
+<div class="w-8 h-8 rounded-full bg-surface-container-high text-on-surface flex items-center justify-center font-label-sm text-label-sm font-bold">
+                    3
+                  </div>
+<span class="font-label-sm text-label-sm text-on-surface">Dipanggil</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Audio/Screen</span>
+</div>
+<div class="flex flex-col gap-1.5 items-center text-center opacity-40">
+<div class="w-8 h-8 rounded-full bg-surface-container-high text-on-surface flex items-center justify-center font-label-sm text-label-sm font-bold">
+                    4
+                  </div>
+<span class="font-label-sm text-label-sm text-on-surface">Konsultasi</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Ruang 204</span>
+</div>
+<div class="flex flex-col gap-1.5 items-center text-center opacity-40">
+<div class="w-8 h-8 rounded-full bg-surface-container-high text-on-surface flex items-center justify-center font-label-sm text-label-sm font-bold">
+                    5
+                  </div>
+<span class="font-label-sm text-label-sm text-on-surface">Selesai</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Farmasi/Kasir</span>
+</div>
+</div>
+<div class="w-full bg-surface-container-high h-2.5 rounded-full overflow-hidden mt-3">
+<div class="bg-primary h-full rounded-full transition-all duration-700" style="width: 40%"></div>
+</div>
+</div>
+<div class="flex flex-wrap items-center gap-space-sm pt-space-xs">
+<button class="flex-1 min-w-[200px] h-12 bg-primary hover:bg-primary-container text-on-primary rounded-lg font-label-lg text-label-lg flex items-center justify-center gap-2 shadow-sm transition-all" id="btnSoundNotification">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">volume_up</span>
+<span>Dengarkan Panggilan Suara</span>
+</button>
+<button class="flex-1 min-w-[190px] h-12 bg-surface-container-low hover:bg-surface-container text-primary rounded-lg font-label-lg text-label-lg flex items-center justify-center gap-2 transition-all" id="btnNavigation">
+<span class="material-symbols-outlined text-[20px]">directions</span>
+<span>Panduan Menuju Ruang 204</span>
+</button>
+<button class="h-12 px-space-md text-error hover:bg-error-container/20 rounded-lg font-label-lg text-label-lg flex items-center justify-center gap-1.5 transition-all" id="btnCancelQueue">
+<span class="material-symbols-outlined text-[18px]">cancel</span>
+<span>Batalkan Antrean</span>
+</button>
+</div>
+</div>
+<div class="w-full bg-surface-card rounded-xl p-space-lg shadow-sm flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[24px]">analytics</span>
+<h3 class="font-title-lg text-title-lg text-brand-navy font-bold">Statistik Waktu Tunggu Ruang 204</h3>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Berdasarkan data hari ini</span>
+</div>
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-space-sm">
+<div class="bg-surface-container-low p-space-sm rounded-lg flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Pasien Terlayani</span>
+<span class="font-headline-md text-headline-md text-brand-navy font-bold">8 Pasien</span>
+<span class="font-body-sm text-body-sm text-status-available">Selesai diperiksa</span>
+</div>
+<div class="bg-surface-container-low p-space-sm rounded-lg flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Rata-rata Konsul</span>
+<span class="font-headline-md text-headline-md text-brand-navy font-bold">9.4 Menit</span>
+<span class="font-body-sm text-body-sm text-secondary">Sesuai standar SLA</span>
+</div>
+<div class="bg-surface-container-low p-space-sm rounded-lg flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Antrean Menunggu</span>
+<span class="font-headline-md text-headline-md text-status-limited font-bold">14 Pasien</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Termasuk A-012</span>
+</div>
+<div class="bg-surface-container-low p-space-sm rounded-lg flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Dokter Hadir</span>
+<span class="font-headline-md text-headline-md text-primary font-bold">08:02 WIB</span>
+<span class="font-body-sm text-body-sm text-status-available">Tepat waktu</span>
+</div>
+</div>
+<div class="w-full bg-surface-container-lowest p-space-sm rounded-lg">
+<div class="flex justify-between items-center mb-2">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Beban Kecepatan Antrean Sesi Pagi</span>
+<span class="font-label-sm text-label-sm text-primary font-bold">Optimal (92%)</span>
+</div>
+<svg class="w-full h-12 text-primary" viewbox="0 0 500 50">
+<path d="M0,35 Q70,40 140,25 T280,30 T420,12 T500,18" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="3"></path>
+<circle cx="140" cy="25" fill="currentColor" r="4"></circle>
+<circle cx="280" cy="30" fill="currentColor" r="4"></circle>
+<circle cx="420" cy="12" fill="#D97706" r="5"></circle>
+<circle cx="500" cy="18" fill="currentColor" r="4"></circle>
+</svg>
+<div class="flex justify-between text-[10px] text-on-surface-variant font-label-sm pt-1">
+<span>08:00 WIB</span>
+<span>09:00 WIB</span>
+<span>10:00 WIB (Perkiraan Giliran)</span>
+<span>11:30 WIB</span>
+</div>
+</div>
+</div>
+</div>
+<div class="lg:col-span-4 flex flex-col gap-space-lg">
+<div class="w-full bg-surface-card rounded-xl p-space-lg shadow-sm flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<h3 class="font-title-lg text-title-lg text-brand-navy font-bold">Antrean Poliklinik Lain</h3>
+<span class="px-2 py-0.5 rounded bg-status-available/10 text-status-available font-label-sm text-label-sm font-bold">Live</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Status antrean berjalan di poliklinik rawat jalan Klinik Sehat Medika hari ini.</p>
+<div class="flex flex-col gap-space-sm">
+<div class="p-space-md rounded-xl bg-surface-container-low hover:bg-surface-container transition-all flex flex-col gap-space-xs">
+<div class="flex justify-between items-start">
+<div class="flex flex-col">
+<span class="font-title-md text-title-md text-brand-navy font-bold">Poli Anak &amp; Tumbuh Kembang</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">dr. Nurul Aini, Sp.A</span>
+</div>
+<span class="px-2 py-0.5 rounded bg-surface-container-high text-primary font-label-sm text-label-sm font-bold">R. 102</span>
+</div>
+<div class="flex items-center justify-between pt-1">
+<div class="flex items-center gap-1.5">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Sedang Melayani:</span>
+<span class="font-headline-md text-headline-md text-primary font-bold">B-007</span>
+</div>
+<span class="px-2.5 py-1 bg-surface-container-lowest text-status-limited font-label-sm text-label-sm rounded-md font-semibold">
+                    Sisa Antrean: 4
+                  </span>
+</div>
+</div>
+<div class="p-space-md rounded-xl bg-surface-container-low hover:bg-surface-container transition-all flex flex-col gap-space-xs">
+<div class="flex justify-between items-start">
+<div class="flex flex-col">
+<span class="font-title-md text-title-md text-brand-navy font-bold">Poli Kandungan &amp; Kebidanan</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">dr. Bambang Sudiro, Sp.OG</span>
+</div>
+<span class="px-2 py-0.5 rounded bg-surface-container-high text-primary font-label-sm text-label-sm font-bold">R. 108</span>
+</div>
+<div class="flex items-center justify-between pt-1">
+<div class="flex items-center gap-1.5">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Sedang Melayani:</span>
+<span class="font-headline-md text-headline-md text-primary font-bold">C-005</span>
+</div>
+<span class="px-2.5 py-1 bg-surface-container-lowest text-status-limited font-label-sm text-label-sm rounded-md font-semibold">
+                    Sisa Antrean: 6
+                  </span>
+</div>
+</div>
+<div class="p-space-md rounded-xl bg-surface-container-low hover:bg-surface-container transition-all flex flex-col gap-space-xs">
+<div class="flex justify-between items-start">
+<div class="flex flex-col">
+<span class="font-title-md text-title-md text-brand-navy font-bold">Poli Jantung &amp; Pembuluh Darah</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">dr. Siti Sarah, Sp.JP</span>
+</div>
+<span class="px-2 py-0.5 rounded bg-surface-container-high text-primary font-label-sm text-label-sm font-bold">R. 201</span>
+</div>
+<div class="flex items-center justify-between pt-1">
+<div class="flex items-center gap-1.5">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Sedang Melayani:</span>
+<span class="font-headline-md text-headline-md text-primary font-bold">D-003</span>
+</div>
+<span class="px-2.5 py-1 bg-surface-container-lowest text-status-available font-label-sm text-label-sm rounded-md font-semibold">
+                    Sisa Antrean: 2
+                  </span>
+</div>
+</div>
+</div>
+<a class="w-full py-2.5 bg-surface-container-low hover:bg-surface-container text-primary font-label-md text-label-md rounded-lg text-center transition-all flex items-center justify-center gap-1" href="#">
+<span>Lihat Semua Monitor Poli (14 Ruangan)</span>
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+</a>
+</div>
+<div class="w-full bg-brand-navy text-inverse-on-surface rounded-xl p-space-lg shadow-sm flex flex-col gap-space-sm relative overflow-hidden">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-brand-gold text-[24px]">contactless</span>
+<h3 class="font-title-md text-title-md text-surface font-bold">HealthQueue Voice Assist</h3>
+</div>
+<p class="font-body-sm text-body-sm text-surface-container-high leading-relaxed">
+              Aktifkan izin audio peramban Anda. Aplikasi akan membunyikan bel denting dan memanggil nama Anda secara otomatis saat giliran Anda tiba di Ruang 204.
+            </p>
+<div class="flex items-center justify-between pt-2">
+<span class="font-label-sm text-label-sm text-secondary-fixed" id="voiceStatusLabel">Status: Pengeras Suara Siap</span>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" id="toggleVoice" type="checkbox"/>
+<div class="w-11 h-6 bg-surface-container-highest peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-surface after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-surface after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-container"></div>
+</label>
+</div>
+</div>
+<div class="w-full bg-surface-card rounded-xl p-space-md shadow-sm flex items-center gap-space-md">
+<img class="w-20 h-20 rounded-lg object-cover shrink-0" data-alt="Modern indoor hospital pharmacy and customer service lounge with digital queue screens, clean architectural lighting and friendly receptionists in Yogyakarta" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA4YGIcZyVg4lJcMHQTkKiOBxn54Th2HuZlZBv3neSzFpwwn1a4yrxQ1BQ6KMBV4bnh-nOywvHpV6bECEa_1f80wcgDJHvRo0lpx1OiEVH2yC3vDx7_8RDG4BUTbjR7p48QJzZH1lQ8Npq3zv7Q2_LnALmAcgpzeDPOCdufs5TQYE1i4O6mu_aMELWqBwmuswFr_UCtADXYmhPxem3TxVQcCK4Meiv3TfxoRIlwDFms6LvGup7LWXgP"/>
+<div class="flex flex-col">
+<span class="font-title-md text-title-md text-brand-navy font-bold">Perlu Bantuan Perawat?</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Hubungi meja perawat stasi 2 lantai 2 jika ada kondisi darurat saat menunggu.</p>
+<a class="font-label-md text-label-md text-primary hover:underline mt-1 font-semibold flex items-center gap-1" href="#">
+<span class="material-symbols-outlined text-[16px]">support_agent</span> Panggil Staf Ruang Tunggu
+              </a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="fixed inset-0 z-50 bg-brand-navy/60 backdrop-blur-sm hidden flex items-center justify-center p-gutter-mobile" id="modalDirection">
+<div class="bg-surface-card max-w-lg w-full rounded-xl p-space-lg shadow-xl flex flex-col gap-space-md relative animate-in fade-in zoom-in duration-200">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[24px]">alt_route</span>
+<h3 class="font-title-lg text-title-lg text-brand-navy font-bold">Panduan Menuju Ruang Poli 204</h3>
+</div>
+<button class="p-1.5 rounded-full hover:bg-surface-container-low text-on-surface-variant" id="btnCloseModal">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<img class="w-full h-44 rounded-lg object-cover" data-alt="Clear schematic diagram and 3D architectural floorplan of a modern Indonesian medical clinic second floor with signs directing to Room 204" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDgs4EPQ_gqiIH8dnoG_QiculDwQcsfLKEgQY7ubLBfx0ulYsmiVBP8DWDvpa1gMQ0ICTuZcCH7XneuUszazAaJ3braZLf8DxgSKkfFehBs4A1xqbpnrnMZNQ106SqUu3lQvXRoauJQNLcIlEr5l6r7ceuzO22qASkaCjjtTRuTThJxpkQVrhG9jvpitAarARrzLRrO3E4c8-YzrbsZFKxiEGZjiWLHNN1ovJrovXp6LoakW3Zpmokz"/>
+<div class="flex flex-col gap-space-xs font-body-sm text-body-sm text-on-surface">
+<div class="flex items-start gap-2">
+<span class="w-5 h-5 rounded-full bg-primary text-on-primary font-label-sm text-label-sm flex items-center justify-center shrink-0 mt-0.5">1</span>
+<span>Dari ruang tunggu utama lantai 1, gunakan <strong>Lift Pasien A</strong> atau tangga di sisi timur menuju <strong>Lantai 2</strong>.</span>
+</div>
+<div class="flex items-start gap-2">
+<span class="w-5 h-5 rounded-full bg-primary text-on-primary font-label-sm text-label-sm flex items-center justify-center shrink-0 mt-0.5">2</span>
+<span>Keluar lift, belok ke arah kiri mengikuti koridor <strong>Poliklinik Rawat Jalan Dewasa</strong>.</span>
+</div>
+<div class="flex items-start gap-2">
+<span class="w-5 h-5 rounded-full bg-primary text-on-primary font-label-sm text-label-sm flex items-center justify-center shrink-0 mt-0.5">3</span>
+<span><strong>Ruang 204 (dr. H. Ahmad Fauzi, Sp.PD)</strong> berada tepat di samping Nurse Station 2 dengan plang akrilik hijau.</span>
+</div>
+</div>
+<button class="w-full h-11 bg-primary text-on-primary font-label-md text-label-md rounded-lg mt-2" id="btnGotIt">
+        Saya Mengerti, Tutup Panduan
+      </button>
+</div>
+</div>
+<div class="fixed bottom-6 right-6 z-50 bg-brand-navy text-surface px-space-md py-space-sm rounded-xl shadow-xl hidden flex items-center gap-3" id="audioToast">
+<span class="material-symbols-outlined text-brand-gold text-[24px]">campaign</span>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-bold text-surface">Audio Notifikasi Simulasi Aktif</span>
+<span class="font-body-sm text-body-sm text-surface-container-high">"Nomor antrean A-009, silakan menuju Ruang 204..."</span>
+</div>
+</div>
+<script>
+    (function() {
+      const btnSound = document.getElementById('btnSoundNotification');
+      const audioToast = document.getElementById('audioToast');
+      const btnNav = document.getElementById('btnNavigation');
+      const modalDir = document.getElementById('modalDirection');
+      const btnCloseModal = document.getElementById('btnCloseModal');
+      const btnGotIt = document.getElementById('btnGotIt');
+      const btnCancel = document.getElementById('btnCancelQueue');
+      const toggleVoice = document.getElementById('toggleVoice');
+      const voiceLabel = document.getElementById('voiceStatusLabel');
+      const btnSearch = document.getElementById('btnSearch');
+      const btnScanQr = document.getElementById('btnScanQr');
+      const ticketInput = document.getElementById('ticketInput');
+
+      if (btnSound && audioToast) {
+        btnSound.addEventListener('click', function() {
+          audioToast.classList.remove('hidden');
+          setTimeout(function() {
+            audioToast.classList.add('hidden');
+          }, 3500);
+        });
+      }
+
+      function openModal() {
+        if (modalDir) modalDir.classList.remove('hidden');
+      }
+
+      function closeModal() {
+        if (modalDir) modalDir.classList.add('hidden');
+      }
+
+      if (btnNav) btnNav.addEventListener('click', openModal);
+      if (btnCloseModal) btnCloseModal.addEventListener('click', closeModal);
+      if (btnGotIt) btnGotIt.addEventListener('click', closeModal);
+
+      if (toggleVoice && voiceLabel) {
+        toggleVoice.addEventListener('change', function() {
+          if (this.checked) {
+            voiceLabel.textContent = 'Status: Pengeras Suara Siap';
+            voiceLabel.className = 'font-label-sm text-label-sm text-secondary-fixed';
+          } else {
+            voiceLabel.textContent = 'Status: Suara Dinonaktifkan';
+            voiceLabel.className = 'font-label-sm text-label-sm text-outline-variant';
+          }
+        });
+      }
+
+      if (btnCancel) {
+        btnCancel.addEventListener('click', function() {
+          if (confirm('Apakah Anda yakin ingin membatalkan antrean tiket A-012 untuk hari ini?')) {
+            alert('Antrean A-012 telah dibatalkan. Kuota telah dikembalikan ke sistem poliklinik.');
+          }
+        });
+      }
+
+      if (btnSearch) {
+        btnSearch.addEventListener('click', function() {
+          const val = ticketInput.value.trim();
+          if (val) {
+            alert('Menemukan tiket terverifikasi: ' + val + ' (Poli Penyakit Dalam)');
+          } else {
+            alert('Silakan masukkan nomor atau kode booking tiket antrean Anda.');
+          }
+        });
+      }
+
+      if (btnScanQr) {
+        btnScanQr.addEventListener('click', function() {
+          alert('Membuka kamera scanner QR Code... Pastikan kode QR pada tiket fisik atau ponsel Anda berada tepat di depan lensa.');
+        });
+      }
+    })();
+  </script>
+</div></main><footer class="w-full bg-brand-navy text-inverse-on-surface mt-auto"><div class="max-w-container-max mx-auto px-gutter-desktop py-space-2xl"><div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-space-xl"><div class="lg:col-span-2 flex flex-col gap-space-md"><div class="flex items-center gap-space-sm"><div class="p-1.5 rounded-lg bg-surface-container-lowest"><img alt="Klinik Sehat Medika Logo" class="h-7 w-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCIp2CS02GzqTmUtufIqI2EX6Qz2z0KM27zKfA-4s0QkpH4zN3HwIFDP_kZnWsT3P6ppHht7VUSFDzyuEVCwm1tRr0IfhgNgLaUAaE-03kWPs2hcSUZfVBApV46VYe0P6WdreLJmC_2DbN2qUPJ1aWlCbE3N8Qb870NH-FKY1IdOhrWIDFhYjuTgybZZzP2q7unPz13z8JYZQ_umODU_sceq2-Hkotw8Jqkk_Cixv2OVZjuzOH2kK48"/></div><span class="font-headline-md text-headline-md text-surface font-bold">Klinik Sehat Medika</span></div><p class="font-body-md text-body-md text-surface-container-high leading-relaxed pr-space-lg">Pusat pelayanan kesehatan rawat jalan terpadu modern berstandar akreditasi nasional. Mengedepankan efisiensi antrean presisi, keramahan medis, dan transparansi waktu layanan untuk seluruh keluarga.</p><div class="flex flex-col gap-space-xs mt-space-xs"><div class="flex items-center gap-space-sm text-surface-container-high font-body-sm text-body-sm"><span class="material-symbols-outlined text-secondary-fixed text-[20px]">location_on</span><span>Jl. Sehat Utama No. 88, Kotabaru, Yogyakarta 55224</span></div><div class="flex items-center gap-space-sm text-surface-container-high font-body-sm text-body-sm"><span class="material-symbols-outlined text-brand-gold text-[20px]">call</span><span>Call Center: (0274) 555-123 | IGD: +62 274 555-999</span></div><div class="flex items-center gap-space-sm text-surface-container-high font-body-sm text-body-sm"><span class="material-symbols-outlined text-secondary-fixed text-[20px]">mail</span><span>layananpasien@kliniksehatmedika.id</span></div></div></div><div class="flex flex-col gap-space-sm"><span class="font-title-md text-title-md text-surface font-semibold">Layanan Poliklinik</span><div class="flex flex-col gap-space-xs font-body-sm text-body-sm text-surface-container-high"><a class="hover:text-secondary-fixed transition-colors" href="#">Poli Penyakit Dalam</a><a class="hover:text-secondary-fixed transition-colors" href="#">Poli Anak &amp; Tumbuh Kembang</a><a class="hover:text-secondary-fixed transition-colors" href="#">Poli Gigi &amp; Mulut Spesialistik</a><a class="hover:text-secondary-fixed transition-colors" href="#">Poli Kandungan &amp; Kebidanan</a><a class="hover:text-secondary-fixed transition-colors" href="#">Poli Mata &amp; Optik Klinis</a><a class="hover:text-secondary-fixed transition-colors" href="#">Laboratorium &amp; Radiologi</a></div></div><div class="flex flex-col gap-space-sm"><span class="font-title-md text-title-md text-surface font-semibold">HealthQueue Digital</span><div class="flex flex-col gap-space-xs font-body-sm text-body-sm text-surface-container-high"><a class="hover:text-secondary-fixed transition-colors" href="#">Estimasi Nomor Antrean</a><a class="hover:text-secondary-fixed transition-colors" href="#">Jadwal Praktik Hari Ini</a><a class="hover:text-secondary-fixed transition-colors" href="#">Panduan Self Check-in Mandiri</a><a class="hover:text-secondary-fixed transition-colors" href="#">Integrasi Rujukan BPJS Kesehatan</a><a class="hover:text-secondary-fixed transition-colors" href="#">Asuransi Rekanan Swasta</a><a class="hover:text-secondary-fixed transition-colors" href="#">Surat Keterangan Sakit Digital</a></div></div><div class="flex flex-col gap-space-sm"><span class="font-title-md text-title-md text-surface font-semibold">Jam Operasional</span><div class="flex flex-col gap-space-2xs font-body-sm text-body-sm text-surface-container-high"><div class="bg-surface-container-lowest/10 p-space-sm rounded-lg flex flex-col gap-1"><span class="font-label-md text-label-md text-secondary-fixed">Instalasi Gawat Darurat (IGD)</span><span class="font-body-sm text-body-sm">Buka 24 Jam Setiap Hari</span></div><div class="bg-surface-container-lowest/10 p-space-sm rounded-lg flex flex-col gap-1"><span class="font-label-md text-label-md text-secondary-fixed">Poliklinik Rawat Jalan</span><span class="font-body-sm text-body-sm">Senin - Sabtu: 07.30 - 21.00 WIB</span><span class="font-body-sm text-body-sm text-surface-variant">Minggu &amp; Libur Nasional: Tutup</span></div></div></div></div><div class="mt-space-2xl pt-space-lg flex flex-col md:flex-row items-center justify-between gap-space-md font-body-sm text-body-sm text-surface-container-high/80"><p>© 2025 Klinik Sehat Medika (HealthQueue). Seluruh Hak Cipta Dilindungi Undang-Undang Republik Indonesia.</p><div class="flex items-center gap-space-lg font-label-md text-label-md"><a class="hover:text-surface transition-colors" href="#">Kebijakan Privasi Pasien</a><a class="hover:text-surface transition-colors" href="#">Syarat &amp; Ketentuan</a><a class="hover:text-surface transition-colors" href="#">Hak &amp; Kewajiban Pasien</a></div></div></div></footer></body></html>

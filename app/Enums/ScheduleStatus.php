@@ -5,7 +5,7 @@ namespace App\Enums;
 use Filament\Support\Contracts\HasColor;
 use Filament\Support\Contracts\HasLabel;
 
-enum ScheduleStatus: string implements HasLabel, HasColor
+enum ScheduleStatus: string implements HasColor, HasLabel
 {
     case Active = 'active';
     case Inactive = 'inactive';
@@ -25,7 +25,7 @@ enum ScheduleStatus: string implements HasLabel, HasColor
         return $this->getLabel() ?? '';
     }
 
-    public function getColor(): string | array | null
+    public function getColor(): string|array|null
     {
         return match ($this) {
             self::Active => 'success',

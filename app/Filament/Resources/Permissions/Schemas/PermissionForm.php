@@ -21,9 +21,10 @@ class PermissionForm
                             ->label(__('Permission Name / Key'))
                             ->options(function (?Permission $record) {
                                 $options = PermissionType::groupedOptions();
-                                if ($record && !PermissionType::tryFrom($record->name)) {
+                                if ($record && ! PermissionType::tryFrom($record->name)) {
                                     $options['Lainnya'][$record->name] = $record->name;
                                 }
+
                                 return $options;
                             })
                             ->searchable()

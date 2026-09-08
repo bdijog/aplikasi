@@ -5,8 +5,8 @@ namespace App\Filament\Resources\Announcements\Pages;
 use App\Filament\Resources\Announcements\AnnouncementResource;
 use Filament\Actions\CreateAction;
 use Filament\Resources\Pages\ListRecords;
-use LaraZeus\SpatieTranslatable\Resources\Pages\ListRecords\Concerns\Translatable;
 use LaraZeus\SpatieTranslatable\Actions\LocaleSwitcher;
+use LaraZeus\SpatieTranslatable\Resources\Pages\ListRecords\Concerns\Translatable;
 
 class ListAnnouncements extends ListRecords
 {
