@@ -3,15 +3,15 @@
     <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
         <div>
             <nav class="flex items-center gap-1.5 text-xs text-on-surface-variant font-medium mb-2">
-                <a class="hover:text-primary transition-colors" href="{{ route('home') }}">{{ __('Beranda') }}</a>
+                <a class="hover:text-primary transition-colors" href="{{ route('home') }}">{{ __('Home') }}</a>
                 <span class="material-symbols-outlined text-[14px]">chevron_right</span>
-                <span class="text-primary font-bold">{{ __('Status Antrean Pasien') }}</span>
+                <span class="text-primary font-bold">{{ __('Patient Queue Status') }}</span>
             </nav>
             <h1 class="font-heading text-2xl md:text-3xl font-bold text-on-surface">
-                {{ __('Pantau Antrean Pasien Waktu Nyata') }}
+                {{ __('Real-Time Patient Queue Tracker') }}
             </h1>
             <p class="text-xs text-on-surface-variant mt-1">
-                {{ __('Pergerakan antrean live terkoneksi langsung dengan sistem display poliklinik.') }}
+                {{ __('Live queue movements are connected directly to the clinic display system.') }}
             </p>
         </div>
 
@@ -19,16 +19,16 @@
         <div class="flex items-center gap-3">
             <a href="{{ route('queue.display') }}" target="_blank" class="px-3.5 py-2 rounded-xl bg-brand-navy text-white text-xs font-bold hover:bg-brand-navy/90 flex items-center gap-1.5 shadow-sm">
                 <span class="material-symbols-outlined text-[18px]">tv</span>
-                <span>{{ __('Buka Layar TV') }}</span>
+                <span>{{ __('Open TV Display') }}</span>
             </a>
 
             <form wire:submit="searchTicket" class="flex items-center gap-2">
                 <div class="relative">
                     <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-[18px]">search</span>
-                    <input wire:model="ticketCode" type="text" placeholder="{{ __('No. Tiket / Booking / NIK') }}" class="w-48 sm:w-56 pl-9 pr-3 py-2 rounded-xl bg-surface-container-low text-xs border border-outline-variant/30 focus:bg-surface-card focus:ring-2 focus:ring-primary focus:outline-none"/>
+                    <input wire:model="ticketCode" type="text" placeholder="{{ __('Ticket No. / Booking / NIK') }}" class="w-48 sm:w-56 pl-9 pr-3 py-2 rounded-xl bg-surface-container-low text-xs border border-outline-variant/30 focus:bg-surface-card focus:ring-2 focus:ring-primary focus:outline-none"/>
                 </div>
                 <button type="submit" class="px-4 py-2 rounded-xl bg-primary text-white text-xs font-bold hover:bg-primary-container shadow-sm">
-                    {{ __('Cari') }}
+                    {{ __('Search') }}
                 </button>
             </form>
         </div>
@@ -55,15 +55,15 @@
                                 <span class="material-symbols-outlined text-[28px]">confirmation_number</span>
                             </div>
                             <div>
-                                <span class="text-xs font-bold text-primary uppercase tracking-wider">{{ __('Tiket Antrean Poliklinik') }}</span>
-                                <h2 class="font-heading text-lg font-bold text-on-surface">{{ $activeTicket->appointment?->patient?->name ?? __('Pasien Terdaftar') }}</h2>
+                                <span class="text-xs font-bold text-primary uppercase tracking-wider">{{ __('Polyclinic Queue Ticket') }}</span>
+                                <h2 class="font-heading text-lg font-bold text-on-surface">{{ $activeTicket->appointment?->patient?->name ?? __('Registered Patient') }}</h2>
                             </div>
                         </div>
 
                         <div class="flex items-center gap-3 text-xs font-medium text-on-surface-variant">
-                            <span>{{ __('Kode Booking: ') }}<strong class="text-on-surface">{{ $activeTicket->appointment?->booking_code ?? '-' }}</strong></span>
+                            <span>{{ __('Booking Code: ') }}<strong class="text-on-surface">{{ $activeTicket->appointment?->booking_code ?? '-' }}</strong></span>
                             <span>•</span>
-                            <span>{{ __('Waktu: ') }}<strong class="text-on-surface">{{ $activeTicket->created_at ? $activeTicket->created_at->format('H:i') : now()->format('H:i') }} WIB</strong></span>
+                            <span>{{ __('Time: ') }}<strong class="text-on-surface">{{ $activeTicket->created_at ? $activeTicket->created_at->format('H:i') : now()->format('H:i') }} WIB</strong></span>
                         </div>
                     </div>
 
@@ -71,14 +71,14 @@
                     <div class="grid grid-cols-1 md:grid-cols-12 gap-4 items-center bg-surface-container-low/70 p-6 rounded-2xl my-6 border border-outline-variant/20">
                         <!-- Left: Patient's Queue Number -->
                         <div class="md:col-span-5 flex flex-col">
-                            <span class="text-[11px] font-bold text-on-surface-variant uppercase tracking-wider">{{ __('Nomor Antrean Anda') }}</span>
+                            <span class="text-[11px] font-bold text-on-surface-variant uppercase tracking-wider">{{ __('Your Queue Number') }}</span>
                             <div class="flex items-baseline gap-2 mt-1">
                                 <span class="font-heading text-4xl md:text-5xl text-primary font-black tracking-tight">{{ $activeTicket->display_number }}</span>
-                                <span class="text-xs text-on-surface-variant font-medium">/ 25 {{ __('Kuota') }}</span>
+                                <span class="text-xs text-on-surface-variant font-medium">/ 25 {{ __('Quota') }}</span>
                             </div>
                             <div class="flex items-center gap-1.5 mt-2 text-status-available text-xs font-semibold">
                                 <span class="material-symbols-outlined text-[16px]">hourglass_bottom</span>
-                                <span>{{ __('Estimasi Tunggu: ± ') }}{{ max(5, $remainingBefore * 12) }} {{ __('Menit lagi') }}</span>
+                                <span>{{ __('Estimated Wait: ± ') }}{{ max(5, $remainingBefore * 12) }} {{ __('Minutes left') }}</span>
                             </div>
                         </div>
 
@@ -92,10 +92,10 @@
                         <!-- Right: Currently Called Live -->
                         <div class="md:col-span-5 flex flex-col bg-surface-card p-4 rounded-xl shadow-xs border border-outline-variant/20">
                             <div class="flex items-center justify-between">
-                                <span class="text-[10px] font-bold text-on-surface-variant uppercase tracking-wider">{{ __('Sedang Dipanggil') }}</span>
+                                <span class="text-[10px] font-bold text-on-surface-variant uppercase tracking-wider">{{ __('Currently Called') }}</span>
                                 <span class="px-2 py-0.5 rounded-full bg-error/15 text-error text-[10px] font-bold flex items-center gap-1">
                                     <span class="w-1.5 h-1.5 rounded-full bg-error animate-ping"></span>
-                                    <span>{{ __('Live Konsultasi') }}</span>
+                                    <span>{{ __('Live Consultation') }}</span>
                                 </span>
                             </div>
                             <div class="flex items-baseline gap-2 mt-1">
@@ -108,9 +108,9 @@
                             </div>
                             <p class="text-[11px] text-on-surface-variant mt-1">
                                 @if($remainingBefore > 0)
-                                    {{ __('Sisa ') }}<strong>{{ $remainingBefore }} {{ __('pasien') }}</strong>{{ __(' sebelum giliran Anda') }}
+                                    {{ __('Remaining ') }}<strong>{{ $remainingBefore }} {{ __('patients') }}</strong>{{ __(' before your turn') }}
                                 @else
-                                    <span class="text-status-available font-bold">{{ __('Giliran Anda berikutnya!') }}</span>
+                                    <span class="text-status-available font-bold">{{ __('You are next in line!') }}</span>
                                 @endif
                             </p>
                         </div>
@@ -128,10 +128,10 @@
                         <div class="flex-1 min-w-0">
                             <div class="flex flex-wrap items-center gap-2">
                                 <h3 class="font-heading text-base font-bold text-on-surface">{{ $activeTicket->doctor?->name ?? 'dr. Spesialis' }}</h3>
-                                <span class="px-2 py-0.5 bg-secondary-fixed text-on-secondary-fixed text-[10px] rounded font-bold">{{ __('Dokter Penanggung Jawab') }}</span>
+                                <span class="px-2 py-0.5 bg-secondary-fixed text-on-secondary-fixed text-[10px] rounded font-bold">{{ __('Attending Doctor') }}</span>
                             </div>
                             <p class="text-xs text-primary font-semibold mt-0.5">
-                                {{ __('Poli ') }}{{ $activeTicket->doctor?->getTranslation('specialty', app()->getLocale()) ?? 'Spesialis' }}
+                                {{ __('Clinic of ') }}{{ $activeTicket->doctor?->getTranslation('specialty', app()->getLocale()) ?? 'Spesialis' }}
                             </p>
                             <div class="flex flex-wrap items-center gap-4 mt-1.5 text-xs text-on-surface-variant">
                                 <span class="flex items-center gap-1 font-semibold text-primary">
@@ -140,7 +140,7 @@
                                 </span>
                                 <span class="flex items-center gap-1">
                                     <span class="material-symbols-outlined text-[16px]">schedule</span>
-                                    <span>{{ __('Sesi: 08:00 - 12:00 WIB') }}</span>
+                                    <span>{{ __('Session: 08:00 - 12:00 WIB') }}</span>
                                 </span>
                             </div>
                         </div>
@@ -149,8 +149,8 @@
                     <!-- 5-Step Visual Progress Tracker -->
                     <div class="mb-6">
                         <div class="flex justify-between items-center mb-3">
-                            <span class="text-xs font-bold text-brand-navy uppercase tracking-wider">{{ __('Alur Pelayanan Antrean') }}</span>
-                            <span class="text-[11px] text-on-surface-variant">{{ __('Rata-rata 10-15 menit / pasien') }}</span>
+                            <span class="text-xs font-bold text-brand-navy uppercase tracking-wider">{{ __('Queue Service Workflow') }}</span>
+                            <span class="text-[11px] text-on-surface-variant">{{ __('Average 10-15 minutes / patient') }}</span>
                         </div>
 
                         @php
@@ -171,7 +171,7 @@
                                     <span class="material-symbols-outlined text-[18px]">check</span>
                                 </div>
                                 <span class="text-[11px] font-bold text-on-surface mt-1.5">{{ __('Checked-in') }}</span>
-                                <span class="text-[10px] text-on-surface-variant">{{ __('Selesai') }}</span>
+                                <span class="text-[10px] text-on-surface-variant">{{ __('Completed') }}</span>
                             </div>
 
                             <!-- 2. Menunggu -->
@@ -183,8 +183,8 @@
                                         <span class="material-symbols-outlined text-[18px]">hourglass_top</span>
                                     @endif
                                 </div>
-                                <span class="text-[11px] font-bold {{ $stepIndex === 2 ? 'text-status-limited' : 'text-on-surface' }} mt-1.5">{{ __('Menunggu') }}</span>
-                                <span class="text-[10px] text-on-surface-variant">{{ $stepIndex === 2 ? __('Ruang Tunggu') : '-' }}</span>
+                                <span class="text-[11px] font-bold {{ $stepIndex === 2 ? 'text-status-limited' : 'text-on-surface' }} mt-1.5">{{ __('Waiting') }}</span>
+                                <span class="text-[10px] text-on-surface-variant">{{ $stepIndex === 2 ? __('Waiting Room') : '-' }}</span>
                             </div>
 
                             <!-- 3. Dipanggil -->
@@ -196,8 +196,8 @@
                                         3
                                     @endif
                                 </div>
-                                <span class="text-[11px] font-bold text-on-surface mt-1.5">{{ __('Dipanggil') }}</span>
-                                <span class="text-[10px] text-on-surface-variant">{{ __('Layar/Audio') }}</span>
+                                <span class="text-[11px] font-bold text-on-surface mt-1.5">{{ __('Called') }}</span>
+                                <span class="text-[10px] text-on-surface-variant">{{ __('Screen/Audio') }}</span>
                             </div>
 
                             <!-- 4. Konsultasi -->
@@ -209,8 +209,8 @@
                                         4
                                     @endif
                                 </div>
-                                <span class="text-[11px] font-bold text-on-surface mt-1.5">{{ __('Konsultasi') }}</span>
-                                <span class="text-[10px] text-on-surface-variant">{{ __('Di Ruang Poli') }}</span>
+                                <span class="text-[11px] font-bold text-on-surface mt-1.5">{{ __('Consultation') }}</span>
+                                <span class="text-[10px] text-on-surface-variant">{{ __('In Clinic Room') }}</span>
                             </div>
 
                             <!-- 5. Selesai -->
@@ -218,8 +218,8 @@
                                 <div class="w-8 h-8 rounded-full {{ $stepIndex === 5 ? 'bg-status-available text-white' : 'bg-surface-container text-outline' }} flex items-center justify-center font-bold text-xs">
                                     5
                                 </div>
-                                <span class="text-[11px] font-bold text-on-surface mt-1.5">{{ __('Selesai') }}</span>
-                                <span class="text-[10px] text-on-surface-variant">{{ __('Farmasi/Kasir') }}</span>
+                                <span class="text-[11px] font-bold text-on-surface mt-1.5">{{ __('Completed') }}</span>
+                                <span class="text-[10px] text-on-surface-variant">{{ __('Pharmacy/Cashier') }}</span>
                             </div>
                         </div>
 
@@ -233,16 +233,16 @@
                     <div class="flex flex-wrap items-center gap-3 pt-2">
                         <button onclick="playVoiceCall('{{ $activeTicket->display_number }}', '{{ $activeTicket->counter ?? 'Ruang Poli 204' }}')" type="button" class="flex-1 min-w-[200px] py-3 px-4 rounded-xl bg-primary text-white text-xs font-bold hover:bg-primary-container shadow-sm flex items-center justify-center gap-2 transition-all">
                             <span class="material-symbols-outlined text-[20px]">volume_up</span>
-                            <span>{{ __('Dengarkan Panggilan Suara') }}</span>
+                            <span>{{ __('Listen to Voice Announcement') }}</span>
                         </button>
 
                         <button onclick="alert('Petunjuk Arah: Naik tangga / lift ke Lantai 2, belok kanan menyusuri koridor Poli Spesialis. Ruang 204 berada di sebelah kanan.')" type="button" class="flex-1 min-w-[180px] py-3 px-4 rounded-xl bg-surface-container text-primary text-xs font-bold hover:bg-surface-container-high flex items-center justify-center gap-2 transition-colors">
                             <span class="material-symbols-outlined text-[20px]">directions</span>
-                            <span>{{ __('Panduan Ruang') }}</span>
+                            <span>{{ __('Room Directions') }}</span>
                         </button>
 
-                        <button wire:click="cancelQueue({{ $activeTicket->id }})" wire:confirm="{{ __('Apakah Anda yakin ingin membatalkan nomor antrean ini?') }}" type="button" class="py-3 px-4 rounded-xl text-error hover:bg-error/10 text-xs font-bold transition-colors">
-                            {{ __('Batalkan Antrean') }}
+                        <button wire:click="cancelQueue({{ $activeTicket->id }})" wire:confirm="{{ __('Are you sure you want to cancel this queue ticket?') }}" type="button" class="py-3 px-4 rounded-xl text-error hover:bg-error/10 text-xs font-bold transition-colors">
+                            {{ __('Cancel Queue Ticket') }}
                         </button>
                     </div>
                 </div>
@@ -252,13 +252,13 @@
                     <div class="w-16 h-16 rounded-full bg-surface-container text-outline flex items-center justify-center mx-auto mb-4">
                         <span class="material-symbols-outlined text-[36px]">confirmation_number</span>
                     </div>
-                    <h3 class="font-heading text-lg font-bold text-on-surface mb-2">{{ __('Belum Ada Antrean yang Dipilih') }}</h3>
+                    <h3 class="font-heading text-lg font-bold text-on-surface mb-2">{{ __('No Active Queue Selected') }}</h3>
                     <p class="text-xs text-on-surface-variant max-w-md mx-auto mb-6">
-                        {{ __('Silakan masukkan nomor antrean, kode booking, atau NIK Anda pada kolom pencarian di atas, atau buat reservasi janji temu dokter terlebih dahulu.') }}
+                        {{ __('Please enter your queue number, booking code, or NIK in the search box above, or make a doctor appointment first.') }}
                     </p>
                     <a href="{{ route('booking.index') }}" class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-primary text-white text-xs font-bold hover:bg-primary-container shadow-sm">
                         <span class="material-symbols-outlined text-[18px]">add_circle</span>
-                        <span>{{ __('Daftar & Ambil Antrean') }}</span>
+                        <span>{{ __('Register & Take Queue Number') }}</span>
                     </a>
                 </div>
             @endif
@@ -268,23 +268,23 @@
                 <div class="flex items-center justify-between mb-4">
                     <div class="flex items-center gap-2">
                         <span class="material-symbols-outlined text-primary text-[22px]">analytics</span>
-                        <h3 class="font-heading text-sm font-bold text-on-surface">{{ __('Statistik Ruang Tunggu Poliklinik') }}</h3>
+                        <h3 class="font-heading text-sm font-bold text-on-surface">{{ __('Polyclinic Waiting Room Analytics') }}</h3>
                     </div>
-                    <span class="text-[11px] text-on-surface-variant">{{ __('Berdasarkan data hari ini') }}</span>
+                    <span class="text-[11px] text-on-surface-variant">{{ __('Based on today data') }}</span>
                 </div>
 
                 <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
                     <div class="p-4 rounded-xl bg-surface-container-low border border-outline-variant/20">
-                        <span class="text-[11px] text-on-surface-variant block mb-1">{{ __('Rata-rata Konsultasi') }}</span>
-                        <span class="font-heading text-xl font-bold text-primary">12 {{ __('Menit') }}</span>
+                        <span class="text-[11px] text-on-surface-variant block mb-1">{{ __('Average Consultation') }}</span>
+                        <span class="font-heading text-xl font-bold text-primary">12 {{ __('Minutes') }}</span>
                     </div>
                     <div class="p-4 rounded-xl bg-surface-container-low border border-outline-variant/20">
-                        <span class="text-[11px] text-on-surface-variant block mb-1">{{ __('Ketepatan Jadwal Dokter') }}</span>
+                        <span class="text-[11px] text-on-surface-variant block mb-1">{{ __('Doctor Schedule Punctuality') }}</span>
                         <span class="font-heading text-xl font-bold text-status-available">98%</span>
                     </div>
                     <div class="p-4 rounded-xl bg-surface-container-low border border-outline-variant/20">
-                        <span class="text-[11px] text-on-surface-variant block mb-1">{{ __('Pasien Selesai Hari Ini') }}</span>
-                        <span class="font-heading text-xl font-bold text-on-surface">42 {{ __('Pasien') }}</span>
+                        <span class="text-[11px] text-on-surface-variant block mb-1">{{ __('Patients Completed Today') }}</span>
+                        <span class="font-heading text-xl font-bold text-on-surface">42 {{ __('Patients') }}</span>
                     </div>
                 </div>
             </div>
@@ -295,7 +295,7 @@
             <!-- All Clinics Overview -->
             <div class="bg-surface-card rounded-2xl p-6 shadow-sm border border-outline-variant/30">
                 <div class="flex items-center justify-between pb-3 border-b border-outline-variant/20 mb-4">
-                    <h3 class="font-heading text-xs font-bold uppercase tracking-wider text-primary">{{ __('Antrean Poliklinik Lainnya') }}</h3>
+                    <h3 class="font-heading text-xs font-bold uppercase tracking-wider text-primary">{{ __('Other Polyclinics Queues') }}</h3>
                     <span class="w-2 h-2 rounded-full bg-status-available animate-pulse"></span>
                 </div>
 
@@ -308,7 +308,7 @@
                             </div>
                             <div class="text-right">
                                 <div class="font-heading text-base font-black text-primary">{{ $clinic['current'] }}</div>
-                                <span class="text-[10px] text-status-limited font-semibold">{{ $clinic['waiting'] }} {{ __('menunggu') }}</span>
+                                <span class="text-[10px] text-status-limited font-semibold">{{ $clinic['waiting'] }} {{ __('waiting') }}</span>
                             </div>
                         </div>
                     @endforeach
@@ -317,7 +317,7 @@
                 <div class="mt-4 pt-3 border-t border-outline-variant/20">
                     <a href="{{ route('queue.display') }}" target="_blank" class="w-full py-2.5 rounded-xl bg-surface-container text-xs font-bold text-primary hover:bg-surface-container-high transition-colors flex items-center justify-center gap-1.5">
                         <span class="material-symbols-outlined text-[18px]">fullscreen</span>
-                        <span>{{ __('Lihat Tampilan Penuh Monitor TV') }}</span>
+                        <span>{{ __('Open Full-Screen TV Monitor') }}</span>
                     </a>
                 </div>
             </div>
@@ -326,13 +326,13 @@
             <div class="bg-brand-navy rounded-2xl p-6 text-white shadow-md">
                 <div class="flex items-center gap-3 mb-3">
                     <span class="material-symbols-outlined text-brand-gold text-[28px]">notifications_active</span>
-                    <h4 class="font-heading text-sm font-bold">{{ __('Panggilan Terlewat?') }}</h4>
+                    <h4 class="font-heading text-sm font-bold">{{ __('Missed Your Call?') }}</h4>
                 </div>
                 <p class="text-xs text-surface-container-high leading-relaxed mb-4">
-                    {{ __('Jika nomor antrean Anda terlewat lebih dari 3 panggilan, harap segera melapor ke perawat di meja informasi ruang tunggu agar dipanggil kembali.') }}
+                    {{ __('If your queue number has been missed by more than 3 calls, please report to the waiting room nurse desk to be recalled.') }}
                 </p>
                 <div class="p-3 rounded-xl bg-white/10 text-xs flex items-center justify-between">
-                    <span>{{ __('Meja Perawat Lobi 2:') }}</span>
+                    <span>{{ __('Lobby 2 Nurse Desk:') }}</span>
                     <strong class="text-brand-gold">{{ __('Ext. 201') }}</strong>
                 </div>
             </div>

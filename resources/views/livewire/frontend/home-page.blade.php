@@ -20,27 +20,27 @@
                     <!-- Trust Pill -->
                     <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-surface-container-lowest/10 backdrop-blur-md border border-white/10 text-xs font-semibold text-brand-gold mb-6 shadow-sm">
                         <span class="material-symbols-outlined text-[18px]">verified</span>
-                        <span>{{ __('Klinik Pratama Terakreditasi Paripurna KARS') }}</span>
+                        <span>{{ __('KARS Paripurna Accredited Healthcare Clinic') }}</span>
                     </div>
 
                     <h1 class="font-heading text-3xl sm:text-4xl md:text-5xl font-black tracking-tight text-surface leading-[1.15] mb-4">
-                        {{ __('Pelayanan Kesehatan Terpadu, Efisien & Ramah Keluarga') }}
+                        {{ __('Integrated, Efficient & Family-Friendly Healthcare') }}
                     </h1>
 
                     <p class="text-sm md:text-base text-surface-container-high leading-relaxed max-w-xl mb-8">
-                        {{ __('Daftar berobat tanpa perlu antre di klinik. Akses jadwal dokter spesialis terkini, reservasi janji temu online, pantau nomor panggilan antrean live dari smartphone Anda.') }}
+                        {{ __('Register for clinic visits without standing in line. Access updated specialist schedules, book appointments online, and track live queue calls from your smartphone.') }}
                     </p>
 
                     <!-- CTAs -->
                     <div class="flex flex-wrap items-center gap-4 w-full sm:w-auto mb-8">
                         <a href="{{ route('booking.index') }}" class="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-primary hover:bg-primary-container text-white font-heading text-sm font-bold shadow-lg flex items-center justify-center gap-2 transition-all">
                             <span class="material-symbols-outlined text-[20px]">event_available</span>
-                            <span>{{ __('Daftar & Booking Janji Temu') }}</span>
+                            <span>{{ __('Register & Book Appointment') }}</span>
                         </a>
 
                         <a href="{{ route('doctors.index') }}" class="w-full sm:w-auto px-6 py-3.5 rounded-xl bg-surface-container-lowest/10 hover:bg-surface-container-lowest/20 text-white font-heading text-sm font-bold border border-white/20 flex items-center justify-center gap-2 transition-all">
                             <span class="material-symbols-outlined text-[20px]">calendar_month</span>
-                            <span>{{ __('Lihat Jadwal Dokter') }}</span>
+                            <span>{{ __('View Doctor Schedules') }}</span>
                         </a>
                     </div>
 
@@ -49,10 +49,10 @@
                         <form wire:submit="checkQuickTicket" class="flex items-center gap-2">
                             <div class="relative flex-1">
                                 <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-[20px]">search</span>
-                                <input wire:model="quickTicketCode" type="text" placeholder="{{ __('Punya tiket? Masukkan no. tiket / kode booking...') }}" class="w-full pl-10 pr-3 py-2 text-xs bg-transparent focus:outline-none text-on-surface"/>
+                                <input wire:model="quickTicketCode" type="text" placeholder="{{ __('Have a ticket? Enter ticket / booking code...') }}" class="w-full pl-10 pr-3 py-2 text-xs bg-transparent focus:outline-none text-on-surface"/>
                             </div>
                             <button type="submit" class="px-4 py-2 rounded-xl bg-brand-navy text-white text-xs font-bold hover:bg-primary transition-colors shrink-0">
-                                {{ __('Cek Antrean') }}
+                                {{ __('Check Queue') }}
                             </button>
                         </form>
                     </div>
@@ -66,7 +66,7 @@
                         
                         <!-- Receptionist Image -->
                         <div class="rounded-3xl overflow-hidden shadow-2xl border border-white/10 bg-brand-navy">
-                            <img src="{{ asset('images/receptionist.png') }}" alt="{{ __('Petugas Front Desk Klinik Ayo Sehat') }}" class="w-full h-auto object-cover transform hover:scale-102 transition-transform duration-500"/>
+                            <img src="{{ asset('images/receptionist.png') }}" alt="{{ __('Front Desk Officer Klinik Ayo Sehat') }}" class="w-full h-auto object-cover transform hover:scale-102 transition-transform duration-500"/>
                         </div>
 
                         <!-- Floating Live Counter Badge -->
@@ -75,7 +75,7 @@
                                 <span class="material-symbols-outlined text-[26px]">timelapse</span>
                             </div>
                             <div>
-                                <span class="text-[10px] uppercase font-bold text-on-surface-variant block">{{ __('Waktu Tunggu Efisien') }}</span>
+                                <span class="text-[10px] uppercase font-bold text-on-surface-variant block">{{ __('Efficient Wait Time') }}</span>
                                 <span class="font-heading text-lg font-black text-primary">&lt; 15 Menit</span>
                             </div>
                         </div>
@@ -85,7 +85,7 @@
                             <span class="material-symbols-outlined text-brand-gold text-[22px]">star</span>
                             <div class="text-left">
                                 <span class="text-xs font-black block">4.9 / 5.0</span>
-                                <span class="text-[9px] text-on-surface-variant">{{ __('Kepuasan Pasien') }}</span>
+                                <span class="text-[9px] text-on-surface-variant">{{ __('Patient Satisfaction') }}</span>
                             </div>
                         </div>
                     </div>
@@ -104,14 +104,14 @@
                         <span class="material-symbols-outlined text-[26px]">calendar_month</span>
                     </div>
                     <h3 class="font-heading text-base font-bold text-on-surface mb-1 group-hover:text-primary transition-colors">
-                        {{ __('Jadwal Dokter & Poliklinik') }}
+                        {{ __('Doctor Schedule & Polyclinics') }}
                     </h3>
                     <p class="text-xs text-on-surface-variant leading-relaxed">
-                        {{ __('Lihat jadwal dokter spesialis dan ketersediaan kuota janji temu waktu nyata.') }}
+                        {{ __('View specialist doctor schedules and real-time appointment quota availability.') }}
                     </p>
                 </div>
                 <div class="mt-4 pt-3 border-t border-outline-variant/20 flex items-center justify-between text-xs font-bold text-primary">
-                    <span>{{ __('Lihat Jadwal') }}</span>
+                    <span>{{ __('View Schedule') }}</span>
                     <span class="material-symbols-outlined text-[16px] group-hover:translate-x-1 transition-transform">arrow_forward</span>
                 </div>
             </a>
@@ -123,14 +123,14 @@
                         <span class="material-symbols-outlined text-[26px]">event_available</span>
                     </div>
                     <h3 class="font-heading text-base font-bold text-on-surface mb-1 group-hover:text-primary transition-colors">
-                        {{ __('Booking Janji Temu') }}
+                        {{ __('Book Appointment') }}
                     </h3>
                     <p class="text-xs text-on-surface-variant leading-relaxed">
-                        {{ __('Registrasi pasien baru & booking jadwal spesialis dalam satu alur terpadu.') }}
+                        {{ __('New patient registration & specialist schedule booking in a unified workflow.') }}
                     </p>
                 </div>
                 <div class="mt-4 pt-3 border-t border-outline-variant/20 flex items-center justify-between text-xs font-bold text-secondary">
-                    <span>{{ __('Booking Online') }}</span>
+                    <span>{{ __('Book Online') }}</span>
                     <span class="material-symbols-outlined text-[16px] group-hover:translate-x-1 transition-transform">arrow_forward</span>
                 </div>
             </a>
@@ -142,14 +142,14 @@
                         <span class="material-symbols-outlined text-[26px]">confirmation_number</span>
                     </div>
                     <h3 class="font-heading text-base font-bold text-on-surface mb-1 group-hover:text-primary transition-colors">
-                        {{ __('Status Antrean Live') }}
+                        {{ __('Live Queue Status') }}
                     </h3>
                     <p class="text-xs text-on-surface-variant leading-relaxed">
-                        {{ __('Pantau nomor panggilan ruang poliklinik secara langsung dengan notifikasi audio.') }}
+                        {{ __('Monitor polyclinic calling numbers directly with audio notifications.') }}
                     </p>
                 </div>
                 <div class="mt-4 pt-3 border-t border-outline-variant/20 flex items-center justify-between text-xs font-bold text-status-available">
-                    <span>{{ __('Pantau Antrean') }}</span>
+                    <span>{{ __('Monitor Queue') }}</span>
                     <span class="material-symbols-outlined text-[16px] group-hover:translate-x-1 transition-transform">arrow_forward</span>
                 </div>
             </a>
@@ -161,14 +161,14 @@
                         <span class="material-symbols-outlined text-[26px]">touch_app</span>
                     </div>
                     <h3 class="font-heading text-base font-bold text-on-surface mb-1 group-hover:text-primary transition-colors">
-                        {{ __('Self Check-in Mandiri') }}
+                        {{ __('Self Check-in Station') }}
                     </h3>
                     <p class="text-xs text-on-surface-variant leading-relaxed">
-                        {{ __('Konfirmasi kehadiran hari H kedatangan dan cetak tiket antrean fisik secara cepat.') }}
+                        {{ __('Confirm arrival attendance on the day of visit and quickly print physical queue tickets.') }}
                     </p>
                 </div>
                 <div class="mt-4 pt-3 border-t border-outline-variant/20 flex items-center justify-between text-xs font-bold text-brand-navy">
-                    <span>{{ __('Check-in Sekarang') }}</span>
+                    <span>{{ __('Check-in Now') }}</span>
                     <span class="material-symbols-outlined text-[16px] group-hover:translate-x-1 transition-transform">arrow_forward</span>
                 </div>
             </a>
@@ -182,14 +182,14 @@
                 <div class="flex items-center gap-3">
                     <div class="w-3 h-3 rounded-full bg-status-available animate-ping"></div>
                     <div>
-                        <h2 class="font-heading text-lg font-bold text-on-surface">{{ __('Panggilan Antrean Live Saat Ini') }}</h2>
-                        <span class="text-xs text-on-surface-variant">{{ __('Sinkronisasi langsung dengan layar monitor poliklinik') }}</span>
+                        <h2 class="font-heading text-lg font-bold text-on-surface">{{ __('Current Live Queue Calls') }}</h2>
+                        <span class="text-xs text-on-surface-variant">{{ __('Direct synchronization with polyclinic monitor screens') }}</span>
                     </div>
                 </div>
 
                 <a href="{{ route('queue.display') }}" target="_blank" class="text-xs font-bold text-primary hover:underline flex items-center gap-1">
                     <span class="material-symbols-outlined text-[16px]">tv</span>
-                    <span>{{ __('Buka Layar Monitor TV') }}</span>
+                    <span>{{ __('Open TV Monitor') }}</span>
                 </a>
             </div>
 
@@ -202,7 +202,7 @@
                         </div>
                         <div class="mt-3 pt-2 border-t border-outline-variant/15 flex items-baseline justify-between">
                             <span class="font-heading text-2xl font-black text-primary">{{ $q['number'] }}</span>
-                            <span class="text-[10px] px-2 py-0.5 rounded bg-status-available/10 text-status-available font-bold">{{ __('Melayani') }}</span>
+                            <span class="text-[10px] px-2 py-0.5 rounded bg-status-available/10 text-status-available font-bold">{{ __('Serving') }}</span>
                         </div>
                     </div>
                 @endforeach
@@ -214,14 +214,14 @@
     <section class="max-w-[75rem] mx-auto px-4 md:px-6 mb-16">
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-8">
             <div>
-                <span class="text-xs font-bold text-primary uppercase tracking-widest">{{ __('Tim Dokter Unggulan') }}</span>
+                <span class="text-xs font-bold text-primary uppercase tracking-widest">{{ __('Featured Medical Team') }}</span>
                 <h2 class="font-heading text-2xl md:text-3xl font-bold text-on-surface mt-1">
-                    {{ __('Dokter Spesialis Berpengalaman') }}
+                    {{ __('Experienced Specialist Doctors') }}
                 </h2>
             </div>
 
             <a href="{{ route('doctors.index') }}" class="text-xs font-bold text-primary hover:underline flex items-center gap-1">
-                <span>{{ __('Lihat Semua Dokter') }}</span>
+                <span>{{ __('View All Doctors') }}</span>
                 <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
             </a>
         </div>
@@ -253,7 +253,7 @@
                             {{ __('Booking') }}
                         </a>
                         <a href="{{ route('doctors.index', ['search' => $doc->name]) }}" class="py-2 px-3 rounded-xl bg-surface-container text-xs font-bold text-primary hover:bg-surface-container-high transition-colors">
-                            {{ __('Jadwal') }}
+                            {{ __('Schedule') }}
                         </a>
                     </div>
                 </div>
@@ -266,14 +266,14 @@
         <div class="max-w-[75rem] mx-auto px-4 md:px-6">
             <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-8">
                 <div>
-                    <span class="text-xs font-bold text-primary uppercase tracking-widest">{{ __('Kabar & Pengumuman') }}</span>
+                    <span class="text-xs font-bold text-primary uppercase tracking-widest">{{ __('News & Announcements') }}</span>
                     <h2 class="font-heading text-2xl md:text-3xl font-bold text-on-surface mt-1">
-                        {{ __('Informasi Terkini Klinik Ayo Sehat') }}
+                        {{ __('Latest Updates from Klinik Ayo Sehat') }}
                     </h2>
                 </div>
 
                 <a href="{{ route('announcements.index') }}" class="text-xs font-bold text-primary hover:underline flex items-center gap-1">
-                    <span>{{ __('Lihat Semua Informasi') }}</span>
+                    <span>{{ __('View All Updates') }}</span>
                     <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
                 </a>
             </div>
@@ -300,7 +300,7 @@
 
                         <div class="mt-4 pt-3 border-t border-outline-variant/20">
                             <a href="{{ route('announcements.show', $ann->slug) }}" class="text-xs font-bold text-primary flex items-center gap-1 group-hover:underline">
-                                <span>{{ __('Baca Selengkapnya') }}</span>
+                                <span>{{ __('Read More') }}</span>
                                 <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
                             </a>
                         </div>
@@ -313,7 +313,7 @@
     <!-- Accreditation & Insurance Partners Bar -->
     <section class="max-w-[75rem] mx-auto px-4 md:px-6 py-12 border-t border-outline-variant/20">
         <div class="text-center mb-6">
-            <span class="text-xs font-bold text-on-surface-variant uppercase tracking-wider">{{ __('Didukung Oleh Mitra Resmi & Terakreditasi Nasional') }}</span>
+            <span class="text-xs font-bold text-on-surface-variant uppercase tracking-wider">{{ __('Supported by Official Partners & Nationally Accredited') }}</span>
         </div>
         <div class="flex flex-wrap items-center justify-center gap-8 md:gap-12 opacity-80">
             <div class="flex items-center gap-2 text-sm font-bold text-on-surface">

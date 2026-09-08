@@ -16,25 +16,25 @@
             <!-- Breadcrumbs & Live Sync Badge -->
             <div class="flex flex-wrap items-center justify-between gap-3 mb-6">
                 <nav class="flex items-center gap-1 text-xs font-medium text-surface-container-high">
-                    <a class="hover:text-secondary-fixed transition-colors" href="{{ route('home') }}">{{ __('Beranda') }}</a>
+                    <a class="hover:text-secondary-fixed transition-colors" href="{{ route('home') }}">{{ __('Home') }}</a>
                     <span class="material-symbols-outlined text-[14px]">chevron_right</span>
-                    <a class="hover:text-secondary-fixed transition-colors" href="{{ route('doctors.index') }}">{{ __('Layanan Pasien') }}</a>
+                    <a class="hover:text-secondary-fixed transition-colors" href="{{ route('doctors.index') }}">{{ __('Patient Services') }}</a>
                     <span class="material-symbols-outlined text-[14px]">chevron_right</span>
-                    <span class="text-secondary-fixed">{{ __('Jadwal Praktik Dokter Terpadu') }}</span>
+                    <span class="text-secondary-fixed">{{ __('Integrated Doctor Practice Schedule') }}</span>
                 </nav>
                 <div class="flex items-center gap-2 bg-surface-container-lowest/10 backdrop-blur-md px-3 py-1 rounded-full text-surface-bright text-xs font-medium">
                     <span class="inline-block w-2 h-2 rounded-full bg-status-available animate-pulse"></span>
-                    <span>{{ __('Sistem Pembaruan Otomatis: Sinkron Terkoneksi') }}</span>
+                    <span>{{ __('Automatic Update System: Connected Live') }}</span>
                 </div>
             </div>
 
             <!-- Headline Block -->
             <div class="max-w-3xl mb-8">
                 <h1 class="font-heading text-3xl md:text-4xl font-bold tracking-tight text-surface mb-3">
-                    {{ __('Temukan Jadwal Dokter & Reservasi Spesialisasi') }}
+                    {{ __('Find Doctor Schedules & Specialty Reservations') }}
                 </h1>
                 <p class="text-base text-surface-container-high leading-relaxed">
-                    {{ __('Akses informasi akurat jadwal poliklinik rawat jalan, ketersediaan kuota waktu nyata, dan booking konsultasi medis langsung tanpa antre di lokasi.') }}
+                    {{ __('Access accurate polyclinic schedules, real-time quota availability, and instant appointment booking without waiting on site.') }}
                 </p>
             </div>
 
@@ -43,26 +43,26 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-4 items-end">
                     <!-- Search Input -->
                     <div class="lg:col-span-4 flex flex-col gap-1.5">
-                        <label class="text-xs font-bold text-on-surface-variant uppercase tracking-wider">{{ __('Cari Nama Dokter / Spesialis') }}</label>
+                        <label class="text-xs font-bold text-on-surface-variant uppercase tracking-wider">{{ __('Search Doctor Name / Specialty') }}</label>
                         <div class="relative flex items-center">
                             <span class="material-symbols-outlined absolute left-3 text-outline text-[20px]">person_search</span>
-                            <input wire:model.live.debounce.300ms="search" class="w-full pl-10 pr-4 py-2.5 rounded-xl bg-surface-container-low text-sm text-on-surface placeholder:text-outline border border-outline-variant/30 focus:outline-none focus:bg-surface-container-lowest focus:ring-2 focus:ring-primary transition-all" placeholder="{{ __('Contoh: dr. Sarah, Anak, Jantung...') }}" type="text"/>
+                            <input wire:model.live.debounce.300ms="search" class="w-full pl-10 pr-4 py-2.5 rounded-xl bg-surface-container-low text-sm text-on-surface placeholder:text-outline border border-outline-variant/30 focus:outline-none focus:bg-surface-container-lowest focus:ring-2 focus:ring-primary transition-all" placeholder="{{ __('Example: dr. Sarah, Pediatrics, Cardiology...') }}" type="text"/>
                         </div>
                     </div>
 
                     <!-- Specialty Dropdown -->
                     <div class="lg:col-span-3 flex flex-col gap-1.5">
-                        <label class="text-xs font-bold text-on-surface-variant uppercase tracking-wider">{{ __('Pilih Poliklinik Spesialis') }}</label>
+                        <label class="text-xs font-bold text-on-surface-variant uppercase tracking-wider">{{ __('Select Specialist Clinic') }}</label>
                         <div class="relative flex items-center">
                             <span class="material-symbols-outlined absolute left-3 text-outline text-[20px]">local_hospital</span>
                             <select wire:model.live="specialty" class="w-full pl-10 pr-8 py-2.5 rounded-xl bg-surface-container-low text-sm text-on-surface appearance-none border border-outline-variant/30 focus:outline-none focus:bg-surface-container-lowest focus:ring-2 focus:ring-primary transition-all cursor-pointer">
-                                <option value="all">{{ __('Semua Poliklinik') }}</option>
-                                <option value="Penyakit Dalam">{{ __('Spesialis Penyakit Dalam') }}</option>
-                                <option value="Anak">{{ __('Spesialis Anak (Pediatri)') }}</option>
-                                <option value="Obstetri">{{ __('Kandungan (Obgyn)') }}</option>
-                                <option value="Jantung">{{ __('Spesialis Jantung & Pembuluh') }}</option>
-                                <option value="Mata">{{ __('Spesialis Mata') }}</option>
-                                <option value="Umum">{{ __('Dokter Umum') }}</option>
+                                <option value="all">{{ __('All Polyclinics') }}</option>
+                                <option value="Penyakit Dalam">{{ __('Internal Medicine Specialist') }}</option>
+                                <option value="Anak">{{ __('Pediatrician (Children Specialist)') }}</option>
+                                <option value="Obstetri">{{ __('Obstetrics & Gynecology (Obgyn)') }}</option>
+                                <option value="Jantung">{{ __('Cardiologist & Vascular') }}</option>
+                                <option value="Mata">{{ __('Ophthalmologist (Eye Specialist)') }}</option>
+                                <option value="Umum">{{ __('General Practitioner') }}</option>
                             </select>
                             <span class="material-symbols-outlined absolute right-3 pointer-events-none text-outline text-[20px]">expand_more</span>
                         </div>
@@ -70,7 +70,7 @@
 
                     <!-- Date Picker -->
                     <div class="lg:col-span-3 flex flex-col gap-1.5">
-                        <label class="text-xs font-bold text-on-surface-variant uppercase tracking-wider">{{ __('Tanggal Kunjungan') }}</label>
+                        <label class="text-xs font-bold text-on-surface-variant uppercase tracking-wider">{{ __('Visit Date') }}</label>
                         <div class="relative flex items-center">
                             <span class="material-symbols-outlined absolute left-3 text-outline text-[20px]">calendar_today</span>
                             <input wire:model.live="date" class="w-full pl-10 pr-4 py-2.5 rounded-xl bg-surface-container-low text-sm text-on-surface border border-outline-variant/30 focus:outline-none focus:bg-surface-container-lowest focus:ring-2 focus:ring-primary transition-all cursor-pointer" type="date"/>
@@ -99,7 +99,7 @@
                     </div>
                     <div>
                         <div class="text-xl font-bold text-on-surface font-heading">{{ $totalDoctors }}</div>
-                        <div class="text-xs text-on-surface-variant font-medium">{{ __('Dokter Aktif') }}</div>
+                        <div class="text-xs text-on-surface-variant font-medium">{{ __('Active Doctors') }}</div>
                     </div>
                 </div>
                 <div class="flex items-center gap-3 pt-3 md:pt-0 md:pl-4">
@@ -108,7 +108,7 @@
                     </div>
                     <div>
                         <div class="text-xl font-bold text-on-surface font-heading">{{ $totalSpecialties }}</div>
-                        <div class="text-xs text-on-surface-variant font-medium">{{ __('Poliklinik Spesialis') }}</div>
+                        <div class="text-xs text-on-surface-variant font-medium">{{ __('Specialist Polyclinics') }}</div>
                     </div>
                 </div>
                 <div class="flex items-center gap-3 pt-3 md:pt-0 md:pl-4">
@@ -117,7 +117,7 @@
                     </div>
                     <div>
                         <div class="text-xl font-bold text-status-available font-heading">{{ $totalQuotaToday }}</div>
-                        <div class="text-xs text-on-surface-variant font-medium">{{ __('Sisa Kuota Janji Temu') }}</div>
+                        <div class="text-xs text-on-surface-variant font-medium">{{ __('Available Appointment Quotas') }}</div>
                     </div>
                 </div>
                 <div class="flex items-center gap-3 pt-3 md:pt-0 md:pl-4">
@@ -126,7 +126,7 @@
                     </div>
                     <div>
                         <div class="text-sm font-bold text-on-surface font-heading">{{ now()->format('H:i') }} WIB</div>
-                        <div class="text-xs text-on-surface-variant font-medium">{{ __('Pembaruan Waktu Nyata') }}</div>
+                        <div class="text-xs text-on-surface-variant font-medium">{{ __('Real-Time Update') }}</div>
                     </div>
                 </div>
             </div>
@@ -136,9 +136,9 @@
     <!-- Specialty Quick Select Grid -->
     <section class="w-full max-w-[75rem] mx-auto px-4 md:px-6 py-8">
         <div class="flex items-center justify-between mb-4">
-            <h2 class="font-heading font-bold text-lg md:text-xl text-on-surface">{{ __('Pilih Berdasarkan Spesialisasi') }}</h2>
+            <h2 class="font-heading font-bold text-lg md:text-xl text-on-surface">{{ __('Browse by Specialty') }}</h2>
             @if($specialty !== 'all')
-                <button wire:click="selectSpecialty('all')" class="text-xs text-primary font-semibold hover:underline">{{ __('Tampilkan Semua') }}</button>
+                <button wire:click="selectSpecialty('all')" class="text-xs text-primary font-semibold hover:underline">{{ __('Show All') }}</button>
             @endif
         </div>
         <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
@@ -148,7 +148,7 @@
                         <span class="material-symbols-outlined text-[24px]">{{ $spec['icon'] }}</span>
                     </div>
                     <span class="text-xs font-bold leading-tight line-clamp-2">{{ $spec['name'] }}</span>
-                    <span class="text-[10px] mt-1 {{ $specialty === $spec['id'] ? 'text-white/80' : 'text-on-surface-variant' }}">{{ $spec['count'] }} {{ __('Dokter') }}</span>
+                    <span class="text-[10px] mt-1 {{ $specialty === $spec['id'] ? 'text-white/80' : 'text-on-surface-variant' }}">{{ $spec['count'] }} {{ __('Doctors') }}</span>
                 </button>
             @endforeach
         </div>
@@ -158,16 +158,16 @@
     <section class="w-full max-w-[75rem] mx-auto px-4 md:px-6 pb-6">
         <div class="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none">
             <button wire:click="selectDay(null)" type="button" class="px-4 py-2 rounded-xl text-xs font-bold shrink-0 transition-all {{ $day === null ? 'bg-primary text-white shadow-sm' : 'bg-surface-container text-on-surface-variant hover:bg-surface-container-high' }}">
-                {{ __('Semua Hari') }}
+                {{ __('All Days') }}
             </button>
             @php
                 $daysMap = [
-                    1 => __('Senin'),
-                    2 => __('Selasa'),
-                    3 => __('Rabu'),
-                    4 => __('Kamis'),
-                    5 => __('Jumat'),
-                    6 => __('Sabtu'),
+                    1 => __('Monday'),
+                    2 => __('Tuesday'),
+                    3 => __('Wednesday'),
+                    4 => __('Thursday'),
+                    5 => __('Friday'),
+                    6 => __('Saturday'),
                 ];
             @endphp
             @foreach($daysMap as $dNum => $dName)
@@ -182,23 +182,23 @@
     <section class="w-full max-w-[75rem] mx-auto px-4 md:px-6 pb-16">
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6">
             <div class="flex items-baseline gap-2">
-                <h3 class="font-heading text-xl font-bold text-on-surface">{{ __('Daftar Dokter Tersedia') }}</h3>
-                <span class="text-xs text-on-surface-variant">({{ count($doctors) }} {{ __('Dokter Ditemukan') }})</span>
+                <h3 class="font-heading text-xl font-bold text-on-surface">{{ __('Available Doctors List') }}</h3>
+                <span class="text-xs text-on-surface-variant">({{ count($doctors) }} {{ __('Doctors Found') }})</span>
             </div>
             <!-- Status Legend -->
             <div class="flex items-center gap-4 text-xs font-medium text-on-surface-variant">
-                <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-status-available"></span> {{ __('Tersedia (>5)') }}</span>
-                <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-status-limited"></span> {{ __('Terbatas (1-5)') }}</span>
-                <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-status-full"></span> {{ __('Penuh') }}</span>
+                <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-status-available"></span> {{ __('Available (>5)') }}</span>
+                <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-status-limited"></span> {{ __('Limited (1-5)') }}</span>
+                <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-status-full"></span> {{ __('Fully Booked') }}</span>
             </div>
         </div>
 
         @if(count($doctors) === 0)
             <div class="bg-surface-card rounded-2xl p-12 text-center border border-outline-variant/30">
                 <span class="material-symbols-outlined text-outline text-[48px] mb-3">search_off</span>
-                <h4 class="font-heading font-bold text-lg text-on-surface mb-1">{{ __('Tidak ada dokter yang cocok dengan kriteria') }}</h4>
-                <p class="text-xs text-on-surface-variant mb-4">{{ __('Silakan sesuaikan filter pencarian hari, poliklinik, atau kata kunci Anda.') }}</p>
-                <button wire:click="resetFilters" class="px-4 py-2 rounded-xl bg-primary text-white text-xs font-bold">{{ __('Reset Semua Filter') }}</button>
+                <h4 class="font-heading font-bold text-lg text-on-surface mb-1">{{ __('No doctors matched your criteria') }}</h4>
+                <p class="text-xs text-on-surface-variant mb-4">{{ __('Please adjust your day, clinic, or keyword search filter.') }}</p>
+                <button wire:click="resetFilters" class="px-4 py-2 rounded-xl bg-primary text-white text-xs font-bold">{{ __('Reset All Filters') }}</button>
             </div>
         @else
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -224,16 +224,16 @@
                                 <div class="flex flex-col min-w-0 flex-1">
                                     <div class="flex items-center justify-between gap-2 flex-wrap mb-1">
                                         <span class="px-2 py-0.5 rounded-lg text-xs bg-surface-container-low text-primary font-bold">
-                                            {{ __('Poli ') }}{{ $doctor->getTranslation('specialty', app()->getLocale()) }}
+                                            {{ __('Clinic of ') }}{{ $doctor->getTranslation('specialty', app()->getLocale()) }}
                                         </span>
                                         @if($activeSchedule)
                                             <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-bold bg-status-available/10 text-status-available">
                                                 <span class="w-1.5 h-1.5 rounded-full bg-status-available animate-pulse"></span>
-                                                {{ __('Praktik Hari Ini') }}
+                                                {{ __('Practicing Today') }}
                                             </span>
                                         @else
                                             <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-medium bg-surface-container text-on-surface-variant">
-                                                {{ __('Tidak Praktik Hari Ini') }}
+                                                {{ __('Off Today') }}
                                             </span>
                                         @endif
                                     </div>
@@ -254,22 +254,22 @@
                                                 <span class="text-on-surface-variant font-normal">({{ $activeSchedule->notes ?? 'Poli Reguler' }})</span>
                                             </span>
                                         @else
-                                            <span class="text-xs font-medium text-on-surface-variant">{{ __('Lihat jadwal hari lain di profil') }}</span>
+                                            <span class="text-xs font-medium text-on-surface-variant">{{ __('View other days schedule in profile') }}</span>
                                         @endif
                                     </div>
 
                                     @if($activeSchedule)
                                         @if($status === 'full')
                                             <span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-status-full/15 text-status-full">
-                                                {{ __('Kuota Penuh (0/') }}{{ $maxQuota }})
+                                                {{ __('Quota Full (0/') }}{{ $maxQuota }})
                                             </span>
                                         @elseif($status === 'limited')
                                             <span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-status-limited/15 text-status-limited">
-                                                {{ __('Sisa ') }}{{ $quotaRemaining }}/{{ $maxQuota }}
+                                                {{ __('Remaining ') }}{{ $quotaRemaining }}/{{ $maxQuota }}
                                             </span>
                                         @else
                                             <span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-status-available/15 text-status-available">
-                                                {{ __('Sisa Kuota: ') }}{{ $quotaRemaining }}/{{ $maxQuota }}
+                                                {{ __('Remaining Quota: ') }}{{ $quotaRemaining }}/{{ $maxQuota }}
                                             </span>
                                         @endif
                                     @endif
@@ -277,7 +277,7 @@
 
                                 <!-- Mini Weekly Days Strip -->
                                 <div class="flex items-center justify-between pt-2 border-t border-outline-variant/20">
-                                    <span class="text-[11px] text-on-surface-variant font-medium">{{ __('Jadwal Praktik Mingguan:') }}</span>
+                                    <span class="text-[11px] text-on-surface-variant font-medium">{{ __('Weekly Practice Schedules:') }}</span>
                                     <div class="flex gap-1">
                                         @php
                                             $daysAbbr = [1 => 'Sn', 2 => 'Sl', 3 => 'Rb', 4 => 'Km', 5 => 'Jm', 6 => 'Sb'];
@@ -286,7 +286,7 @@
                                             @php
                                                 $isScheduled = in_array($dIndex, $item['scheduledDays'], true);
                                             @endphp
-                                            <span class="w-6 h-6 rounded-lg flex items-center justify-center text-[10px] font-bold {{ $isScheduled ? 'bg-primary text-white shadow-xs' : 'bg-surface-container text-outline' }}" title="{{ $isScheduled ? __('Praktik') : __('Libur') }}">
+                                            <span class="w-6 h-6 rounded-lg flex items-center justify-center text-[10px] font-bold {{ $isScheduled ? 'bg-primary text-white shadow-xs' : 'bg-surface-container text-outline' }}" title="{{ $isScheduled ? __('On Duty') : __('Off Duty') }}">
                                                 {{ $dAbbr }}
                                             </span>
                                         @endforeach
@@ -299,10 +299,10 @@
                         <div class="flex items-center gap-3 mt-5 pt-2">
                             <a href="{{ route('booking.index', ['doctor_id' => $doctor->id, 'date' => $date]) }}" class="flex-1 bg-primary text-white py-2.5 px-4 rounded-xl text-xs font-bold hover:bg-primary-container transition-all flex items-center justify-center gap-2 shadow-sm">
                                 <span class="material-symbols-outlined text-[18px]">event_available</span>
-                                <span>{{ __('Reservasi Janji Temu') }}</span>
+                                <span>{{ __('Book Appointment') }}</span>
                             </a>
                             <button wire:click="showDoctorDetail({{ $doctor->id }})" class="px-4 py-2.5 rounded-xl bg-surface-container text-xs font-bold text-primary hover:bg-surface-container-high transition-colors" type="button">
-                                <span>{{ __('Profil Lengkap') }}</span>
+                                <span>{{ __('Full Profile') }}</span>
                             </button>
                         </div>
                     </article>
@@ -315,9 +315,9 @@
     <section class="w-full bg-surface-container-low py-16">
         <div class="max-w-[75rem] mx-auto px-4 md:px-6">
             <div class="text-center max-w-2xl mx-auto mb-12">
-                <span class="text-xs font-bold text-primary uppercase tracking-widest">{{ __('Panduan Pasien') }}</span>
-                <h2 class="font-heading text-2xl md:text-3xl font-bold text-on-surface mt-1">{{ __('4 Langkah Mudah Berobat Tanpa Antre') }}</h2>
-                <p class="text-sm text-on-surface-variant mt-2">{{ __('Alur pendaftaran digital terintegrasi untuk kenyamanan dan efisiensi waktu Anda dan keluarga.') }}</p>
+                <span class="text-xs font-bold text-primary uppercase tracking-widest">{{ __('Patient Guide') }}</span>
+                <h2 class="font-heading text-2xl md:text-3xl font-bold text-on-surface mt-1">{{ __('4 Easy Steps to Clinic Visits Without Queues') }}</h2>
+                <p class="text-sm text-on-surface-variant mt-2">{{ __('Integrated digital registration workflow for the convenience and time efficiency of you and your family.') }}</p>
             </div>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -327,13 +327,13 @@
                         <div class="w-12 h-12 rounded-xl bg-surface-container-low text-primary flex items-center justify-center font-heading text-xl font-bold mb-4">
                             1
                         </div>
-                        <h3 class="font-heading text-base font-bold text-on-surface mb-1.5">{{ __('Pilih Dokter & Jadwal') }}</h3>
+                        <h3 class="font-heading text-base font-bold text-on-surface mb-1.5">{{ __('Choose Doctor & Schedule') }}</h3>
                         <p class="text-xs text-on-surface-variant leading-relaxed">
-                            {{ __('Pilih spesialisasi yang Anda butuhkan, sesuaikan jam praktik dokter dengan ketersediaan kuota waktu nyata.') }}
+                            {{ __('Choose the specialty you need, match doctor practice hours with real-time quota availability.') }}
                         </p>
                     </div>
                     <div class="mt-4 pt-3 text-primary text-xs font-bold flex items-center gap-1 border-t border-outline-variant/20">
-                        <span>{{ __('Filter Kebutuhan') }}</span>
+                        <span>{{ __('Filter Needs') }}</span>
                         <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
                     </div>
                 </div>
@@ -344,13 +344,13 @@
                         <div class="w-12 h-12 rounded-xl bg-surface-container-low text-primary flex items-center justify-center font-heading text-xl font-bold mb-4">
                             2
                         </div>
-                        <h3 class="font-heading text-base font-bold text-on-surface mb-1.5">{{ __('Isi Data & Buat Janji') }}</h3>
+                        <h3 class="font-heading text-base font-bold text-on-surface mb-1.5">{{ __('Fill Details & Book') }}</h3>
                         <p class="text-xs text-on-surface-variant leading-relaxed">
-                            {{ __('Daftarkan pasien baru atau masuk dengan akun pasien, masukkan keluhan, dan langsung dapatkan kode booking QR.') }}
+                            {{ __('Register a new patient or sign in with your account, enter your complaints, and receive your booking QR code.') }}
                         </p>
                     </div>
                     <div class="mt-4 pt-3 text-primary text-xs font-bold flex items-center gap-1 border-t border-outline-variant/20">
-                        <span>{{ __('Konfirmasi Instan') }}</span>
+                        <span>{{ __('Instant Confirmation') }}</span>
                         <span class="material-symbols-outlined text-[16px]">qr_code</span>
                     </div>
                 </div>
@@ -361,13 +361,13 @@
                         <div class="w-12 h-12 rounded-xl bg-surface-container-low text-primary flex items-center justify-center font-heading text-xl font-bold mb-4">
                             3
                         </div>
-                        <h3 class="font-heading text-base font-bold text-on-surface mb-1.5">{{ __('Check-in Hari H') }}</h3>
+                        <h3 class="font-heading text-base font-bold text-on-surface mb-1.5">{{ __('Check-in on Visit Day') }}</h3>
                         <p class="text-xs text-on-surface-variant leading-relaxed">
-                            {{ __('Lakukan self check-in via gawai ponsel saat tiba di klinik, atau masukkan kode booking pada kios anjungan mandiri.') }}
+                            {{ __('Perform self check-in via mobile phone upon arrival, or enter your booking code at the kiosk station.') }}
                         </p>
                     </div>
                     <div class="mt-4 pt-3 text-primary text-xs font-bold flex items-center gap-1 border-t border-outline-variant/20">
-                        <span>{{ __('30 Menit Sebelum Sesi') }}</span>
+                        <span>{{ __('30 Minutes Before Session') }}</span>
                         <span class="material-symbols-outlined text-[16px]">touch_app</span>
                     </div>
                 </div>
@@ -378,13 +378,13 @@
                         <div class="w-12 h-12 rounded-xl bg-primary text-white flex items-center justify-center font-heading text-xl font-bold mb-4 shadow-sm">
                             4
                         </div>
-                        <h3 class="font-heading text-base font-bold text-on-surface mb-1.5">{{ __('Pantau Antrean Live') }}</h3>
+                        <h3 class="font-heading text-base font-bold text-on-surface mb-1.5">{{ __('Monitor Live Queue') }}</h3>
                         <p class="text-xs text-on-surface-variant leading-relaxed">
-                            {{ __('Pantau pergerakan nomor panggilan ruang poliklinik secara live dari ruang tunggu dengan audio pengumuman.') }}
+                            {{ __('Monitor live clinic queue movement from waiting room with audio announcements.') }}
                         </p>
                     </div>
                     <div class="mt-4 pt-3 text-secondary text-xs font-bold flex items-center gap-1 border-t border-outline-variant/20">
-                        <span>{{ __('Notifikasi Suara Audio') }}</span>
+                        <span>{{ __('Audio Sound Notification') }}</span>
                         <span class="material-symbols-outlined text-[16px]">volume_up</span>
                     </div>
                 </div>
@@ -401,16 +401,16 @@
                         <span class="material-symbols-outlined text-[36px] text-brand-gold">support_agent</span>
                     </div>
                     <div>
-                        <h3 class="font-heading text-xl font-bold">{{ __('Butuh Bantuan Pendaftaran Jadwal Dokter?') }}</h3>
+                        <h3 class="font-heading text-xl font-bold">{{ __('Need Help with Doctor Appointment Booking?') }}</h3>
                         <p class="text-xs md:text-sm text-surface-container-high mt-1 max-w-xl">
-                            {{ __('Petugas admisi kami siap membantu pertanyaan terkait rujukan BPJS, asuransi swasta, atau janji temu dokter spesialis melalui WhatsApp.') }}
+                            {{ __('Our admission team is ready to assist you regarding BPJS referrals, private insurance, or specialist appointments via WhatsApp.') }}
                         </p>
                     </div>
                 </div>
                 <div class="flex items-center gap-3 shrink-0">
                     <a href="https://wa.me/6281234567890" target="_blank" class="bg-brand-gold text-brand-navy px-6 py-3 rounded-xl text-xs font-bold hover:bg-yellow-400 transition-colors shadow-md flex items-center gap-2">
                         <span class="material-symbols-outlined text-[20px]">chat</span>
-                        <span>{{ __('WhatsApp Admisi: 0812-3456-7890') }}</span>
+                        <span>{{ __('Admission WhatsApp: 0812-3456-7890') }}</span>
                     </a>
                 </div>
             </div>
@@ -444,14 +444,14 @@
 
                 <div class="space-y-6">
                     <div>
-                        <h4 class="text-xs font-bold text-on-surface-variant uppercase tracking-wider mb-2">{{ __('Profil & Keahlian Klinis') }}</h4>
+                        <h4 class="text-xs font-bold text-on-surface-variant uppercase tracking-wider mb-2">{{ __('Profile & Clinical Expertise') }}</h4>
                         <p class="text-xs text-on-surface leading-relaxed">
-                            {{ $selectedDoctor->getTranslation('bio', app()->getLocale()) ?: __('Dokter spesialis berpengalaman di Klinik Ayo Sehat yang berdedikasi memberikan pelayanan medis komprehensif, tepat, dan ramah keluarga.') }}
+                            {{ $selectedDoctor->getTranslation('bio', app()->getLocale()) ?: __('Experienced specialist doctors at Klinik Ayo Sehat dedicated to providing comprehensive, precise, and family-friendly medical care.') }}
                         </p>
                     </div>
 
                     <div>
-                        <h4 class="text-xs font-bold text-on-surface-variant uppercase tracking-wider mb-3">{{ __('Jadwal Praktik Rutin') }}</h4>
+                        <h4 class="text-xs font-bold text-on-surface-variant uppercase tracking-wider mb-3">{{ __('Regular Practice Schedule') }}</h4>
                         <div class="space-y-2">
                             @forelse($selectedDoctor->schedules as $sched)
                                 <div class="flex items-center justify-between p-3 rounded-xl bg-surface-container-low border border-outline-variant/20 text-xs">
@@ -460,27 +460,27 @@
                                         <div>
                                             <div class="font-bold text-on-surface">
                                                 {{ match($sched->day_of_week) {
-                                                    1 => __('Senin'),
-                                                    2 => __('Selasa'),
-                                                    3 => __('Rabu'),
-                                                    4 => __('Kamis'),
-                                                    5 => __('Jumat'),
-                                                    6 => __('Sabtu'),
-                                                    7 => __('Minggu'),
+                                                    1 => __('Monday'),
+                                                    2 => __('Tuesday'),
+                                                    3 => __('Wednesday'),
+                                                    4 => __('Thursday'),
+                                                    5 => __('Friday'),
+                                                    6 => __('Saturday'),
+                                                    7 => __('Sunday'),
                                                     default => '-'
                                                 } }}
                                             </div>
-                                            <div class="text-on-surface-variant">{{ $sched->notes ?? __('Poli Reguler') }}</div>
+                                            <div class="text-on-surface-variant">{{ $sched->notes ?? __('Regular Polyclinic') }}</div>
                                         </div>
                                     </div>
                                     <div class="text-right">
                                         <div class="font-bold text-primary">{{ substr($sched->start_time, 0, 5) }} - {{ substr($sched->end_time, 0, 5) }} WIB</div>
-                                        <div class="text-[10px] text-on-surface-variant">{{ __('Maks: ') }}{{ $sched->max_patients }} {{ __('pasien') }}</div>
+                                        <div class="text-[10px] text-on-surface-variant">{{ __('Max: ') }}{{ $sched->max_patients }} {{ __('patients') }}</div>
                                     </div>
                                 </div>
                             @empty
                                 <div class="text-xs text-on-surface-variant p-3 bg-surface-container-low rounded-xl text-center">
-                                    {{ __('Belum ada jadwal praktik aktif.') }}
+                                    {{ __('No active practice schedule available.') }}
                                 </div>
                             @endforelse
                         </div>
@@ -489,10 +489,10 @@
                     <div class="pt-4 flex gap-3">
                         <a href="{{ route('booking.index', ['doctor_id' => $selectedDoctor->id]) }}" class="flex-1 bg-primary text-white py-3 px-4 rounded-xl text-xs font-bold hover:bg-primary-container transition-all flex items-center justify-center gap-2 shadow-sm">
                             <span class="material-symbols-outlined text-[18px]">event_available</span>
-                            <span>{{ __('Buat Janji Temu dengan Dokter Ini') }}</span>
+                            <span>{{ __('Book Appointment with This Doctor') }}</span>
                         </a>
                         <button wire:click="closeDoctorDetail" class="px-5 py-3 rounded-xl bg-surface-container text-xs font-bold text-on-surface hover:bg-surface-container-high transition-colors">
-                            {{ __('Tutup') }}
+                            {{ __('Close') }}
                         </button>
                     </div>
                 </div>

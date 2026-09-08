@@ -39,10 +39,10 @@ class HomePage extends Component
 
         // Sample active queue counters
         $activeQueues = [
-            ['name' => __('Poli Penyakit Dalam'), 'number' => 'A-009', 'room' => 'Ruang 204'],
-            ['name' => __('Poli Anak (Pediatri)'), 'number' => 'B-004', 'room' => 'Ruang 103'],
-            ['name' => __('Poli Gigi & Mulut'), 'number' => 'C-007', 'room' => 'Ruang 201'],
-            ['name' => __('Instalasi Farmasi'), 'number' => 'F-028', 'room' => 'Loket Obat'],
+            ['name' => __('Internal Medicine Clinic'), 'number' => 'A-009', 'room' => 'Ruang 204'],
+            ['name' => __('Pediatric Clinic'), 'number' => 'B-004', 'room' => 'Ruang 103'],
+            ['name' => __('Dental & Oral Clinic'), 'number' => 'C-007', 'room' => 'Ruang 201'],
+            ['name' => __('Pharmacy Facility'), 'number' => 'F-028', 'room' => 'Loket Obat'],
         ];
 
         return view('livewire.frontend.home-page', [

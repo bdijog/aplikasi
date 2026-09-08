@@ -86,7 +86,7 @@
                     KLINIK AYO SEHAT
                 </h1>
                 <p class="text-xs text-secondary-fixed font-semibold tracking-wider uppercase">
-                    {{ __('HealthQueue Monitor Antrean Terpadu') }}
+                    {{ __('HealthQueue Integrated Queue Monitor') }}
                 </p>
             </div>
         </div>
@@ -97,17 +97,17 @@
             <div class="flex items-center gap-2 bg-white/10 rounded-xl p-1.5 border border-white/10">
                 <button @click="toggleSound()" type="button" class="px-3 py-1.5 rounded-lg text-xs font-bold transition-all flex items-center gap-1.5" :class="soundEnabled ? 'bg-status-available text-white shadow' : 'bg-white/20 text-white/60'">
                     <span class="material-symbols-outlined text-[18px]" x-text="soundEnabled ? 'volume_up' : 'volume_off'"></span>
-                    <span x-text="soundEnabled ? '{{ __('Suara Aktif') }}' : '{{ __('Bisu') }}'"></span>
+                    <span x-text="soundEnabled ? '{{ __('Sound On') }}' : '{{ __('Muted') }}'"></span>
                 </button>
 
                 <button @click="playChimeAndSpeak('{{ $currentCalled?->display_number ?? 'A-012' }}', '{{ $currentCalled?->counter ?? 'Poli Penyakit Dalam' }}')" type="button" class="px-3 py-1.5 rounded-lg text-xs font-bold bg-white/10 hover:bg-white/20 text-white transition-all flex items-center gap-1">
                     <span class="material-symbols-outlined text-[18px]">play_circle</span>
-                    <span>{{ __('Panggil Ulang') }}</span>
+                    <span>{{ __('Re-announce Call') }}</span>
                 </button>
             </div>
 
             <!-- Fullscreen Button -->
-            <button @click="toggleFullscreen()" type="button" class="p-2.5 rounded-xl bg-white/10 hover:bg-white/20 text-white transition-colors" title="{{ __('Layar Penuh') }}">
+            <button @click="toggleFullscreen()" type="button" class="p-2.5 rounded-xl bg-white/10 hover:bg-white/20 text-white transition-colors" title="{{ __('Fullscreen') }}">
                 <span class="material-symbols-outlined text-[22px]">fullscreen</span>
             </button>
 
@@ -132,16 +132,16 @@
                 <div class="flex items-center justify-between mb-4">
                     <div class="flex items-center gap-2.5">
                         <span class="w-3.5 h-3.5 rounded-full bg-status-available animate-ping"></span>
-                        <span class="text-xs md:text-sm font-black uppercase tracking-widest text-brand-gold">{{ __('PANGGILAN SEKARANG') }}</span>
+                        <span class="text-xs md:text-sm font-black uppercase tracking-widest text-brand-gold">{{ __('CURRENT CALL') }}</span>
                     </div>
                     <span class="px-3 py-1 rounded-full bg-status-available text-white text-xs font-bold uppercase tracking-wider shadow-sm">
-                        {{ __('Sedang Masuk Ruang') }}
+                        {{ __('Entering Room') }}
                     </span>
                 </div>
 
                 <!-- Prominent Calling Number -->
                 <div class="bg-black/25 rounded-3xl p-8 text-center my-4 border border-white/10 shadow-inner">
-                    <span class="text-xs md:text-sm uppercase tracking-widest text-surface-container-high font-bold block mb-2">{{ __('NOMOR ANTREAN') }}</span>
+                    <span class="text-xs md:text-sm uppercase tracking-widest text-surface-container-high font-bold block mb-2">{{ __('QUEUE NUMBER') }}</span>
                     <div class="font-heading text-6xl md:text-8xl lg:text-9xl font-black text-brand-gold tracking-tight drop-shadow-[0_4px_16px_rgba(251,186,21,0.4)]">
                         {{ $currentCalled?->display_number ?? 'A-012' }}
                     </div>
@@ -150,19 +150,19 @@
                 <!-- Destination Counter & Room -->
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 my-4">
                     <div class="bg-white/10 rounded-2xl p-5 border border-white/10">
-                        <span class="text-xs uppercase tracking-wider text-surface-container-high font-semibold block mb-1">{{ __('TUJUAN POLIKLINIK / LOKET') }}</span>
+                        <span class="text-xs uppercase tracking-wider text-surface-container-high font-semibold block mb-1">{{ __('DESTINATION CLINIC / COUNTER') }}</span>
                         <div class="font-heading text-xl md:text-2xl font-bold text-white">
                             {{ $currentCalled?->counter ?? 'Ruang Poli Penyakit Dalam' }}
                         </div>
-                        <span class="text-xs text-secondary-fixed mt-1 block font-medium">{{ __('Gedung Utama • Lantai 2') }}</span>
+                        <span class="text-xs text-secondary-fixed mt-1 block font-medium">{{ __('Main Building • 2nd Floor') }}</span>
                     </div>
 
                     <div class="bg-white/10 rounded-2xl p-5 border border-white/10">
-                        <span class="text-xs uppercase tracking-wider text-surface-container-high font-semibold block mb-1">{{ __('DOKTER PENANGGUNG JAWAB') }}</span>
+                        <span class="text-xs uppercase tracking-wider text-surface-container-high font-semibold block mb-1">{{ __('ATTENDING DOCTOR') }}</span>
                         <div class="font-heading text-lg md:text-xl font-bold text-white truncate">
                             {{ $currentCalled?->doctor?->name ?? 'dr. H. Ahmad Fauzi, Sp.PD' }}
                         </div>
-                        <span class="text-xs text-brand-gold mt-1 block font-semibold">{{ __('Pemeriksaan Aktif') }}</span>
+                        <span class="text-xs text-brand-gold mt-1 block font-semibold">{{ __('Active Examination') }}</span>
                     </div>
                 </div>
             </div>
@@ -172,11 +172,11 @@
                 <div class="flex items-center gap-3">
                     <span class="material-symbols-outlined text-brand-gold text-[26px]">hearing</span>
                     <p class="text-xs text-surface-container-high leading-relaxed">
-                        {{ __('Harap pasien yang nomornya terpanggil segera menuju ke ruang poliklinik terkait. Persiapkan berkas rujukan jika diperlukan.') }}
+                        {{ __('Patients whose numbers are called please proceed immediately to the respective clinic room. Prepare referral documents if required.') }}
                     </p>
                 </div>
                 <button @click="playChimeAndSpeak('{{ $currentCalled?->display_number ?? 'A-012' }}', '{{ $currentCalled?->counter ?? 'Poli Penyakit Dalam' }}')" class="px-4 py-2 rounded-xl bg-brand-gold text-brand-navy font-bold text-xs shrink-0 hover:bg-yellow-400 transition-colors shadow">
-                    {{ __('Panggil Audio') }}
+                    {{ __('Play Audio') }}
                 </button>
             </div>
         </section>
@@ -184,8 +184,8 @@
         <!-- Right Side: Grid of All Active Polikliniks (Span 5) -->
         <section class="lg:col-span-5 flex flex-col gap-4">
             <div class="bg-surface-card/10 backdrop-blur-md rounded-2xl p-4 border border-white/10 flex items-center justify-between">
-                <span class="text-xs font-black uppercase tracking-wider text-surface">{{ __('STATUS ANTREAN POLIKLINIK LAIN') }}</span>
-                <span class="text-[11px] text-secondary-fixed font-semibold">{{ count($counters) }} {{ __('Loket Beroperasi') }}</span>
+                <span class="text-xs font-black uppercase tracking-wider text-surface">{{ __('OTHER CLINICS QUEUE STATUS') }}</span>
+                <span class="text-[11px] text-secondary-fixed font-semibold">{{ count($counters) }} {{ __('Counters Active') }}</span>
             </div>
 
             <!-- Counters Grid -->
@@ -209,17 +209,17 @@
                         </div>
 
                         <div class="bg-black/30 rounded-xl p-3 text-center my-1 border border-white/5">
-                            <span class="text-[9px] uppercase tracking-wider text-surface-container-high block">{{ __('NOMOR PANGGILAN') }}</span>
+                            <span class="text-[9px] uppercase tracking-wider text-surface-container-high block">{{ __('CALLED NUMBER') }}</span>
                             <div class="font-heading text-2xl md:text-3xl font-black text-brand-gold tracking-tight">
                                 {{ $ticket?->display_number ?? '-' }}
                             </div>
                         </div>
 
                         <div class="flex items-center justify-between text-[10px] text-surface-container-high pt-1">
-                            <span>{{ __('Status:') }} <strong class="text-status-available">{{ __('Melayani') }}</strong></span>
+                            <span>{{ __('Status:') }} <strong class="text-status-available">{{ __('Serving') }}</strong></span>
                             <button @click="playChimeAndSpeak('{{ $ticket?->display_number ?? '' }}', '{{ is_string($counter->name) ? $counter->name : '' }}')" type="button" class="text-secondary-fixed hover:underline flex items-center gap-0.5">
                                 <span class="material-symbols-outlined text-[14px]">volume_up</span>
-                                <span>{{ __('Panggil') }}</span>
+                                <span>{{ __('Call') }}</span>
                             </button>
                         </div>
                     </div>
@@ -233,12 +233,12 @@
     <footer class="bg-surface-card/10 backdrop-blur-md rounded-2xl px-6 py-3 border border-white/10 flex items-center gap-4 overflow-hidden">
         <div class="flex items-center gap-2 text-brand-gold font-bold text-xs shrink-0">
             <span class="material-symbols-outlined text-[20px] animate-pulse">campaign</span>
-            <span class="uppercase tracking-wider">{{ __('INFORMASI KLINIK:') }}</span>
+            <span class="uppercase tracking-wider">{{ __('CLINIC NOTICE:') }}</span>
         </div>
 
         <div class="overflow-hidden whitespace-nowrap flex-1 text-xs text-surface-container-high">
             <div class="inline-block animate-marquee">
-                {{ __('Selamat datang di Klinik Ayo Sehat • Mohon perhatikan nomor antrean Anda pada layar display monitor • Pasien BPJS Kesehatan harap mempersiapkan surat rujukan faskes tingkat 1 dan KTP • Layanan IGD dan Ruang Tindakan Darurat Buka 24 Jam Setiap Hari • Untuk bantuan reservasi hubungi WhatsApp Admisi di 0812-3456-7890 •') }}
+                {{ __('Welcome to Klinik Ayo Sehat • Please pay attention to your queue number on the display monitor • BPJS Health patients please prepare primary clinic referral letter and ID card • ER and Emergency Procedure Room Open 24 Hours Daily • For reservation assistance contact Admission WhatsApp at 0812-3456-7890 •') }}
             </div>
         </div>
 

@@ -1,9 +1,9 @@
 <div class="max-w-[75rem] mx-auto px-4 md:px-6 py-8">
     <!-- Breadcrumbs -->
     <nav class="flex items-center gap-1.5 text-xs text-on-surface-variant font-medium mb-6">
-        <a class="hover:text-primary transition-colors" href="{{ route('home') }}">{{ __('Beranda') }}</a>
+        <a class="hover:text-primary transition-colors" href="{{ route('home') }}">{{ __('Home') }}</a>
         <span class="material-symbols-outlined text-[14px]">chevron_right</span>
-        <a class="hover:text-primary transition-colors" href="{{ route('announcements.index') }}">{{ __('Pengumuman') }}</a>
+        <a class="hover:text-primary transition-colors" href="{{ route('announcements.index') }}">{{ __('Announcements') }}</a>
         <span class="material-symbols-outlined text-[14px]">chevron_right</span>
         <span class="text-primary font-bold truncate max-w-xs">{{ $announcement->getTranslation('title', app()->getLocale()) }}</span>
     </nav>
@@ -15,7 +15,7 @@
             <!-- Category & Date Header -->
             <div class="flex flex-wrap items-center justify-between gap-3 pb-4 border-b border-outline-variant/20 mb-6">
                 <span class="px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold">
-                    {{ __('Pengumuman Resmi') }}
+                    {{ __('Official Announcement') }}
                 </span>
                 <div class="flex items-center gap-3 text-xs text-on-surface-variant">
                     <span class="flex items-center gap-1">
@@ -55,12 +55,12 @@
             <div class="mt-10 pt-6 border-t border-outline-variant/20 flex flex-wrap items-center justify-between gap-4">
                 <a href="{{ route('announcements.index') }}" class="px-5 py-2.5 rounded-xl bg-surface-container text-xs font-bold text-on-surface hover:bg-surface-container-high transition-colors flex items-center gap-1.5">
                     <span class="material-symbols-outlined text-[18px]">arrow_back</span>
-                    <span>{{ __('Kembali ke Semua Pengumuman') }}</span>
+                    <span>{{ __('Back to All Announcements') }}</span>
                 </a>
 
                 <div class="flex items-center gap-2">
-                    <span class="text-xs text-on-surface-variant font-medium">{{ __('Bagikan:') }}</span>
-                    <a href="https://api.whatsapp.com/send?text={{ urlencode($announcement->getTranslation('title', app()->getLocale()) . ' ' . url()->current()) }}" target="_blank" class="p-2 rounded-xl bg-status-available/10 text-status-available hover:bg-status-available/20 transition-colors" title="{{ __('Bagikan ke WhatsApp') }}">
+                    <span class="text-xs text-on-surface-variant font-medium">{{ __('Share:') }}</span>
+                    <a href="https://api.whatsapp.com/send?text={{ urlencode($announcement->getTranslation('title', app()->getLocale()) . ' ' . url()->current()) }}" target="_blank" class="p-2 rounded-xl bg-status-available/10 text-status-available hover:bg-status-available/20 transition-colors" title="{{ __('Share to WhatsApp') }}">
                         <span class="material-symbols-outlined text-[18px]">share</span>
                     </a>
                 </div>
@@ -71,7 +71,7 @@
         <aside class="lg:col-span-4 space-y-6">
             <!-- Related Announcements -->
             <div class="bg-surface-card rounded-2xl p-6 shadow-sm border border-outline-variant/30">
-                <h3 class="font-heading text-xs font-bold uppercase tracking-wider text-primary mb-4">{{ __('Pengumuman Lainnya') }}</h3>
+                <h3 class="font-heading text-xs font-bold uppercase tracking-wider text-primary mb-4">{{ __('Other Announcements') }}</h3>
                 <div class="space-y-4">
                     @foreach($relatedAnnouncements as $rel)
                         <div class="pb-3 border-b border-outline-variant/15 last:border-0 last:pb-0">
@@ -91,12 +91,12 @@
             <!-- Booking CTA Widget -->
             <div class="bg-gradient-to-br from-primary to-brand-navy rounded-2xl p-6 text-white shadow-md">
                 <span class="material-symbols-outlined text-brand-gold text-[32px] mb-2">event_available</span>
-                <h3 class="font-heading text-base font-bold">{{ __('Konsultasi dengan Dokter Spesialis?') }}</h3>
+                <h3 class="font-heading text-base font-bold">{{ __('Consult with Specialist Doctors?') }}</h3>
                 <p class="text-xs text-surface-container-high mt-1 mb-4 leading-relaxed">
-                    {{ __('Dapatkan pelayanan rawat jalan terbaik tanpa antre dengan melakukan reservasi jadwal online.') }}
+                    {{ __('Get the best outpatient care without queueing by making an online appointment.') }}
                 </p>
                 <a href="{{ route('booking.index') }}" class="w-full py-2.5 rounded-xl bg-brand-gold text-brand-navy text-xs font-bold hover:bg-yellow-400 transition-colors flex items-center justify-center gap-1.5 shadow">
-                    <span>{{ __('Buat Janji Temu Sekarang') }}</span>
+                    <span>{{ __('Book an Appointment Now') }}</span>
                     <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
                 </a>
             </div>

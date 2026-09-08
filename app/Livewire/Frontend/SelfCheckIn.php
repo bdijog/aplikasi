@@ -53,7 +53,7 @@ class SelfCheckIn extends Component
 
         $code = trim($this->bookingCode);
         if (empty($code)) {
-            $this->errorMessage = __('Silakan masukkan kode booking, NIK, atau nomor rekam medis Anda.');
+            $this->errorMessage = __('Please enter your booking code, NIK, or medical record number.');
 
             return;
         }
@@ -69,7 +69,7 @@ class SelfCheckIn extends Component
             ->first();
 
         if (! $appointment) {
-            $this->errorMessage = __('Data reservasi tidak ditemukan. Pastikan Anda telah melakukan booking dan memasukkan kode dengan benar.');
+            $this->errorMessage = __('Reservation not found. Please ensure you have booked and entered the code correctly.');
 
             return;
         }

@@ -29,7 +29,7 @@ class RoleForm
                     ]),
 
                 Section::make(__('Permissions Assignment'))
-                    ->description(__('Pilih hak akses (permission) yang diberikan untuk peran ini. Hak akses disinkronkan dengan PermissionType.'))
+                    ->description(__('Select the permissions granted to this role. Permissions are synchronized with PermissionType.'))
                     ->schema([
                         CheckboxList::make('permissions')
                             ->label(__('Permissions'))

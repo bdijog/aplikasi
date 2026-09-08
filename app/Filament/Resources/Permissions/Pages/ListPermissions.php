@@ -20,12 +20,12 @@ class ListPermissions extends ListRecords
         return [
             CreateAction::make(),
             Action::make('syncFromEnum')
-                ->label(__('Sinkronkan dari Enum'))
+                ->label(__('Sync from Enum'))
                 ->icon(Heroicon::OutlinedArrowPath)
                 ->color('warning')
                 ->requiresConfirmation()
-                ->modalHeading(__('Sinkronisasi Permission dari Enum'))
-                ->modalDescription(__('Tindakan ini akan mendaftarkan seluruh hak akses dari PermissionType enum ke database.'))
+                ->modalHeading(__('Sync Permissions from Enum'))
+                ->modalDescription(__('This action will register all permissions from the PermissionType enum to the database.'))
                 ->action(function () {
                     $createdCount = 0;
                     foreach (PermissionType::cases() as $case) {
@@ -42,10 +42,10 @@ class ListPermissions extends ListRecords
                         ->forget(config('permission.cache.key'));
 
                     Notification::make()
-                        ->title(__('Sinkronisasi Berhasil'))
+                        ->title(__('Sync Successful'))
                         ->body($createdCount > 0
-                            ? __(':count permission baru berhasil ditambahkan.', ['count' => $createdCount])
-                            : __('Semua permission dari enum sudah terdaftar di database.'))
+                            ? __(':count new permissions were successfully added.', ['count' => $createdCount])
+                            : __('All permissions from the enum are already registered in the database.'))
                         ->success()
                         ->send();
                 }),

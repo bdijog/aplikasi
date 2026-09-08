@@ -66,7 +66,7 @@ class PatientQueue extends Component
             $this->ticketCode = $ticket->display_number;
             $this->resetErrorBag();
         } else {
-            $this->addError('ticketCode', __('Nomor antrean atau kode booking tidak ditemukan.'));
+            $this->addError('ticketCode', __('Queue number or booking code not found.'));
         }
     }
 
@@ -75,7 +75,7 @@ class PatientQueue extends Component
         $ticket = QueueTicket::find($ticketId);
         if ($ticket) {
             $ticket->update(['status' => QueueTicketStatus::Cancelled]);
-            session()->flash('success', __('Antrean ').$ticket->display_number.__(' telah dibatalkan.'));
+            session()->flash('success', __('Queue ').$ticket->display_number.__(' has been cancelled.'));
         }
     }
 
@@ -111,28 +111,28 @@ class PatientQueue extends Component
         // Summary of all clinics today
         $clinicsSummary = [
             [
-                'name' => __('Poli Penyakit Dalam'),
+                'name' => __('Internal Medicine Clinic'),
                 'room' => 'Ruang 204 • Lt. 2',
                 'current' => 'A-009',
                 'waiting' => 5,
                 'status' => 'active',
             ],
             [
-                'name' => __('Poli Anak (Pediatri)'),
+                'name' => __('Pediatric Clinic'),
                 'room' => 'Ruang 103 • Lt. 1',
                 'current' => 'B-004',
                 'waiting' => 3,
                 'status' => 'active',
             ],
             [
-                'name' => __('Poli Gigi & Mulut'),
+                'name' => __('Dental & Oral Clinic'),
                 'room' => 'Ruang 201 • Lt. 2',
                 'current' => 'C-007',
                 'waiting' => 6,
                 'status' => 'active',
             ],
             [
-                'name' => __('Instalasi Farmasi & Obat'),
+                'name' => __('Pharmacy & Dispensary'),
                 'room' => 'Loket Farmasi Utama',
                 'current' => 'F-028',
                 'waiting' => 8,

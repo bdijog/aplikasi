@@ -132,6 +132,21 @@ class FrontendPortalTest extends TestCase
         $responseId->assertSessionHas('locale', 'id');
     }
 
+    public function test_translations_render_correctly_in_both_locales(): void
+    {
+        // Test Indonesian translations
+        $responseId = $this->withSession(['locale' => 'id'])->get(route('doctors.index'));
+        $responseId->assertStatus(200);
+        $responseId->assertSee('Jadwal Praktik Mingguan:', false);
+        $responseId->assertSee('Reservasi Janji Temu', false);
+
+        // Test English translations
+        $responseEn = $this->withSession(['locale' => 'en'])->get(route('doctors.index'));
+        $responseEn->assertStatus(200);
+        $responseEn->assertSee('Weekly Practice Schedules:', false);
+        $responseEn->assertSee('Book Appointment', false);
+    }
+
     public function test_livewire_booking_can_register_new_patient(): void
     {
         $uniqueNik = '3201'.rand(100000000000, 999999999999);

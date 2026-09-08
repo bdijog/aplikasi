@@ -151,12 +151,12 @@ class DoctorSchedule extends Component
 
         // Specialties list for buttons
         $specialtiesList = [
-            ['id' => 'Penyakit Dalam', 'name' => __('Spesialis Penyakit Dalam'), 'icon' => 'cardiology', 'count' => 1],
-            ['id' => 'Anak', 'name' => __('Spesialis Anak (Pediatri)'), 'icon' => 'child_care', 'count' => 1],
-            ['id' => 'Obstetri', 'name' => __('Kandungan (Obgyn)'), 'icon' => 'pregnant_woman', 'count' => 1],
-            ['id' => 'Jantung', 'name' => __('Jantung & Pembuluh'), 'icon' => 'monitor_heart', 'count' => 2],
-            ['id' => 'Mata', 'name' => __('Spesialis Mata'), 'icon' => 'visibility', 'count' => 2],
-            ['id' => 'Umum', 'name' => __('Dokter Umum'), 'icon' => 'medical_services', 'count' => 2],
+            ['id' => 'Penyakit Dalam', 'name' => __('Internal Medicine Specialist'), 'icon' => 'cardiology', 'count' => 1],
+            ['id' => 'Anak', 'name' => __('Pediatrician (Children Specialist)'), 'icon' => 'child_care', 'count' => 1],
+            ['id' => 'Obstetri', 'name' => __('Obstetrics & Gynecology (Obgyn)'), 'icon' => 'pregnant_woman', 'count' => 1],
+            ['id' => 'Jantung', 'name' => __('Cardiology & Vascular'), 'icon' => 'monitor_heart', 'count' => 2],
+            ['id' => 'Mata', 'name' => __('Ophthalmologist (Eye Specialist)'), 'icon' => 'visibility', 'count' => 2],
+            ['id' => 'Umum', 'name' => __('General Practitioner'), 'icon' => 'medical_services', 'count' => 2],
         ];
 
         return view('livewire.frontend.doctor-schedule', [

@@ -30,13 +30,13 @@ class RolesTable
 
                 TextColumn::make('permissions_count')
                     ->counts('permissions')
-                    ->label(__('Total Hak Akses'))
+                    ->label(__('Total Permissions'))
                     ->badge()
                     ->color('primary')
                     ->sortable(),
 
                 TextColumn::make('permissions.name')
-                    ->label(__('Hak Akses'))
+                    ->label(__('Permissions'))
                     ->badge()
                     ->color('info')
                     ->formatStateUsing(fn ($state) => PermissionType::tryFrom($state)?->label() ?? $state)

@@ -30,7 +30,7 @@ class PermissionForm
                             ->searchable()
                             ->required()
                             ->unique(ignoreRecord: true)
-                            ->helperText(__('Pilih hak akses dari daftar PermissionType enum.')),
+                            ->helperText(__('Select a permission from the PermissionType enum list.')),
 
                         Hidden::make('guard_name')
                             ->default('web'),
@@ -41,7 +41,7 @@ class PermissionForm
                             ->multiple()
                             ->preload()
                             ->searchable()
-                            ->helperText(__('Pilih peran yang diberikan hak akses ini.')),
+                            ->helperText(__('Select the roles assigned to this permission.')),
                     ]),
             ]);
     }

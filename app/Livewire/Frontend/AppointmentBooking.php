@@ -122,13 +122,13 @@ class AppointmentBooking extends Component
             'password' => 'required|min:6',
             'address' => 'nullable|string|max:500',
         ], [
-            'national_id.required' => __('NIK 16 digit wajib diisi.'),
-            'national_id.digits' => __('NIK harus tepat 16 digit angka.'),
-            'national_id.unique' => __('NIK sudah terdaftar. Silakan pilih tab Pasien Lama untuk masuk.'),
-            'name.required' => __('Nama lengkap pasien wajib diisi.'),
-            'date_of_birth.required' => __('Tanggal lahir wajib diisi.'),
-            'phone.required' => __('Nomor telepon / WhatsApp wajib diisi.'),
-            'password.required' => __('Kata sandi akun pasien wajib diisi minimal 6 karakter.'),
+            'national_id.required' => __('16-digit National ID (NIK) is required.'),
+            'national_id.digits' => __('NIK must be exactly 16 numeric digits.'),
+            'national_id.unique' => __('NIK is already registered. Please choose Existing Patient tab to log in.'),
+            'name.required' => __('Patient full name is required.'),
+            'date_of_birth.required' => __('Date of birth is required.'),
+            'phone.required' => __('Phone number / WhatsApp is required.'),
+            'password.required' => __('Patient password is required with minimum 6 characters.'),
         ]);
 
         // Generate Medical Record Number (RM)
@@ -150,7 +150,7 @@ class AppointmentBooking extends Component
 
         Auth::guard('patient')->login($patient);
 
-        session()->flash('success', __('Registrasi pasien baru berhasil! Silakan pilih dokter dan jadwal.'));
+        session()->flash('success', __('New patient registration successful! Please select doctor and schedule.'));
         $this->step = 2;
     }
 
@@ -160,8 +160,8 @@ class AppointmentBooking extends Component
             'login_identifier' => 'required',
             'login_password' => 'required',
         ], [
-            'login_identifier.required' => __('Masukkan NIK atau Email terdaftar.'),
-            'login_password.required' => __('Masukkan kata sandi Anda.'),
+            'login_identifier.required' => __('Enter registered NIK or Email.'),
+            'login_password.required' => __('Enter your password.'),
         ]);
 
         $patient = Patient::where('email', $this->login_identifier)
@@ -170,7 +170,7 @@ class AppointmentBooking extends Component
             ->first();
 
         if (! $patient || ! Hash::check($this->login_password, $patient->password)) {
-            $this->addError('login_identifier', __('Kredensial tidak cocok dengan data rekam medis kami.'));
+            $this->addError('login_identifier', __('Credentials do not match our medical records.'));
 
             return;
         }
@@ -184,7 +184,7 @@ class AppointmentBooking extends Component
         $this->date_of_birth = $patient->date_of_birth ? $patient->date_of_birth->format('Y-m-d') : '';
         $this->gender = $patient->gender?->value ?? 'male';
 
-        session()->flash('success', __('Berhasil masuk sebagai ').$patient->name);
+        session()->flash('success', __('Successfully signed in as ').$patient->name);
         $this->step = 2;
     }
 
@@ -240,8 +240,8 @@ class AppointmentBooking extends Component
             'chief_complaint' => 'required|string|min:5|max:1000',
             'terms_agreed' => 'accepted',
         ], [
-            'chief_complaint.required' => __('Mohon jelaskan keluhan utama atau tujuan konsultasi medis.'),
-            'terms_agreed.accepted' => __('Anda harus menyetujui tata tertib kunjungan klinik.'),
+            'chief_complaint.required' => __('Please describe your chief complaint or consultation purpose.'),
+            'terms_agreed.accepted' => __('You must agree to clinic visit regulations.'),
         ]);
 
         $patient = Auth::guard('patient')->user();

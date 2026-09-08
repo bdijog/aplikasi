@@ -4,7 +4,7 @@
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>{{ $title ?? __('Klinik Ayo Sehat - Portal Antrean & Jadwal Dokter') }}</title>
+    <title>{{ $title ?? __('Klinik Ayo Sehat - Queue Portal & Doctor Schedule') }}</title>
     
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com"/>
@@ -29,18 +29,18 @@
                 <div class="flex items-center gap-4">
                     <span class="flex items-center gap-1">
                         <span class="material-symbols-outlined text-brand-gold text-[15px]">verified</span>
-                        <span>{{ __('Akreditasi Paripurna KARS & ISO 9001:2015') }}</span>
+                        <span>{{ __('KARS Paripurna Accredited & ISO 9001:2015') }}</span>
                     </span>
                     <span class="hidden md:inline text-outline-variant">•</span>
                     <span class="hidden md:flex items-center gap-1">
                         <span class="material-symbols-outlined text-secondary-fixed text-[15px]">schedule</span>
-                        <span>{{ __('Layanan IGD 24 Jam & Poliklinik Rawat Jalan') }}</span>
+                        <span>{{ __('24-Hour Emergency & Outpatient Polyclinics') }}</span>
                     </span>
                 </div>
                 <div class="flex items-center gap-3">
                     <span class="flex items-center gap-1.5 bg-error/20 text-on-error px-2.5 py-0.5 rounded-full text-xs font-semibold">
                         <span class="w-1.5 h-1.5 rounded-full bg-error animate-pulse"></span>
-                        <span>{{ __('Hotline Darurat: +62 274 555-999') }}</span>
+                        <span>{{ __('Emergency Hotline: +62 274 555-999') }}</span>
                     </span>
                 </div>
             </div>
@@ -61,19 +61,19 @@
                 <!-- Desktop Navigation Links -->
                 <nav class="hidden lg:flex items-center gap-1 text-sm font-medium">
                     <a href="{{ route('doctors.index') }}" class="px-3 py-2 rounded-lg transition-colors {{ request()->routeIs('doctors.*') ? 'bg-primary-container text-on-primary-container font-semibold shadow-sm' : 'text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface' }}">
-                        {{ __('Jadwal Dokter & Poliklinik') }}
+                        {{ __('Doctor Schedule & Polyclinics') }}
                     </a>
                     <a href="{{ route('booking.index') }}" class="px-3 py-2 rounded-lg transition-colors {{ request()->routeIs('booking.*') ? 'bg-primary-container text-on-primary-container font-semibold shadow-sm' : 'text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface' }}">
-                        {{ __('Booking Janji Temu') }}
+                        {{ __('Book Appointment') }}
                     </a>
                     <a href="{{ route('queue.index') }}" class="px-3 py-2 rounded-lg transition-colors {{ request()->routeIs('queue.*') ? 'bg-primary-container text-on-primary-container font-semibold shadow-sm' : 'text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface' }}">
-                        {{ __('Status Antrean') }}
+                        {{ __('Queue Status') }}
                     </a>
                     <a href="{{ route('checkin.index') }}" class="px-3 py-2 rounded-lg transition-colors {{ request()->routeIs('checkin.*') ? 'bg-primary-container text-on-primary-container font-semibold shadow-sm' : 'text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface' }}">
                         {{ __('Self Check-in') }}
                     </a>
                     <a href="{{ route('announcements.index') }}" class="px-3 py-2 rounded-lg transition-colors {{ request()->routeIs('announcements.*') ? 'bg-primary-container text-on-primary-container font-semibold shadow-sm' : 'text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface' }}">
-                        {{ __('Pengumuman') }}
+                        {{ __('Announcements') }}
                     </a>
                 </nav>
             </div>
@@ -84,9 +84,9 @@
                 <x-frontend.language-switcher />
 
                 <!-- TV Queue Monitor Shortcut Link -->
-                <a href="{{ route('queue.display') }}" target="_blank" title="{{ __('Buka Layar Monitor Antrean TV') }}" class="hidden sm:inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-surface-container text-primary font-medium text-xs hover:bg-surface-container-high transition-colors border border-outline-variant/40">
+                <a href="{{ route('queue.display') }}" target="_blank" title="{{ __('Open TV Queue Monitor Display') }}" class="hidden sm:inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-surface-container text-primary font-medium text-xs hover:bg-surface-container-high transition-colors border border-outline-variant/40">
                     <span class="material-symbols-outlined text-[18px]">tv</span>
-                    <span>{{ __('Layar TV') }}</span>
+                    <span>{{ __('TV Monitor') }}</span>
                 </a>
 
                 <!-- Patient Profile or Login -->
@@ -98,7 +98,7 @@
                             </div>
                             <div class="hidden sm:flex flex-col text-left">
                                 <span class="text-xs font-semibold text-on-surface truncate max-w-[120px]">{{ auth('patient')->user()->name }}</span>
-                                <span class="text-[10px] text-status-available font-medium">{{ __('RM: ') }}{{ auth('patient')->user()->medical_record_number ?? '-' }}</span>
+                                <span class="text-[10px] text-status-available font-medium">{{ __('MRN: ') }}{{ auth('patient')->user()->medical_record_number ?? '-' }}</span>
                             </div>
                             <span class="material-symbols-outlined text-[16px] text-outline">expand_more</span>
                         </button>
@@ -109,13 +109,13 @@
                             </div>
                             <a href="{{ route('queue.index') }}" class="flex items-center gap-2 px-4 py-2 text-xs text-on-surface hover:bg-surface-container">
                                 <span class="material-symbols-outlined text-[18px] text-primary">confirmation_number</span>
-                                <span>{{ __('Tiket Antrean Saya') }}</span>
+                                <span>{{ __('My Queue Ticket') }}</span>
                             </a>
                             <form method="POST" action="{{ route('patient.logout') }}">
                                 @csrf
                                 <button type="submit" class="w-full flex items-center gap-2 px-4 py-2 text-xs text-error hover:bg-error-container/20 text-left">
                                     <span class="material-symbols-outlined text-[18px]">logout</span>
-                                    <span>{{ __('Keluar (Logout)') }}</span>
+                                    <span>{{ __('Sign Out') }}</span>
                                 </button>
                             </form>
                         </div>
@@ -123,7 +123,7 @@
                 @else
                     <a href="{{ route('booking.index') }}" class="hidden sm:inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-primary text-white font-semibold text-xs shadow hover:bg-primary-container transition-all">
                         <span class="material-symbols-outlined text-[18px]">event</span>
-                        <span>{{ __('Daftar & Booking') }}</span>
+                        <span>{{ __('Register & Book') }}</span>
                     </a>
                 @endif
 
@@ -137,26 +137,26 @@
         <!-- Mobile Menu Dropdown -->
         <div x-show="mobileMenuOpen" x-cloak x-transition class="lg:hidden bg-surface-card border-b border-outline-variant/30 px-4 py-4 space-y-2 shadow-lg">
             <a href="{{ route('home') }}" class="block px-3 py-2 rounded-lg text-sm font-medium {{ request()->routeIs('home') ? 'bg-primary-container text-on-primary-container font-semibold' : 'text-on-surface hover:bg-surface-container' }}">
-                {{ __('Beranda') }}
+                {{ __('Home') }}
             </a>
             <a href="{{ route('doctors.index') }}" class="block px-3 py-2 rounded-lg text-sm font-medium {{ request()->routeIs('doctors.*') ? 'bg-primary-container text-on-primary-container font-semibold' : 'text-on-surface hover:bg-surface-container' }}">
-                {{ __('Jadwal Dokter & Poliklinik') }}
+                {{ __('Doctor Schedule & Polyclinics') }}
             </a>
             <a href="{{ route('booking.index') }}" class="block px-3 py-2 rounded-lg text-sm font-medium {{ request()->routeIs('booking.*') ? 'bg-primary-container text-on-primary-container font-semibold' : 'text-on-surface hover:bg-surface-container' }}">
-                {{ __('Booking Janji Temu') }}
+                {{ __('Book Appointment') }}
             </a>
             <a href="{{ route('queue.index') }}" class="block px-3 py-2 rounded-lg text-sm font-medium {{ request()->routeIs('queue.*') ? 'bg-primary-container text-on-primary-container font-semibold' : 'text-on-surface hover:bg-surface-container' }}">
-                {{ __('Status Antrean') }}
+                {{ __('Queue Status') }}
             </a>
             <a href="{{ route('checkin.index') }}" class="block px-3 py-2 rounded-lg text-sm font-medium {{ request()->routeIs('checkin.*') ? 'bg-primary-container text-on-primary-container font-semibold' : 'text-on-surface hover:bg-surface-container' }}">
                 {{ __('Self Check-in') }}
             </a>
             <a href="{{ route('announcements.index') }}" class="block px-3 py-2 rounded-lg text-sm font-medium {{ request()->routeIs('announcements.*') ? 'bg-primary-container text-on-primary-container font-semibold' : 'text-on-surface hover:bg-surface-container' }}">
-                {{ __('Pengumuman') }}
+                {{ __('Announcements') }}
             </a>
             <a href="{{ route('queue.display') }}" target="_blank" class="flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium text-primary hover:bg-surface-container">
                 <span class="material-symbols-outlined text-[18px]">tv</span>
-                <span>{{ __('Buka Layar Monitor TV') }}</span>
+                <span>{{ __('Open TV Monitor') }}</span>
             </a>
         </div>
     </header>
@@ -197,7 +197,7 @@
                         <span class="font-heading text-xl text-surface font-bold">Klinik Ayo Sehat</span>
                     </div>
                     <p class="text-sm text-surface-container-high leading-relaxed pr-6">
-                        {{ __('Pusat pelayanan kesehatan rawat jalan terpadu modern berstandar akreditasi nasional. Mengedepankan efisiensi antrean presisi, keramahan medis, dan transparansi waktu layanan untuk seluruh keluarga.') }}
+                        {{ __('Modern integrated outpatient healthcare center with national accreditation standards. Prioritizing precise queue efficiency, medical hospitality, and service transparency for the whole family.') }}
                     </p>
                     <div class="flex flex-col gap-2.5 mt-2">
                         <div class="flex items-center gap-3 text-surface-container-high text-xs">
@@ -217,14 +217,14 @@
 
                 <!-- Col 3: Polyclinics -->
                 <div class="flex flex-col gap-3">
-                    <span class="font-heading text-base text-surface font-semibold">{{ __('Layanan Poliklinik') }}</span>
+                    <span class="font-heading text-base text-surface font-semibold">{{ __('Polyclinic Services') }}</span>
                     <div class="flex flex-col gap-2 text-xs text-surface-container-high">
-                        <a class="hover:text-secondary-fixed transition-colors" href="{{ route('doctors.index') }}">{{ __('Poli Penyakit Dalam') }}</a>
-                        <a class="hover:text-secondary-fixed transition-colors" href="{{ route('doctors.index') }}">{{ __('Poli Anak & Tumbuh Kembang') }}</a>
-                        <a class="hover:text-secondary-fixed transition-colors" href="{{ route('doctors.index') }}">{{ __('Poli Gigi & Bedah Mulut') }}</a>
-                        <a class="hover:text-secondary-fixed transition-colors" href="{{ route('doctors.index') }}">{{ __('Poli Kandungan (Obgyn)') }}</a>
-                        <a class="hover:text-secondary-fixed transition-colors" href="{{ route('doctors.index') }}">{{ __('Poli Jantung & Pembuluh Darah') }}</a>
-                        <a class="hover:text-secondary-fixed transition-colors" href="{{ route('doctors.index') }}">{{ __('Laboratorium & Farmasi') }}</a>
+                        <a class="hover:text-secondary-fixed transition-colors" href="{{ route('doctors.index') }}">{{ __('Internal Medicine Clinic') }}</a>
+                        <a class="hover:text-secondary-fixed transition-colors" href="{{ route('doctors.index') }}">{{ __('Pediatrics & Child Development') }}</a>
+                        <a class="hover:text-secondary-fixed transition-colors" href="{{ route('doctors.index') }}">{{ __('Dental & Oral Surgery') }}</a>
+                        <a class="hover:text-secondary-fixed transition-colors" href="{{ route('doctors.index') }}">{{ __('Obstetrics & Gynecology (Obgyn)') }}</a>
+                        <a class="hover:text-secondary-fixed transition-colors" href="{{ route('doctors.index') }}">{{ __('Cardiology & Vascular Clinic') }}</a>
+                        <a class="hover:text-secondary-fixed transition-colors" href="{{ route('doctors.index') }}">{{ __('Laboratory & Pharmacy') }}</a>
                     </div>
                 </div>
 
@@ -232,37 +232,37 @@
                 <div class="flex flex-col gap-3">
                     <span class="font-heading text-base text-surface font-semibold">{{ __('HealthQueue Digital') }}</span>
                     <div class="flex flex-col gap-2 text-xs text-surface-container-high">
-                        <a class="hover:text-secondary-fixed transition-colors" href="{{ route('queue.index') }}">{{ __('Estimasi Nomor Antrean') }}</a>
-                        <a class="hover:text-secondary-fixed transition-colors" href="{{ route('doctors.index') }}">{{ __('Jadwal Praktik Dokter') }}</a>
-                        <a class="hover:text-secondary-fixed transition-colors" href="{{ route('checkin.index') }}">{{ __('Panduan Self Check-in') }}</a>
-                        <a class="hover:text-secondary-fixed transition-colors" href="{{ route('announcements.index') }}">{{ __('Informasi & Pengumuman') }}</a>
-                        <a class="hover:text-secondary-fixed transition-colors" href="{{ route('queue.display') }}" target="_blank">{{ __('Monitor Antrean Publik (TV)') }}</a>
+                        <a class="hover:text-secondary-fixed transition-colors" href="{{ route('queue.index') }}">{{ __('Estimated Queue Number') }}</a>
+                        <a class="hover:text-secondary-fixed transition-colors" href="{{ route('doctors.index') }}">{{ __('Doctor Practice Schedules') }}</a>
+                        <a class="hover:text-secondary-fixed transition-colors" href="{{ route('checkin.index') }}">{{ __('Self Check-in Guide') }}</a>
+                        <a class="hover:text-secondary-fixed transition-colors" href="{{ route('announcements.index') }}">{{ __('Information & Announcements') }}</a>
+                        <a class="hover:text-secondary-fixed transition-colors" href="{{ route('queue.display') }}" target="_blank">{{ __('Public Queue Monitor (TV)') }}</a>
                     </div>
                 </div>
 
                 <!-- Col 5: Operational Hours -->
                 <div class="flex flex-col gap-3">
-                    <span class="font-heading text-base text-surface font-semibold">{{ __('Jam Operasional') }}</span>
+                    <span class="font-heading text-base text-surface font-semibold">{{ __('Operating Hours') }}</span>
                     <div class="flex flex-col gap-2.5 text-xs text-surface-container-high">
                         <div class="bg-surface-container-lowest/10 p-3 rounded-lg flex flex-col gap-1">
-                            <span class="font-semibold text-secondary-fixed">{{ __('Instalasi Gawat Darurat (IGD)') }}</span>
-                            <span>{{ __('Buka 24 Jam Setiap Hari') }}</span>
+                            <span class="font-semibold text-secondary-fixed">{{ __('Emergency Department (ER)') }}</span>
+                            <span>{{ __('Open 24 Hours Every Day') }}</span>
                         </div>
                         <div class="bg-surface-container-lowest/10 p-3 rounded-lg flex flex-col gap-1">
-                            <span class="font-semibold text-secondary-fixed">{{ __('Poliklinik Rawat Jalan') }}</span>
-                            <span>{{ __('Senin - Sabtu: 07.30 - 21.00 WIB') }}</span>
-                            <span class="text-surface-variant">{{ __('Minggu & Libur Nasional: Tutup') }}</span>
+                            <span class="font-semibold text-secondary-fixed">{{ __('Outpatient Polyclinics') }}</span>
+                            <span>{{ __('Monday - Saturday: 07.30 - 21.00 WIB') }}</span>
+                            <span class="text-surface-variant">{{ __('Sunday & Public Holidays: Closed') }}</span>
                         </div>
                     </div>
                 </div>
             </div>
 
             <div class="mt-12 pt-6 border-t border-surface-container-high/15 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-surface-container-high/80">
-                <p>© {{ date('Y') }} Klinik Ayo Sehat (HealthQueue). {{ __('Seluruh Hak Cipta Dilindungi Undang-Undang.') }}</p>
+                <p>© {{ date('Y') }} Klinik Ayo Sehat (HealthQueue). {{ __('All Rights Reserved Under Applicable Law.') }}</p>
                 <div class="flex items-center gap-6 font-medium">
-                    <a class="hover:text-surface transition-colors" href="#">{{ __('Kebijakan Privasi') }}</a>
-                    <a class="hover:text-surface transition-colors" href="#">{{ __('Syarat & Ketentuan') }}</a>
-                    <a class="hover:text-surface transition-colors" href="#">{{ __('Hak & Kewajiban Pasien') }}</a>
+                    <a class="hover:text-surface transition-colors" href="#">{{ __('Privacy Policy') }}</a>
+                    <a class="hover:text-surface transition-colors" href="#">{{ __('Terms & Conditions') }}</a>
+                    <a class="hover:text-surface transition-colors" href="#">{{ __('Patient Rights & Responsibilities') }}</a>
                 </div>
             </div>
         </div>

@@ -14,22 +14,22 @@
 
         <div class="relative z-10 max-w-3xl">
             <nav class="flex items-center gap-1.5 text-xs text-surface-container-high font-medium mb-3">
-                <a class="hover:text-secondary-fixed transition-colors" href="{{ route('home') }}">{{ __('Beranda') }}</a>
+                <a class="hover:text-secondary-fixed transition-colors" href="{{ route('home') }}">{{ __('Home') }}</a>
                 <span class="material-symbols-outlined text-[14px]">chevron_right</span>
-                <span class="text-secondary-fixed">{{ __('Informasi & Pengumuman') }}</span>
+                <span class="text-secondary-fixed">{{ __('Information & Announcements') }}</span>
             </nav>
 
             <h1 class="font-heading text-3xl md:text-4xl font-bold tracking-tight text-surface mb-3">
-                {{ __('Pusat Informasi & Pengumuman Resmi') }}
+                {{ __('Official Information & Announcement Center') }}
             </h1>
             <p class="text-sm text-surface-container-high leading-relaxed mb-6">
-                {{ __('Dapatkan informasi terkini seputar jadwal operasional libur, program imunisasi, edukasi kesehatan masyarakat, dan pembaruan sistem poliklinik Klinik Ayo Sehat.') }}
+                {{ __('Get the latest information regarding holiday operational schedules, immunization programs, community health education, and clinic system updates.') }}
             </p>
 
             <!-- Search Bar -->
             <div class="max-w-md relative">
                 <span class="material-symbols-outlined absolute left-3.5 top-1/2 -translate-y-1/2 text-outline text-[20px]">search</span>
-                <input wire:model.live.debounce.300ms="search" type="text" placeholder="{{ __('Cari pengumuman, topik, atau kata kunci...') }}" class="w-full pl-11 pr-4 py-3 rounded-xl bg-surface text-on-surface text-xs focus:ring-2 focus:ring-primary focus:outline-none shadow-sm"/>
+                <input wire:model.live.debounce.300ms="search" type="text" placeholder="{{ __('Search announcements, topics, or keywords...') }}" class="w-full pl-11 pr-4 py-3 rounded-xl bg-surface text-on-surface text-xs focus:ring-2 focus:ring-primary focus:outline-none shadow-sm"/>
             </div>
         </div>
     </section>
@@ -43,8 +43,8 @@
             @if($announcements->isEmpty())
                 <div class="bg-surface-card rounded-2xl p-12 text-center border border-outline-variant/30">
                     <span class="material-symbols-outlined text-outline text-[48px] mb-3">newspaper</span>
-                    <h3 class="font-heading text-lg font-bold text-on-surface mb-1">{{ __('Tidak Ada Pengumuman Ditemukan') }}</h3>
-                    <p class="text-xs text-on-surface-variant">{{ __('Silakan coba dengan kata kunci pencarian lainnya.') }}</p>
+                    <h3 class="font-heading text-lg font-bold text-on-surface mb-1">{{ __('No Announcements Found') }}</h3>
+                    <p class="text-xs text-on-surface-variant">{{ __('Please try other search keywords.') }}</p>
                 </div>
             @else
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
@@ -57,7 +57,7 @@
                             <div>
                                 <div class="flex items-center justify-between gap-2 mb-3">
                                     <span class="px-2.5 py-0.5 rounded-full bg-primary/10 text-primary text-[10px] font-bold">
-                                        {{ __('Pengumuman Resmi') }}
+                                        {{ __('Official Announcement') }}
                                     </span>
                                     <span class="text-[11px] text-on-surface-variant flex items-center gap-1">
                                         <span class="material-symbols-outlined text-[14px]">calendar_today</span>
@@ -78,7 +78,7 @@
 
                             <div class="mt-4 pt-3 border-t border-outline-variant/20 flex items-center justify-between">
                                 <a href="{{ route('announcements.show', $ann->slug) }}" class="text-xs font-bold text-primary flex items-center gap-1 group-hover:underline">
-                                    <span>{{ __('Baca Selengkapnya') }}</span>
+                                    <span>{{ __('Read More') }}</span>
                                     <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
                                 </a>
                                 <span class="text-[10px] text-outline">KARS Paripurna</span>
@@ -98,15 +98,15 @@
         <div class="lg:col-span-4 space-y-6">
             <!-- Quick Actions -->
             <div class="bg-surface-card rounded-2xl p-6 shadow-sm border border-outline-variant/30">
-                <h3 class="font-heading text-xs font-bold uppercase tracking-wider text-primary mb-4">{{ __('Layanan Cepat Pasien') }}</h3>
+                <h3 class="font-heading text-xs font-bold uppercase tracking-wider text-primary mb-4">{{ __('Fast Patient Services') }}</h3>
                 <div class="space-y-3">
                     <a href="{{ route('doctors.index') }}" class="p-3 rounded-xl bg-surface-container-low hover:bg-surface-container flex items-center gap-3 transition-colors">
                         <div class="w-10 h-10 rounded-lg bg-primary/10 text-primary flex items-center justify-center shrink-0">
                             <span class="material-symbols-outlined text-[20px]">calendar_month</span>
                         </div>
                         <div>
-                            <span class="text-xs font-bold text-on-surface block">{{ __('Jadwal Dokter Spesialis') }}</span>
-                            <span class="text-[11px] text-on-surface-variant">{{ __('Lihat ketersediaan kuota hari ini') }}</span>
+                            <span class="text-xs font-bold text-on-surface block">{{ __('Specialist Doctor Schedules') }}</span>
+                            <span class="text-[11px] text-on-surface-variant">{{ __('Check today quota availability') }}</span>
                         </div>
                     </a>
 
@@ -115,8 +115,8 @@
                             <span class="material-symbols-outlined text-[20px]">event_available</span>
                         </div>
                         <div>
-                            <span class="text-xs font-bold text-on-surface block">{{ __('Booking Janji Temu') }}</span>
-                            <span class="text-[11px] text-on-surface-variant">{{ __('Pendaftaran pasien baru & lama') }}</span>
+                            <span class="text-xs font-bold text-on-surface block">{{ __('Book Appointment') }}</span>
+                            <span class="text-[11px] text-on-surface-variant">{{ __('New & existing patient registration') }}</span>
                         </div>
                     </a>
 
@@ -125,8 +125,8 @@
                             <span class="material-symbols-outlined text-[20px]">confirmation_number</span>
                         </div>
                         <div>
-                            <span class="text-xs font-bold text-on-surface block">{{ __('Status Antrean Live') }}</span>
-                            <span class="text-[11px] text-on-surface-variant">{{ __('Pantau nomor panggilan saat ini') }}</span>
+                            <span class="text-xs font-bold text-on-surface block">{{ __('Live Queue Status') }}</span>
+                            <span class="text-[11px] text-on-surface-variant">{{ __('Monitor current called numbers') }}</span>
                         </div>
                     </a>
 
@@ -135,8 +135,8 @@
                             <span class="material-symbols-outlined text-[20px]">touch_app</span>
                         </div>
                         <div>
-                            <span class="text-xs font-bold text-on-surface block">{{ __('Self Check-in Mandiri') }}</span>
-                            <span class="text-[11px] text-on-surface-variant">{{ __('Cetak tiket antrean fisik di lobi') }}</span>
+                            <span class="text-xs font-bold text-on-surface block">{{ __('Self Check-in Station') }}</span>
+                            <span class="text-[11px] text-on-surface-variant">{{ __('Print physical queue ticket in lobby') }}</span>
                         </div>
                     </a>
                 </div>
@@ -146,13 +146,13 @@
             <div class="bg-brand-navy rounded-2xl p-6 text-white shadow-md">
                 <div class="flex items-center gap-2 text-brand-gold text-xs font-bold uppercase tracking-wider mb-2">
                     <span class="material-symbols-outlined text-[20px]">emergency</span>
-                    <span>{{ __('Hotline Gawat Darurat') }}</span>
+                    <span>{{ __('Emergency Hotline') }}</span>
                 </div>
                 <div class="font-heading text-xl font-black text-white mb-2">
                     +62 274 555-999
                 </div>
                 <p class="text-xs text-surface-container-high leading-relaxed">
-                    {{ __('Instalasi Gawat Darurat (IGD) dan tim ambulans respons cepat siaga 24 jam setiap hari.') }}
+                    {{ __('Emergency Room (ER) and rapid response ambulance team on standby 24 hours every day.') }}
                 </p>
             </div>
         </div>
