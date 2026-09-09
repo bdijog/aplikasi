@@ -6,7 +6,10 @@ use App\Enums\AppointmentStatus;
 use App\Enums\QueueTicketPriority;
 use App\Enums\QueueTicketStatus;
 use App\Models\QueueTicket;
+use App\Services\Reports\ExcelExportService;
+use App\Services\Reports\PdfExportService;
 use Filament\Actions\Action;
+use Filament\Actions\BulkAction;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
@@ -16,6 +19,7 @@ use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Collection;
 
 class QueueTicketsTable
 {
@@ -157,6 +161,67 @@ class QueueTicketsTable
             ])
             ->toolbarActions([
                 BulkActionGroup::make([
+                    BulkAction::make('export_excel_selected')
+                        ->label(__('Ekspor Antrian Excel'))
+                        ->icon(Heroicon::OutlinedArrowDownTray)
+                        ->color('success')
+                        ->action(function (Collection $records, ExcelExportService $excelService) {
+                            $records->loadMissing(['appointment.patient', 'doctor']);
+                            $headers = ['No.', 'No. Antrian', 'Tanggal', 'Nama Pasien', 'Dokter', 'Prioritas', 'Status', 'Counter/Poli', 'Panggilan', 'Waktu Panggil', 'Mulai Layanan', 'Selesai Layanan', 'Durasi Tunggu (Mnt)', 'Durasi Layanan (Mnt)'];
+                            $rows = [];
+                            $no = 1;
+                            foreach ($records as $t) {
+                                $checkIn = $t->appointment?->checked_in_at ?? $t->created_at;
+                                $wait = ($checkIn && $t->called_at && $t->called_at->greaterThanOrEqualTo($checkIn)) ? $checkIn->diffInMinutes($t->called_at) : '-';
+                                $serve = ($t->completed_at && $t->served_at && $t->completed_at->greaterThanOrEqualTo($t->served_at)) ? $t->served_at->diffInMinutes($t->completed_at) : '-';
+
+                                $rows[] = [
+                                    $no++,
+                                    $t->display_number,
+                                    $t->queue_date?->format('d/m/Y') ?? '-',
+                                    $t->appointment?->patient?->name ?? '-',
+                                    $t->doctor?->name ?? '-',
+                                    $t->priority?->getLabel() ?? (string) $t->priority,
+                                    $t->status?->getLabel() ?? (string) $t->status,
+                                    $t->counter ?? '-',
+                                    $t->call_count,
+                                    $t->called_at?->format('H:i:s') ?? '-',
+                                    $t->served_at?->format('H:i:s') ?? '-',
+                                    $t->completed_at?->format('H:i:s') ?? '-',
+                                    $wait,
+                                    $serve,
+                                ];
+                            }
+
+                            return $excelService->exportGenericTable('Daftar Tiket Antrian Terpilih', $headers, $rows, 'Antrian_Terpilih_'.now()->format('Ymd_His').'.xlsx');
+                        }),
+
+                    BulkAction::make('export_pdf_selected')
+                        ->label(__('Ekspor Antrian PDF'))
+                        ->icon(Heroicon::OutlinedDocumentArrowDown)
+                        ->color('danger')
+                        ->action(function (Collection $records, PdfExportService $pdfService) {
+                            $records->loadMissing(['appointment.patient', 'doctor']);
+                            $headers = ['No.', 'No. Tiket', 'Tanggal', 'Nama Pasien', 'Dokter', 'Prioritas', 'Status', 'Panggil', 'Selesai'];
+                            $rows = [];
+                            $no = 1;
+                            foreach ($records as $t) {
+                                $rows[] = [
+                                    $no++,
+                                    $t->display_number,
+                                    $t->queue_date?->format('d/m/Y') ?? '-',
+                                    $t->appointment?->patient?->name ?? '-',
+                                    $t->doctor?->name ?? '-',
+                                    $t->priority?->getLabel() ?? (string) $t->priority,
+                                    $t->status?->getLabel() ?? (string) $t->status,
+                                    $t->called_at?->format('H:i:s') ?? '-',
+                                    $t->completed_at?->format('H:i:s') ?? '-',
+                                ];
+                            }
+
+                            return $pdfService->exportGenericTable('Daftar Tiket Antrian Terpilih', $headers, $rows, 'Antrian_Terpilih_'.now()->format('Ymd_His').'.pdf', 'landscape');
+                        }),
+
                     DeleteBulkAction::make(),
                 ]),
             ]);
