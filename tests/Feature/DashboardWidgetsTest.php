@@ -4,8 +4,10 @@ namespace Tests\Feature;
 
 use App\Enums\AppointmentStatus;
 use App\Enums\QueueTicketStatus;
+use App\Filament\Widgets\ActiveDoctorQueuesTableWidget;
 use App\Filament\Widgets\AnnualVisitsTrendChart;
 use App\Filament\Widgets\AppointmentTrendChart;
+use App\Filament\Widgets\DoctorVisitRankTableWidget;
 use App\Filament\Widgets\MonthlyComparisonChart;
 use App\Filament\Widgets\ServiceEfficiencyOverview;
 use App\Filament\Widgets\TodayStatsOverview;
@@ -48,9 +50,11 @@ class DashboardWidgetsTest extends TestCase
         $response->assertStatus(200);
         $response->assertSee('Ringkasan Hari Ini');
         $response->assertSee('Efisiensi Layanan');
+        $response->assertSee('Antrian Aktif per Dokter');
         $response->assertSee('Tren Appointment 7 Hari Terakhir');
         $response->assertSee('Perbandingan Bulanan');
         $response->assertSee('Tren Kunjungan Tahunan');
+        $response->assertSee('Dokter Paling Banyak Kunjungan');
     }
 
     public function test_today_stats_overview_widget_renders_stats_accurately(): void
@@ -237,6 +241,93 @@ class DashboardWidgetsTest extends TestCase
         $this->assertCount(5, $queueData['labels']);
     }
 
+    public function test_doctor_visit_rank_table_widget_renders_and_ranks_doctors(): void
+    {
+        $doctor = Doctor::factory()->create([
+            'name' => 'dr. Ranking Specialist Test',
+            'is_active' => true,
+        ]);
+        $patient = Patient::factory()->create();
+        $schedule = Schedule::factory()->create(['doctor_id' => $doctor->id]);
+
+        for ($i = 1; $i <= 5; $i++) {
+            Appointment::create([
+                'patient_id' => $patient->id,
+                'doctor_id' => $doctor->id,
+                'schedule_id' => $schedule->id,
+                'booking_code' => "BK-RANK-0{$i}",
+                'appointment_date' => now()->format('Y-m-d'),
+                'status' => AppointmentStatus::Completed,
+                'chief_complaint' => 'Ranking test visit',
+            ]);
+        }
+
+        $lastAppointment = Appointment::where('doctor_id', $doctor->id)->first();
+
+        QueueTicket::create([
+            'appointment_id' => $lastAppointment->id,
+            'doctor_id' => $doctor->id,
+            'schedule_id' => $schedule->id,
+            'queue_date' => now()->format('Y-m-d'),
+            'queue_number' => 101,
+            'prefix' => 'R',
+            'display_number' => 'R-101',
+            'status' => QueueTicketStatus::Completed,
+            'served_at' => now()->subMinutes(15),
+            'completed_at' => now(),
+        ]);
+
+        Livewire::actingAs($this->admin)
+            ->test(DoctorVisitRankTableWidget::class)
+            ->assertSuccessful()
+            ->assertSee('Dokter Paling Banyak Kunjungan')
+            ->assertSee('dr. Ranking Specialist Test')
+            ->assertSee('Pasien')
+            ->assertSee('15 mnt');
+    }
+
+    public function test_active_doctor_queues_table_widget_renders_live_status(): void
+    {
+        $doctor = Doctor::factory()->create([
+            'name' => 'dr. Queue Active Test',
+            'is_active' => true,
+        ]);
+        $patient = Patient::factory()->create();
+        $schedule = Schedule::factory()->create(['doctor_id' => $doctor->id]);
+
+        $appointment = Appointment::create([
+            'patient_id' => $patient->id,
+            'doctor_id' => $doctor->id,
+            'schedule_id' => $schedule->id,
+            'booking_code' => 'BK-LIVE-01',
+            'appointment_date' => now()->format('Y-m-d'),
+            'status' => AppointmentStatus::InProgress,
+            'chief_complaint' => 'Live queue test',
+        ]);
+
+        QueueTicket::create([
+            'appointment_id' => $appointment->id,
+            'doctor_id' => $doctor->id,
+            'schedule_id' => $schedule->id,
+            'queue_date' => now()->format('Y-m-d'),
+            'queue_number' => 202,
+            'prefix' => 'Q',
+            'display_number' => 'Q-202',
+            'status' => QueueTicketStatus::Serving,
+            'counter' => 'Loket 1',
+            'called_at' => now(),
+            'served_at' => now(),
+        ]);
+
+        Livewire::actingAs($this->admin)
+            ->test(ActiveDoctorQueuesTableWidget::class)
+            ->assertSuccessful()
+            ->assertSee('Antrian Aktif per Dokter')
+            ->assertSee('dr. Queue Active Test')
+            ->assertSee('Q-202')
+            ->assertSee('Sedang Melayani');
+    }
+
     public function test_widgets_have_correct_sort_and_polling_intervals(): void
     {
         $todayWidget = new TodayStatsOverview;
@@ -246,6 +337,10 @@ class DashboardWidgetsTest extends TestCase
         $efficiencyWidget = new ServiceEfficiencyOverview;
         $this->assertSame(-1, ServiceEfficiencyOverview::getSort());
         $this->assertSame('60s', invade($efficiencyWidget)->getPollingInterval());
+
+        $activeQueueWidget = new ActiveDoctorQueuesTableWidget;
+        $this->assertSame(0, ActiveDoctorQueuesTableWidget::getSort());
+        $this->assertSame('10s', invade($activeQueueWidget)->getPollingInterval());
 
         $appointmentChart = new AppointmentTrendChart;
         $this->assertSame(1, AppointmentTrendChart::getSort());
@@ -258,5 +353,9 @@ class DashboardWidgetsTest extends TestCase
         $annualChart = new AnnualVisitsTrendChart;
         $this->assertSame(3, AnnualVisitsTrendChart::getSort());
         $this->assertNull(invade($annualChart)->getPollingInterval());
+
+        $rankWidget = new DoctorVisitRankTableWidget;
+        $this->assertSame(4, DoctorVisitRankTableWidget::getSort());
+        $this->assertSame('60s', invade($rankWidget)->getPollingInterval());
     }
 }
