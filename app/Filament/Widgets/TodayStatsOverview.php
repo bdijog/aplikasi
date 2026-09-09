@@ -29,7 +29,7 @@ class TodayStatsOverview extends StatsOverviewWidget
     /**
      * @var int | array<string, ?int> | null
      */
-    protected int | array | null $columns = [
+    protected int|array|null $columns = [
         'sm' => 2,
         'md' => 3,
         'xl' => 5,

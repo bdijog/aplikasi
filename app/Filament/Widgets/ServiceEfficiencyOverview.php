@@ -24,7 +24,7 @@ class ServiceEfficiencyOverview extends StatsOverviewWidget
     /**
      * @var int | array<string, ?int> | null
      */
-    protected int | array | null $columns = 3;
+    protected int|array|null $columns = 3;
 
     protected function getStats(): array
     {
