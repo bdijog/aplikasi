@@ -5,6 +5,8 @@ use App\Livewire\Frontend\AnnouncementList;
 use App\Livewire\Frontend\AppointmentBooking;
 use App\Livewire\Frontend\DoctorSchedule;
 use App\Livewire\Frontend\HomePage;
+use App\Livewire\Frontend\PatientDashboard;
+use App\Livewire\Frontend\PatientLogin;
 use App\Livewire\Frontend\PatientQueue;
 use App\Livewire\Frontend\QueueDisplay;
 use App\Livewire\Frontend\SelfCheckIn;
@@ -50,11 +52,21 @@ Route::get('/locale/{lang}', function (string $lang, Request $request) {
     return redirect()->back();
 })->name('locale.switch');
 
+// Patient Auth (Login Mandiri - Guest Only)
+Route::middleware('guest:patient')->group(function () {
+    Route::get('/patient/login', PatientLogin::class)->name('patient.login');
+});
+
+// Patient Authenticated (Dashboard & Profile)
+Route::middleware('auth:patient')->group(function () {
+    Route::get('/patient/dashboard', PatientDashboard::class)->name('patient.dashboard');
+});
+
 // Patient Logout
 Route::post('/patient/logout', function (Request $request) {
     Auth::guard('patient')->logout();
     $request->session()->invalidate();
     $request->session()->regenerateToken();
 
-    return redirect()->route('home')->with('success', __('Anda telah berhasil keluar dari akun pasien.'));
+    return redirect()->route('home')->with('success', __('You have been successfully signed out of your patient account.'));
 })->name('patient.logout');

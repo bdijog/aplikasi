@@ -107,6 +107,10 @@
                                 <p class="text-xs font-bold text-on-surface">{{ auth('patient')->user()->name }}</p>
                                 <p class="text-[11px] text-on-surface-variant truncate">{{ auth('patient')->user()->phone ?? auth('patient')->user()->email }}</p>
                             </div>
+                            <a href="{{ route('patient.dashboard') }}" class="flex items-center gap-2 px-4 py-2 text-xs text-on-surface hover:bg-surface-container">
+                                <span class="material-symbols-outlined text-[18px] text-primary">dashboard</span>
+                                <span>{{ __('Patient Dashboard') }}</span>
+                            </a>
                             <a href="{{ route('queue.index') }}" class="flex items-center gap-2 px-4 py-2 text-xs text-on-surface hover:bg-surface-container">
                                 <span class="material-symbols-outlined text-[18px] text-primary">confirmation_number</span>
                                 <span>{{ __('My Queue Ticket') }}</span>
@@ -121,6 +125,10 @@
                         </div>
                     </div>
                 @else
+                    <a href="{{ route('patient.login') }}" class="hidden sm:inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-surface-container text-primary font-semibold text-xs border border-outline-variant/30 hover:bg-surface-container-high transition-all">
+                        <span class="material-symbols-outlined text-[18px]">login</span>
+                        <span>{{ __('Patient Login') }}</span>
+                    </a>
                     <a href="{{ route('booking.index') }}" class="hidden sm:inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-primary text-white font-semibold text-xs shadow hover:bg-primary-container transition-all">
                         <span class="material-symbols-outlined text-[18px]">event</span>
                         <span>{{ __('Register & Book') }}</span>

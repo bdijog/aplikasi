@@ -16,6 +16,24 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->web(append: [
             SetLocale::class,
         ]);
+
+        // Redirect authenticated patients away from guest-only pages (e.g. /patient/login)
+        $middleware->redirectUsersTo(function (Request $request) {
+            if ($request->is('patient/*') || $request->routeIs('patient.*')) {
+                return route('patient.dashboard');
+            }
+
+            return route('home');
+        });
+
+        // Redirect unauthenticated patients to the patient login page
+        $middleware->redirectGuestsTo(function (Request $request) {
+            if ($request->is('patient/*') || $request->routeIs('patient.*')) {
+                return route('patient.login');
+            }
+
+            return route('home');
+        });
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         $exceptions->shouldRenderJsonWhen(
