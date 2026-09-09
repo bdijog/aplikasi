@@ -40,10 +40,12 @@ class ExcelExportService
         $this->applyDocumentHeader(
             $sheet,
             title: 'REKAPITULASI KUNJUNGAN PASIEN & JANJI TEMU',
-            subtitle: 'Periode: '.$data['period']['formatted'].($data['selected_doctor'] ? ' | Dokter: '.$data['selected_doctor'] : ' | Semua Dokter')
+            subtitle: 'Periode: '.$data['period']['formatted'].($data['selected_doctor'] ? ' | Dokter: '.$data['selected_doctor'] : ' | Semua Dokter'),
+            lastCol: 'M'
         );
 
         // 2. Ringkasan Status Box (Baris 5)
+        $sheet->mergeCells('A5:H5');
         $sheet->setCellValue('A5', 'RINGKASAN STATUS KUNJUNGAN');
         $sheet->getStyle('A5')->getFont()->setBold(true)->setSize(11);
 
@@ -73,6 +75,7 @@ class ExcelExportService
         $sheet->getStyle('A6:H7')->getBorders()->getAllBorders()->setBorderStyle(Border::BORDER_THIN);
 
         // 3. Tabel Detail Kunjungan (Mulai Baris 9)
+        $sheet->mergeCells('A9:M9');
         $sheet->setCellValue('A9', 'DAFTAR DETAIL JANJI TEMU PASIEN');
         $sheet->getStyle('A9')->getFont()->setBold(true)->setSize(11);
 
@@ -150,10 +153,12 @@ class ExcelExportService
         $this->applyDocumentHeader(
             $sheet,
             title: 'LAPORAN STATISTIK KUNJUNGAN BULANAN',
-            subtitle: 'Bulan: '.$data['month_name'].' | Total Kunjungan: '.$data['total_visits'].' Pasien'
+            subtitle: 'Bulan: '.$data['month_name'].' | Total Kunjungan: '.$data['total_visits'].' Pasien',
+            lastCol: 'I'
         );
 
         // Ringkasan
+        $sheet->mergeCells('A5:B5');
         $sheet->setCellValue('A5', 'RINGKASAN RASIO KUNJUNGAN');
         $sheet->getStyle('A5')->getFont()->setBold(true);
 
@@ -174,6 +179,7 @@ class ExcelExportService
         }
 
         // Tabel Spesialisasi
+        $sheet->mergeCells('D5:G5');
         $sheet->setCellValue('D5', 'DISTRIBUSI PER SPESIALISASI / POLI');
         $sheet->getStyle('D5')->getFont()->setBold(true);
 
@@ -194,6 +200,7 @@ class ExcelExportService
 
         // Tabel Kinerja Kunjungan Per Dokter
         $docStartRow = max($r, $endSpecRow) + 2;
+        $sheet->mergeCells('A'.$docStartRow.':I'.$docStartRow);
         $sheet->setCellValue('A'.$docStartRow, 'RINCIAN KUNJUNGAN PASIEN PER DOKTER');
         $sheet->getStyle('A'.$docStartRow)->getFont()->setBold(true)->setSize(11);
 
@@ -241,10 +248,12 @@ class ExcelExportService
         $this->applyDocumentHeader(
             $sheet,
             title: 'LAPORAN KINERJA DOKTER & DURASI KONSULTASI',
-            subtitle: 'Periode: '.$data['period']['formatted'].($data['selected_doctor'] ? ' | Dokter: '.$data['selected_doctor'] : '')
+            subtitle: 'Periode: '.$data['period']['formatted'].($data['selected_doctor'] ? ' | Dokter: '.$data['selected_doctor'] : ''),
+            lastCol: 'L'
         );
 
         // Ringkasan KPI Global
+        $sheet->mergeCells('A5:E5');
         $sheet->setCellValue('A5', 'RINGKASAN INDIKATOR KINERJA');
         $sheet->getStyle('A5')->getFont()->setBold(true);
 
@@ -271,6 +280,7 @@ class ExcelExportService
         $sheet->getStyle('A6:E7')->getBorders()->getAllBorders()->setBorderStyle(Border::BORDER_THIN);
 
         // Tabel Detail Kinerja per Dokter
+        $sheet->mergeCells('A9:L9');
         $sheet->setCellValue('A9', 'TABEL PERFORMA & EFISIENSI LAYANAN DOKTER');
         $sheet->getStyle('A9')->getFont()->setBold(true)->setSize(11);
 
@@ -337,10 +347,12 @@ class ExcelExportService
         $this->applyDocumentHeader(
             $sheet,
             title: 'LAPORAN ANTRIAN & ANALISIS WAKTU TUNGGU LAYANAN',
-            subtitle: 'Periode: '.$data['period']['formatted'].($data['selected_doctor'] ? ' | Dokter: '.$data['selected_doctor'] : '')
+            subtitle: 'Periode: '.$data['period']['formatted'].($data['selected_doctor'] ? ' | Dokter: '.$data['selected_doctor'] : ''),
+            lastCol: 'M'
         );
 
         // Ringkasan
+        $sheet->mergeCells('A5:F5');
         $sheet->setCellValue('A5', 'RINGKASAN METRIK ANTRIAN');
         $sheet->getStyle('A5')->getFont()->setBold(true);
 
@@ -367,6 +379,7 @@ class ExcelExportService
         $sheet->getStyle('A6:F7')->getBorders()->getAllBorders()->setBorderStyle(Border::BORDER_THIN);
 
         // Tabel Harian
+        $sheet->mergeCells('A9:F9');
         $sheet->setCellValue('A9', 'ANALISIS WAKTU TUNGGU PER HARI');
         $sheet->getStyle('A9')->getFont()->setBold(true)->setSize(11);
 
@@ -390,6 +403,7 @@ class ExcelExportService
 
         // Tabel Log Tiket Antrian
         $logStart = $endDayRow + 2;
+        $sheet->mergeCells('A'.$logStart.':M'.$logStart);
         $sheet->setCellValue('A'.$logStart, 'LOG DETAIL TIKET ANTRIAN PASIEN');
         $sheet->getStyle('A'.$logStart)->getFont()->setBold(true)->setSize(11);
 
@@ -469,10 +483,12 @@ class ExcelExportService
         $this->applyDocumentHeader(
             $sheet,
             title: 'ROSTER JADWAL PRAKTIK DOKTER & KUOTA LAYANAN',
-            subtitle: 'Tanggal Cetak: '.now()->translatedFormat('d F Y').($data['selected_doctor'] ? ' | Dokter: '.$data['selected_doctor'] : ' | Seluruh Jadwal')
+            subtitle: 'Tanggal Cetak: '.now()->translatedFormat('d F Y').($data['selected_doctor'] ? ' | Dokter: '.$data['selected_doctor'] : ' | Seluruh Jadwal'),
+            lastCol: 'K'
         );
 
         // Ringkasan
+        $sheet->mergeCells('A5:D5');
         $sheet->setCellValue('A5', 'RINGKASAN JADWAL PRAKTIK');
         $sheet->getStyle('A5')->getFont()->setBold(true);
 
@@ -498,6 +514,7 @@ class ExcelExportService
         $sheet->getStyle('A6:D7')->getBorders()->getAllBorders()->setBorderStyle(Border::BORDER_THIN);
 
         // Tabel Jadwal
+        $sheet->mergeCells('A9:K9');
         $sheet->setCellValue('A9', 'DAFTAR JADWAL PRAKTIK DOKTER');
         $sheet->getStyle('A9')->getFont()->setBold(true)->setSize(11);
 
@@ -564,17 +581,19 @@ class ExcelExportService
         $sheet = $spreadsheet->getActiveSheet();
         $sheet->setTitle('Data Ekspor');
 
+        $lastCol = $this->getColumnLetter(max(1, count($headers)));
+
         $this->applyDocumentHeader(
             $sheet,
             title: strtoupper($title),
-            subtitle: 'Dicetak pada: '.now()->translatedFormat('d F Y H:i:s').' | Total: '.count($rows).' Data'
+            subtitle: 'Dicetak pada: '.now()->translatedFormat('d F Y H:i:s').' | Total: '.count($rows).' Data',
+            lastCol: $lastCol
         );
 
         $startRow = 5;
         $this->writeTableHeaders($sheet, $headers, $startRow);
 
         $r = $startRow + 1;
-        $lastCol = $this->getColumnLetter(count($headers));
 
         foreach ($rows as $rowData) {
             $c = 'A';
@@ -597,16 +616,31 @@ class ExcelExportService
     // HELPER STYLING METHODS
     // ==========================================
 
-    private function applyDocumentHeader(Worksheet $sheet, string $title, string $subtitle): void
+    private function applyDocumentHeader(Worksheet $sheet, string $title, string $subtitle, string $lastCol = 'H'): void
     {
+        // 1. Baris Judul Utama Klinik (Merge selebar tabel agar tidak mendistorsi kolom A)
+        $sheet->mergeCells("A1:{$lastCol}1");
         $sheet->setCellValue('A1', 'KLINIK AYO SEHAT - SISTEM INFORMASI LAYANAN & JADWAL DOKTER');
-        $sheet->getStyle('A1')->getFont()->setBold(true)->setSize(14)->setColor(new Color(Color::COLOR_DARKBLUE));
+        $sheet->getStyle("A1:{$lastCol}1")->getFont()->setBold(true)->setSize(13)->setColor(new Color(self::HEADER_FILL));
+        $sheet->getStyle("A1:{$lastCol}1")->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER)->setVertical(Alignment::VERTICAL_CENTER);
+        $sheet->getRowDimension(1)->setRowHeight(25);
 
+        // 2. Baris Judul Laporan
+        $sheet->mergeCells("A2:{$lastCol}2");
         $sheet->setCellValue('A2', $title);
-        $sheet->getStyle('A2')->getFont()->setBold(true)->setSize(12);
+        $sheet->getStyle("A2:{$lastCol}2")->getFont()->setBold(true)->setSize(11)->setColor(new Color(self::ACCENT_COLOR));
+        $sheet->getStyle("A2:{$lastCol}2")->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER)->setVertical(Alignment::VERTICAL_CENTER);
+        $sheet->getRowDimension(2)->setRowHeight(20);
 
+        // 3. Baris Subtitle / Periode
+        $sheet->mergeCells("A3:{$lastCol}3");
         $sheet->setCellValue('A3', $subtitle);
-        $sheet->getStyle('A3')->getFont()->setItalic(true)->setSize(10);
+        $sheet->getStyle("A3:{$lastCol}3")->getFont()->setItalic(true)->setSize(9)->setColor(new Color('64748B'));
+        $sheet->getStyle("A3:{$lastCol}3")->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER)->setVertical(Alignment::VERTICAL_CENTER);
+        $sheet->getRowDimension(3)->setRowHeight(18);
+
+        // Baris pemisah kosong
+        $sheet->getRowDimension(4)->setRowHeight(8);
     }
 
     /**
@@ -641,6 +675,17 @@ class ExcelExportService
         for ($i = $fromIdx; $i <= $toIdx; $i++) {
             $colLetter = Coordinate::stringFromColumnIndex($i);
             $sheet->getColumnDimension($colLetter)->setAutoSize(true);
+        }
+
+        $sheet->calculateColumnWidths();
+
+        // Pastikan kolom No. (kolom A jika sempit) memiliki lebar minimal yang proporsional dan tidak terdistorsi
+        if ($fromCol === 'A') {
+            $colAWidth = $sheet->getColumnDimension('A')->getWidth();
+            if ($colAWidth > 0 && $colAWidth < 6) {
+                $sheet->getColumnDimension('A')->setAutoSize(false);
+                $sheet->getColumnDimension('A')->setWidth(7);
+            }
         }
     }
 
