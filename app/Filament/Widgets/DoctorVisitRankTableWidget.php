@@ -28,8 +28,8 @@ class DoctorVisitRankTableWidget extends TableWidget
     public function table(Table $table): Table
     {
         return $table
-            ->heading(__('Dokter Paling Banyak Kunjungan'))
-            ->description(__('Peringkat dokter berdasarkan total kunjungan pasien yang dilayani dan rata-rata durasi konsultasi.'))
+            ->heading(__('Most Visited Doctors'))
+            ->description(__('Doctor rankings based on total patient visits served and average consultation duration.'))
             ->query(
                 Doctor::query()
                     ->where('is_active', true)
@@ -51,7 +51,7 @@ class DoctorVisitRankTableWidget extends TableWidget
             ->defaultSort('visits_count', 'desc')
             ->columns([
                 TextColumn::make('rank')
-                    ->label(__('Peringkat'))
+                    ->label(__('Rank'))
                     ->rowIndex()
                     ->badge()
                     ->color(fn (string $state): string => match ($state) {
@@ -69,14 +69,14 @@ class DoctorVisitRankTableWidget extends TableWidget
                     ->formatStateUsing(fn (string $state): string => "#{$state}"),
 
                 TextColumn::make('name')
-                    ->label(__('Nama Dokter'))
+                    ->label(__('Doctor Name'))
                     ->searchable()
                     ->sortable()
                     ->weight('bold')
                     ->description(fn (Doctor $record): ?string => $record->license_number ? 'SIP: '.$record->license_number : null),
 
                 TextColumn::make('specialty')
-                    ->label(__('Spesialisasi'))
+                    ->label(__('Specialty'))
                     ->badge()
                     ->color('info')
                     ->state(function (Doctor $record): string {
@@ -94,15 +94,15 @@ class DoctorVisitRankTableWidget extends TableWidget
                     }),
 
                 TextColumn::make('visits_count')
-                    ->label(__('Jumlah Pasien'))
+                    ->label(__('Total Patients'))
                     ->sortable()
                     ->badge()
                     ->color('primary')
                     ->icon('heroicon-m-user-group')
-                    ->formatStateUsing(fn ($state): string => number_format((int) $state, 0, ',', '.').' Pasien'),
+                    ->formatStateUsing(fn ($state): string => __(':count Patients', ['count' => number_format((int) $state, 0, ',', '.')])),
 
                 TextColumn::make('avg_duration')
-                    ->label(__('Rata-rata Durasi'))
+                    ->label(__('Average Duration'))
                     ->badge()
                     ->state(function (Doctor $record): string {
                         $validTickets = $record->queueTickets->filter(
@@ -115,7 +115,7 @@ class DoctorVisitRankTableWidget extends TableWidget
 
                         $avgMinutes = round($validTickets->avg(fn ($t) => $t->served_at->diffInMinutes($t->completed_at)), 1);
 
-                        return $avgMinutes.' mnt';
+                        return $avgMinutes.' '.__('min');
                     })
                     ->color(function (string $state): string {
                         if ($state === '-') {
@@ -133,12 +133,12 @@ class DoctorVisitRankTableWidget extends TableWidget
             ])
             ->filters([
                 SelectFilter::make('period')
-                    ->label(__('Periode'))
+                    ->label(__('Period'))
                     ->options([
-                        'all' => 'Semua Waktu',
-                        'today' => 'Hari Ini',
-                        'week' => '7 Hari Terakhir',
-                        'month' => 'Bulan Ini',
+                        'all' => __('All Time'),
+                        'today' => __('Today'),
+                        'week' => __('Last 7 Days'),
+                        'month' => __('This Month'),
                     ])
                     ->default('all')
                     ->query(function (Builder $query, array $data): Builder {

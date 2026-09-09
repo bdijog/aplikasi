@@ -5,6 +5,7 @@ namespace App\Filament\Widgets;
 use App\Models\Appointment;
 use App\Models\QueueTicket;
 use Filament\Widgets\ChartWidget;
+use Illuminate\Contracts\Support\Htmlable;
 
 class AnnualVisitsTrendChart extends ChartWidget
 {
@@ -14,9 +15,15 @@ class AnnualVisitsTrendChart extends ChartWidget
 
     protected ?string $pollingInterval = null;
 
-    protected ?string $heading = 'Tren Kunjungan Tahunan';
+    public function getHeading(): string|Htmlable|null
+    {
+        return __('Annual Visits Trend');
+    }
 
-    protected ?string $description = 'Perkembangan volume kunjungan antrean pasien dan reservasi janji temu dalam 12 bulan terakhir.';
+    public function getDescription(): string|Htmlable|null
+    {
+        return __('Growth of patient queue visits and appointment bookings in the last 12 months.');
+    }
 
     /**
      * @var int | string | array<string, int | null>
@@ -61,7 +68,7 @@ class AnnualVisitsTrendChart extends ChartWidget
         return [
             'datasets' => [
                 [
-                    'label' => 'Kunjungan Pasien (Antrean)',
+                    'label' => __('Patient Visits (Queue)'),
                     'data' => $queueData,
                     'borderColor' => '#3b82f6',
                     'backgroundColor' => 'rgba(59, 130, 246, 0.1)',
@@ -69,7 +76,7 @@ class AnnualVisitsTrendChart extends ChartWidget
                     'tension' => 0.3,
                 ],
                 [
-                    'label' => 'Janji Temu Terdaftar',
+                    'label' => __('Registered Appointments'),
                     'data' => $apptData,
                     'borderColor' => '#8b5cf6',
                     'backgroundColor' => 'rgba(139, 92, 246, 0.1)',

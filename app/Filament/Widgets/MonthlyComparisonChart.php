@@ -5,6 +5,7 @@ namespace App\Filament\Widgets;
 use App\Models\Appointment;
 use App\Models\QueueTicket;
 use Filament\Widgets\ChartWidget;
+use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
 
@@ -16,9 +17,15 @@ class MonthlyComparisonChart extends ChartWidget
 
     protected ?string $pollingInterval = '60s';
 
-    protected ?string $heading = 'Perbandingan Bulanan';
+    public function getHeading(): string|Htmlable|null
+    {
+        return __('Monthly Comparison');
+    }
 
-    protected ?string $description = 'Komparasi performa mingguan: Bulan Ini vs Bulan Lalu.';
+    public function getDescription(): string|Htmlable|null
+    {
+        return __('Weekly performance comparison: This Month vs Last Month.');
+    }
 
     /**
      * @var int | string | array<string, int | null>
@@ -34,8 +41,8 @@ class MonthlyComparisonChart extends ChartWidget
     protected function getFilters(): ?array
     {
         return [
-            'appointments' => 'Janji Temu',
-            'queue' => 'Kunjungan Antrean',
+            'appointments' => __('Appointment Bookings'),
+            'queue' => __('Queue Visits'),
         ];
     }
 
@@ -77,8 +84,8 @@ class MonthlyComparisonChart extends ChartWidget
             $lastCounts = $this->calculateWeeklyCounts($lastMonthData, 'appointment_date');
         }
 
-        $thisMonthLabel = 'Bulan Ini ('.now()->translatedFormat('M Y').')';
-        $lastMonthLabel = 'Bulan Lalu ('.now()->subMonth()->translatedFormat('M Y').')';
+        $thisMonthLabel = __('This Month').' ('.now()->translatedFormat('M Y').')';
+        $lastMonthLabel = __('Last Month').' ('.now()->subMonth()->translatedFormat('M Y').')';
 
         return [
             'datasets' => [
@@ -100,11 +107,11 @@ class MonthlyComparisonChart extends ChartWidget
                 ],
             ],
             'labels' => [
-                'Minggu 1 (Tgl 1-7)',
-                'Minggu 2 (Tgl 8-14)',
-                'Minggu 3 (Tgl 15-21)',
-                'Minggu 4 (Tgl 22-28)',
-                'Minggu 5 (Tgl 29+)',
+                __('Week 1 (Days 1-7)'),
+                __('Week 2 (Days 8-14)'),
+                __('Week 3 (Days 15-21)'),
+                __('Week 4 (Days 22-28)'),
+                __('Week 5 (Days 29+)'),
             ],
         ];
     }

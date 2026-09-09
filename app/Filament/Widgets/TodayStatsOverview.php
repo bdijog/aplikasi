@@ -22,9 +22,15 @@ class TodayStatsOverview extends StatsOverviewWidget
 
     protected ?string $pollingInterval = '15s';
 
-    protected ?string $heading = 'Ringkasan Hari Ini';
+    protected function getHeading(): ?string
+    {
+        return __('Today Summary');
+    }
 
-    protected ?string $description = 'Pantauan operasional janji temu, antrean poliklinik, dan dokter aktif hari ini.';
+    protected function getDescription(): ?string
+    {
+        return __('Operational monitoring of appointments, clinic queues, and active doctors today.');
+    }
 
     /**
      * @var int | array<string, ?int> | null
@@ -153,32 +159,39 @@ class TodayStatsOverview extends StatsOverviewWidget
         };
 
         return [
-            Stat::make('Total Janji Temu Hari Ini', (string) $totalTodayAppointments)
-                ->description("Pending: {$pendingToday} • Konfirmasi: {$confirmedToday} • Check-in: {$checkedInToday}")
+            Stat::make(__('Today Total Appointments'), (string) $totalTodayAppointments)
+                ->description(__('Pending: :pending • Confirmed: :confirmed • Checked-in: :checked_in', [
+                    'pending' => $pendingToday,
+                    'confirmed' => $confirmedToday,
+                    'checked_in' => $checkedInToday,
+                ]))
                 ->descriptionIcon('heroicon-m-calendar-days')
                 ->chart($appointmentTrend)
                 ->color('primary'),
 
-            Stat::make('Antrean Aktif Sekarang', (string) $waitingToday)
-                ->description("{$waitingToday} menunggu • {$servingToday} sedang dilayani")
+            Stat::make(__('Active Queues Now'), (string) $waitingToday)
+                ->description(__(':waiting waiting • :serving serving', [
+                    'waiting' => $waitingToday,
+                    'serving' => $servingToday,
+                ]))
                 ->descriptionIcon('heroicon-m-ticket')
                 ->chart($waitingTrend)
                 ->color($waitingColor),
 
-            Stat::make('Pasien Sudah Dilayani', (string) $completedToday)
-                ->description('Konsultasi dokter selesai hari ini')
+            Stat::make(__('Patients Served'), (string) $completedToday)
+                ->description(__('Doctor consultations completed today'))
                 ->descriptionIcon('heroicon-m-check-circle')
                 ->chart($completedTrend)
                 ->color('success'),
 
-            Stat::make('No-Show Hari Ini', (string) $noShowToday)
-                ->description($noShowToday > 0 ? 'Pasien tidak hadir sesuai jadwal' : 'Tidak ada pasien no-show')
+            Stat::make(__('Today No-Shows'), (string) $noShowToday)
+                ->description($noShowToday > 0 ? __('Patients did not attend as scheduled') : __('No no-show patients'))
                 ->descriptionIcon('heroicon-m-user-minus')
                 ->chart($noShowTrend)
                 ->color($noShowColor),
 
-            Stat::make('Dokter Aktif Hari Ini', (string) $activeDoctorsToday)
-                ->description("Dari {$totalActiveDoctors} dokter aktif terdaftar")
+            Stat::make(__('Active Doctors Today'), (string) $activeDoctorsToday)
+                ->description(__('Out of :total active doctors registered', ['total' => $totalActiveDoctors]))
                 ->descriptionIcon('heroicon-m-user-group')
                 ->chart($doctorTrend)
                 ->color('info'),

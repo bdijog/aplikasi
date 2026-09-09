@@ -33,8 +33,8 @@ class ActiveDoctorQueuesTableWidget extends TableWidget
         $today = now()->toDateString();
 
         return $table
-            ->heading(__('Antrian Aktif per Dokter'))
-            ->description(__('Pantauan real-time status antrean aktif: nomor sedang dipanggil, jumlah pasien menunggu, dan antrean selesai hari ini.'))
+            ->heading(__('Active Queues by Doctor'))
+            ->description(__('Real-time monitoring of active queue status: currently called number, waiting patients, and completed queues today.'))
             ->query(
                 Doctor::query()
                     ->where('is_active', true)
@@ -62,7 +62,7 @@ class ActiveDoctorQueuesTableWidget extends TableWidget
             ->defaultSort('waiting_count', 'desc')
             ->columns([
                 TextColumn::make('name')
-                    ->label(__('Dokter'))
+                    ->label(__('Doctor'))
                     ->searchable()
                     ->sortable()
                     ->weight('bold')
@@ -82,7 +82,7 @@ class ActiveDoctorQueuesTableWidget extends TableWidget
                     }),
 
                 TextColumn::make('currently_serving')
-                    ->label(__('Sedang Dipanggil'))
+                    ->label(__('Currently Called'))
                     ->badge()
                     ->state(function (Doctor $record): ?string {
                         $servingTicket = $record->queueTickets->firstWhere('status', QueueTicketStatus::Serving);
@@ -94,12 +94,12 @@ class ActiveDoctorQueuesTableWidget extends TableWidget
 
                         return null;
                     })
-                    ->placeholder(__('Belum ada panggilan'))
+                    ->placeholder(__('No calls yet'))
                     ->color(fn ($state): string => $state ? 'primary' : 'gray')
                     ->icon(fn ($state): ?string => $state ? 'heroicon-m-megaphone' : null),
 
                 TextColumn::make('waiting_count')
-                    ->label(__('Menunggu'))
+                    ->label(__('Waiting'))
                     ->sortable()
                     ->badge()
                     ->color(fn ($state): string => match (true) {
@@ -108,18 +108,18 @@ class ActiveDoctorQueuesTableWidget extends TableWidget
                         default => 'gray',
                     })
                     ->icon('heroicon-m-clock')
-                    ->formatStateUsing(fn ($state): string => "{$state} Pasien"),
+                    ->formatStateUsing(fn ($state): string => __(':count Patients', ['count' => $state])),
 
                 TextColumn::make('completed_today_count')
-                    ->label(__('Selesai Hari Ini'))
+                    ->label(__('Completed Today'))
                     ->sortable()
                     ->badge()
                     ->color(fn ($state): string => $state > 0 ? 'success' : 'gray')
                     ->icon('heroicon-m-check-circle')
-                    ->formatStateUsing(fn ($state): string => "{$state} Pasien"),
+                    ->formatStateUsing(fn ($state): string => __(':count Patients', ['count' => $state])),
 
                 TextColumn::make('operational_status')
-                    ->label(__('Status Operasional'))
+                    ->label(__('Operational Status'))
                     ->badge()
                     ->state(function (Doctor $record): string {
                         $serving = $record->queueTickets->firstWhere('status', QueueTicketStatus::Serving);
@@ -127,27 +127,33 @@ class ActiveDoctorQueuesTableWidget extends TableWidget
                         $completed = $record->queueTickets->where('status', QueueTicketStatus::Completed)->count();
 
                         if ($serving) {
-                            return 'Sedang Melayani';
+                            return 'serving';
                         }
                         if ($waiting > 0) {
-                            return 'Pasien Menunggu';
+                            return 'waiting';
                         }
                         if ($completed > 0) {
-                            return 'Standby (Selesai)';
+                            return 'standby';
                         }
 
-                        return 'Tidak Ada Antrean';
+                        return 'none';
+                    })
+                    ->formatStateUsing(fn (string $state): string => match ($state) {
+                        'serving' => __('Serving'),
+                        'waiting' => __('Patients Waiting'),
+                        'standby' => __('Standby (Finished)'),
+                        default => __('No Queue'),
                     })
                     ->color(fn (string $state): string => match ($state) {
-                        'Sedang Melayani' => 'info',
-                        'Pasien Menunggu' => 'warning',
-                        'Standby (Selesai)' => 'success',
+                        'serving' => 'info',
+                        'waiting' => 'warning',
+                        'standby' => 'success',
                         default => 'gray',
                     }),
             ])
             ->recordActions([
                 Action::make('view_queue')
-                    ->label(__('Buka Antrean'))
+                    ->label(__('Open Queue'))
                     ->icon('heroicon-m-arrow-top-right-on-square')
                     ->color('gray')
                     ->url(fn (Doctor $record): string => route('filament.admin.resources.queue-tickets.index', [
@@ -158,7 +164,7 @@ class ActiveDoctorQueuesTableWidget extends TableWidget
                 Filter::make('queue_date')
                     ->form([
                         DatePicker::make('date')
-                            ->label(__('Tanggal Antrean'))
+                            ->label(__('Queue Date'))
                             ->default(now()),
                     ])
                     ->query(function (Builder $query, array $data): Builder {

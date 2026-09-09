@@ -4,6 +4,8 @@ namespace App\Providers;
 
 use App\Policies\PermissionPolicy;
 use App\Policies\RolePolicy;
+use BezhanSalleh\LanguageSwitch\Enums\Placement;
+use BezhanSalleh\LanguageSwitch\Enums\PlacementMode;
 use BezhanSalleh\LanguageSwitch\LanguageSwitch;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
@@ -37,7 +39,17 @@ class AppServiceProvider extends ServiceProvider
         Permission::deleted(fn () => app(PermissionRegistrar::class)->forgetCachedPermissions());
 
         LanguageSwitch::configureUsing(function (LanguageSwitch $switch) {
-            $switch->locales(['id', 'en']);
+            $switch
+                ->locales(['id', 'en'])
+                ->visible(outsidePanels: true)
+                ->outsidePanelPlacement(Placement::TopStart, PlacementMode::Pinned)
+                ->dropdownPlacement(function (LanguageSwitch $switch) {
+                    $placement = $switch->getOutsidePanelPlacement();
+
+                    return in_array($placement, [Placement::TopStart, Placement::BottomStart], true)
+                        ? 'bottom-start'
+                        : 'bottom-end';
+                });
         });
     }
 }

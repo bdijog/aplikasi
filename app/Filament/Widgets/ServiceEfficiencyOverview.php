@@ -17,9 +17,15 @@ class ServiceEfficiencyOverview extends StatsOverviewWidget
 
     protected ?string $pollingInterval = '60s';
 
-    protected ?string $heading = 'Efisiensi Layanan';
+    protected function getHeading(): ?string
+    {
+        return __('Service Efficiency');
+    }
 
-    protected ?string $description = 'Indikator performa waktu tunggu, durasi konsultasi dokter, dan rasio ketidakhadiran pasien.';
+    protected function getDescription(): ?string
+    {
+        return __('Performance indicators for wait times, doctor consultation duration, and patient no-show ratio.');
+    }
 
     /**
      * @var int | array<string, ?int> | null
@@ -28,7 +34,7 @@ class ServiceEfficiencyOverview extends StatsOverviewWidget
 
     protected function getStats(): array
     {
-        return Cache::remember('filament_service_efficiency_overview_stats', 60, function () {
+        return Cache::remember('filament_service_efficiency_overview_stats_'.app()->getLocale(), 60, function () {
             $today = now()->format('Y-m-d');
             $days = [];
             for ($i = 6; $i >= 0; $i--) {
@@ -75,8 +81,8 @@ class ServiceEfficiencyOverview extends StatsOverviewWidget
 
             $avgWaitDisplay = $avgWaitToday ?? (count($all7DaysWaitMinutes) > 0 ? round(array_sum($all7DaysWaitMinutes) / count($all7DaysWaitMinutes), 1) : 0);
             $waitDescription = $hasTodayCalls
-                ? 'Rata-rata waktu tunggu antrean hari ini'
-                : (count($all7DaysWaitMinutes) > 0 ? 'Rata-rata 7 hari terakhir (belum ada panggilan hari ini)' : 'Belum ada data panggilan antrean');
+                ? __('Average queue wait time today')
+                : (count($all7DaysWaitMinutes) > 0 ? __('Last 7 days average (no calls today yet)') : __('No queue call data yet'));
 
             $waitColor = match (true) {
                 $avgWaitDisplay > 30 => 'danger',
@@ -120,8 +126,8 @@ class ServiceEfficiencyOverview extends StatsOverviewWidget
 
             $avgConsultDisplay = $avgConsultToday ?? (count($all7DaysConsultMinutes) > 0 ? round(array_sum($all7DaysConsultMinutes) / count($all7DaysConsultMinutes), 1) : 0);
             $consultDescription = $hasTodayConsults
-                ? 'Durasi tatap muka dokter dengan pasien hari ini'
-                : (count($all7DaysConsultMinutes) > 0 ? 'Rata-rata 7 hari terakhir (belum ada selesai hari ini)' : 'Belum ada data konsultasi selesai');
+                ? __('Doctor-patient consultation duration today')
+                : (count($all7DaysConsultMinutes) > 0 ? __('Last 7 days average (none completed today yet)') : __('No completed consultation data yet'));
 
             $consultColor = match (true) {
                 $avgConsultDisplay > 25 => 'warning',
@@ -164,8 +170,15 @@ class ServiceEfficiencyOverview extends StatsOverviewWidget
             }
 
             $noShowDescription = $hasTodayAppts
-                ? "{$noShowToday} dari {$totalToday} janji temu hari ini (7 Hari: {$rate7Days}%)"
-                : "7 hari terakhir: {$noShow7Days} dari {$total7Days} janji temu";
+                ? __(':count of :total appointments today (7 Days: :rate%)', [
+                    'count' => $noShowToday,
+                    'total' => $totalToday,
+                    'rate' => $rate7Days,
+                ])
+                : __('Last 7 days: :count of :total appointments', [
+                    'count' => $noShow7Days,
+                    'total' => $total7Days,
+                ]);
 
             $noShowRateColor = match (true) {
                 $rateDisplay > 15 => 'danger',
@@ -174,19 +187,19 @@ class ServiceEfficiencyOverview extends StatsOverviewWidget
             };
 
             return [
-                Stat::make('Rata-rata Waktu Tunggu', $avgWaitDisplay.' Menit')
+                Stat::make(__('Average Wait Time'), $avgWaitDisplay.' '.__('Minutes'))
                     ->description($waitDescription)
                     ->descriptionIcon('heroicon-m-clock')
                     ->chart($waitTrend)
                     ->color($waitColor),
 
-                Stat::make('Rata-rata Durasi Konsultasi', $avgConsultDisplay.' Menit')
+                Stat::make(__('Average Consultation Duration'), $avgConsultDisplay.' '.__('Minutes'))
                     ->description($consultDescription)
                     ->descriptionIcon('heroicon-m-user-group')
                     ->chart($consultTrend)
                     ->color($consultColor),
 
-                Stat::make('Tingkat No-Show', $rateDisplay.'%')
+                Stat::make(__('No-Show Rate'), $rateDisplay.'%')
                     ->description($noShowDescription)
                     ->descriptionIcon('heroicon-m-user-minus')
                     ->chart($noShowRateTrend)

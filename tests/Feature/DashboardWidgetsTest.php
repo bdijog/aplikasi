@@ -45,7 +45,7 @@ class DashboardWidgetsTest extends TestCase
 
     public function test_admin_dashboard_can_be_rendered_with_widgets(): void
     {
-        $response = $this->actingAs($this->admin)->get('/admin');
+        $response = $this->actingAs($this->admin)->withSession(['locale' => 'id'])->get('/admin');
 
         $response->assertStatus(200);
         $response->assertSee('Ringkasan Hari Ini');
@@ -357,5 +357,65 @@ class DashboardWidgetsTest extends TestCase
         $rankWidget = new DoctorVisitRankTableWidget;
         $this->assertSame(4, DoctorVisitRankTableWidget::getSort());
         $this->assertSame('60s', invade($rankWidget)->getPollingInterval());
+    }
+
+    public function test_admin_dashboard_can_be_rendered_in_english(): void
+    {
+        $response = $this->actingAs($this->admin)->withSession(['locale' => 'en'])->get('/admin');
+
+        $response->assertStatus(200);
+        $response->assertSee('Today Summary');
+        $response->assertSee('Service Efficiency');
+        $response->assertSee('Active Queues by Doctor');
+        $response->assertSee('Appointment Trend Last 7 Days');
+        $response->assertSee('Monthly Comparison');
+        $response->assertSee('Annual Visits Trend');
+        $response->assertSee('Most Visited Doctors');
+    }
+
+    public function test_widgets_can_render_content_in_english(): void
+    {
+        app()->setLocale('en');
+
+        Livewire::actingAs($this->admin)
+            ->test(TodayStatsOverview::class)
+            ->assertSuccessful()
+            ->assertSee('Today Total Appointments')
+            ->assertSee('Active Queues Now')
+            ->assertSee('Patients Served')
+            ->assertSee('Today No-Shows')
+            ->assertSee('Active Doctors Today');
+
+        Livewire::actingAs($this->admin)
+            ->test(ServiceEfficiencyOverview::class)
+            ->assertSuccessful()
+            ->assertSee('Average Wait Time')
+            ->assertSee('Average Consultation Duration')
+            ->assertSee('No-Show Rate');
+
+        Livewire::actingAs($this->admin)
+            ->test(AppointmentTrendChart::class)
+            ->assertSuccessful()
+            ->assertSee('Appointment Trend Last 7 Days');
+
+        Livewire::actingAs($this->admin)
+            ->test(MonthlyComparisonChart::class)
+            ->assertSuccessful()
+            ->assertSee('Monthly Comparison');
+
+        Livewire::actingAs($this->admin)
+            ->test(AnnualVisitsTrendChart::class)
+            ->assertSuccessful()
+            ->assertSee('Annual Visits Trend');
+
+        Livewire::actingAs($this->admin)
+            ->test(DoctorVisitRankTableWidget::class)
+            ->assertSuccessful()
+            ->assertSee('Most Visited Doctors');
+
+        Livewire::actingAs($this->admin)
+            ->test(ActiveDoctorQueuesTableWidget::class)
+            ->assertSuccessful()
+            ->assertSee('Active Queues by Doctor');
     }
 }

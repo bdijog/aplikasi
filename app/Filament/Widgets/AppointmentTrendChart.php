@@ -5,6 +5,7 @@ namespace App\Filament\Widgets;
 use App\Enums\AppointmentStatus;
 use App\Models\Appointment;
 use Filament\Widgets\ChartWidget;
+use Illuminate\Contracts\Support\Htmlable;
 
 class AppointmentTrendChart extends ChartWidget
 {
@@ -14,9 +15,15 @@ class AppointmentTrendChart extends ChartWidget
 
     protected ?string $pollingInterval = '30s';
 
-    protected ?string $heading = 'Tren Appointment 7 Hari Terakhir';
+    public function getHeading(): string|Htmlable|null
+    {
+        return __('Appointment Trend Last 7 Days');
+    }
 
-    protected ?string $description = 'Jumlah reservasi janji temu harian dalam 7 hari terakhir.';
+    public function getDescription(): string|Htmlable|null
+    {
+        return __('Daily appointment booking counts over the last 7 days.');
+    }
 
     /**
      * @var int | string | array<string, int | null>
@@ -63,7 +70,7 @@ class AppointmentTrendChart extends ChartWidget
         return [
             'datasets' => [
                 [
-                    'label' => 'Total Janji Temu',
+                    'label' => __('Total Appointments'),
                     'data' => $totalData,
                     'borderColor' => '#f59e0b',
                     'backgroundColor' => 'rgba(245, 158, 11, 0.1)',
@@ -71,7 +78,7 @@ class AppointmentTrendChart extends ChartWidget
                     'tension' => 0.3,
                 ],
                 [
-                    'label' => 'Hadir / Selesai',
+                    'label' => __('Attended / Completed'),
                     'data' => $completedData,
                     'borderColor' => '#10b981',
                     'backgroundColor' => 'rgba(16, 185, 129, 0.1)',

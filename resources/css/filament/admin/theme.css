@@ -3,4 +3,24 @@
 @source '../../../../app/Filament/**/*';
 @source '../../../../resources/views/filament/**/*';
 @source '../../../../vendor/awcodes/light-switch/resources/**/*.blade.php';
+@source '../../../../vendor/bezhansalleh/filament-language-switch/**';
+
+/* Cegah wrapper full-width light-switch memblokir klik pada elemen di bawahnya */
+.auth-theme-switcher {
+    pointer-events: none;
+}
+
+.auth-theme-switcher > * {
+    pointer-events: auto;
+}
+
+/* Pastikan language switch dan panel dropdown berada di layer teratas */
+.fi-ls-pinned {
+    z-index: 50 !important;
+    pointer-events: auto;
+}
+
+.fi-dropdown-panel {
+    z-index: 50 !important;
+}
 
