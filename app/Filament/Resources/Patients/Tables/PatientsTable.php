@@ -3,13 +3,18 @@
 namespace App\Filament\Resources\Patients\Tables;
 
 use App\Enums\Gender;
+use App\Services\Reports\ExcelExportService;
+use App\Services\Reports\PdfExportService;
+use Filament\Actions\BulkAction;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
+use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Collection;
 
 class PatientsTable
 {
@@ -72,6 +77,56 @@ class PatientsTable
             ])
             ->toolbarActions([
                 BulkActionGroup::make([
+                    BulkAction::make('export_excel_selected')
+                        ->label(__('Ekspor Excel'))
+                        ->icon(Heroicon::OutlinedArrowDownTray)
+                        ->color('success')
+                        ->action(function (Collection $records, ExcelExportService $excelService) {
+                            $headers = ['No.', 'No. RM', 'Nama Pasien', 'NIK', 'Jenis Kelamin', 'Tanggal Lahir', 'Gol. Darah', 'No. Telepon', 'Alamat'];
+                            $rows = [];
+                            $no = 1;
+                            foreach ($records as $p) {
+                                $rows[] = [
+                                    $no++,
+                                    $p->medical_record_number ?? '-',
+                                    $p->name,
+                                    $p->national_id ?? '-',
+                                    $p->gender?->getLabel() ?? (string) $p->gender,
+                                    $p->date_of_birth?->format('d/m/Y') ?? '-',
+                                    $p->blood_type ?? '-',
+                                    $p->phone ?? '-',
+                                    $p->address ?? '-',
+                                ];
+                            }
+
+                            return $excelService->exportGenericTable('Daftar Pasien Terpilih', $headers, $rows, 'Pasien_Terpilih_'.now()->format('Ymd_His').'.xlsx');
+                        }),
+
+                    BulkAction::make('export_pdf_selected')
+                        ->label(__('Ekspor PDF'))
+                        ->icon(Heroicon::OutlinedDocumentArrowDown)
+                        ->color('danger')
+                        ->action(function (Collection $records, PdfExportService $pdfService) {
+                            $headers = ['No.', 'No. RM', 'Nama Pasien', 'NIK', 'Jenis Kelamin', 'Tanggal Lahir', 'Gol. Darah', 'No. Telepon', 'Alamat'];
+                            $rows = [];
+                            $no = 1;
+                            foreach ($records as $p) {
+                                $rows[] = [
+                                    $no++,
+                                    $p->medical_record_number ?? '-',
+                                    $p->name,
+                                    $p->national_id ?? '-',
+                                    $p->gender?->getLabel() ?? (string) $p->gender,
+                                    $p->date_of_birth?->format('d/m/Y') ?? '-',
+                                    $p->blood_type ?? '-',
+                                    $p->phone ?? '-',
+                                    $p->address ?? '-',
+                                ];
+                            }
+
+                            return $pdfService->exportGenericTable('Daftar Pasien Terpilih', $headers, $rows, 'Pasien_Terpilih_'.now()->format('Ymd_His').'.pdf', 'landscape');
+                        }),
+
                     DeleteBulkAction::make(),
                 ]),
             ]);

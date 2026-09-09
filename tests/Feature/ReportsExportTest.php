@@ -327,5 +327,17 @@ class ReportsExportTest extends TestCase
         $resQueues->assertStatus(200);
         $resQueues->assertSee('Ekspor Antrian Excel');
         $resQueues->assertSee('Ekspor Antrian PDF');
+
+        // 4. Doctors list page
+        $resDocs = $this->actingAs($this->admin)->get('/admin/doctors');
+        $resDocs->assertStatus(200);
+        $resDocs->assertSee('Ekspor Excel');
+        $resDocs->assertSee('Ekspor PDF');
+
+        // 5. Patients list page
+        $resPats = $this->actingAs($this->admin)->get('/admin/patients');
+        $resPats->assertStatus(200);
+        $resPats->assertSee('Ekspor Excel');
+        $resPats->assertSee('Ekspor PDF');
     }
 }

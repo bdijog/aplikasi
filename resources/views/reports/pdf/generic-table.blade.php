@@ -12,8 +12,10 @@
         <tbody>
             @forelse($rows as $row)
                 <tr>
-                    @foreach($row as $cell)
-                        <td>{{ $cell }}</td>
+                    @foreach($row as $idx => $cell)
+                        <td class="{{ $idx === 0 || in_array(strtolower($headers[$idx] ?? ''), ['tanggal', 'jam', 'status', 'no. rm']) ? 'text-center' : '' }}">
+                            {{ $cell }}
+                        </td>
                     @endforeach
                 </tr>
             @empty

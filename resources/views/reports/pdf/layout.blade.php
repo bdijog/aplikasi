@@ -138,9 +138,14 @@
 
         /* Signatures */
         .signatures {
-            margin-top: 25px;
+            margin-top: 20px;
             width: 100%;
+            border-collapse: collapse;
             page-break-inside: avoid;
+        }
+        .signatures td {
+            border: none;
+            vertical-align: top;
         }
         .sign-box {
             width: 45%;
@@ -148,13 +153,13 @@
             font-size: 8pt;
         }
         .sign-space {
-            height: 50px;
+            height: 45px;
         }
 
         /* Footer */
         .footer {
             position: fixed;
-            bottom: -15px;
+            bottom: -30px;
             left: 0;
             right: 0;
             height: 20px;
@@ -166,6 +171,20 @@
     </style>
 </head>
 <body>
+
+    <!-- Fixed Footer on Every Page (must be at top of body for Dompdf) -->
+    <div class="footer">
+        <table style="width: 100%; border: none; border-collapse: collapse;">
+            <tr>
+                <td style="border: none; padding: 0; text-align: left; font-size: 7pt; color: #94a3b8; background: transparent;">
+                    Klinik Ayo Sehat &copy; {{ date('Y') }} &bull; Sistem Informasi Manajemen Jadwal Dokter
+                </td>
+                <td style="border: none; padding: 0; text-align: right; font-size: 7pt; color: #94a3b8; background: transparent;">
+                    Dicetak secara otomatis oleh sistem
+                </td>
+            </tr>
+        </table>
+    </div>
 
     <!-- Header / Kop Surat -->
     <table class="header-table">
@@ -199,15 +218,15 @@
     <!-- Signatures -->
     <table class="signatures">
         <tr>
-            <td class="sign-box" style="float: left;">
+            <td class="sign-box">
                 <div>Yogyakarta, {{ now()->translatedFormat('d F Y') }}</div>
                 <div style="margin-top: 3px;">Petugas Loket / Administrasi,</div>
                 <div class="sign-space"></div>
                 <div class="font-bold">( Staf Front Office )</div>
                 <div style="color: #64748b; font-size: 7pt;">Klinik Ayo Sehat</div>
             </td>
-            <td style="width: 10%;"></td>
-            <td class="sign-box" style="float: right;">
+            <td style="width: 10%; border: none;"></td>
+            <td class="sign-box">
                 <div>Mengetahui,</div>
                 <div style="margin-top: 3px;">Pimpinan / Kepala Pelayanan Medis,</div>
                 <div class="sign-space"></div>
@@ -216,11 +235,6 @@
             </td>
         </tr>
     </table>
-
-    <div class="footer">
-        <span style="float: left;">Klinik Ayo Sehat &copy; {{ date('Y') }} &bull; Sistem Informasi Manajemen Jadwal Dokter</span>
-        <span style="float: right;">Dicetak secara otomatis oleh sistem</span>
-    </div>
 
 </body>
 </html>
